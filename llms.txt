@@ -14,7 +14,7 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 
 ## Contributions open source
 
-- [OGX (ex-Llama Stack, Meta)](https://github.com/ogx-ai/ogx/pull/6697) : audit et correctifs proposés pour 3 bugs silencieux (Elasticsearch, pgvector, comptage des tokens).
+- [OGX (ex-Llama Stack, Meta)](https://github.com/ogx-ai/ogx/pull/6697) : audit et correctifs intégrés par les mainteneurs (PR #6697 et #6698 fusionnées le 1er octobre 2026) pour 3 bugs silencieux (Elasticsearch, pgvector, comptage des tokens).
 - [Mistral AI, mistral-common](https://github.com/mistralai/mistral-common/pull/349) : tokenizers en environnement hors ligne.
 - [azure-ai-gateway](https://github.com/Zakariakhchiche/azure-ai-gateway), [vllm-production-serving](https://github.com/Zakariakhchiche/vllm-production-serving), [ai-company-stack](https://github.com/Zakariakhchiche/ai-company-stack), [lakehouse-pipeline-demo](https://github.com/Zakariakhchiche/lakehouse-pipeline-demo).
 
