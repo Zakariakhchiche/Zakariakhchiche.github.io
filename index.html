@@ -83,10 +83,15 @@ aside.panel{background:var(--surface);border:1px solid var(--line);border-radius
 section{display:grid;gap:14px}
 footer{color:var(--muted);font-size:.85rem;display:flex;flex-wrap:wrap;gap:8px 16px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
+nav.topnav{display:flex;flex-wrap:wrap;gap:6px;padding:8px;background:var(--surface);border:1px solid var(--line);border-radius:10px}
+nav.topnav a{font:500 .88rem var(--f-body);color:var(--ink);text-decoration:none;padding:6px 12px;border-radius:7px}
+nav.topnav a:hover{background:var(--bg);color:var(--accent)}
+nav.topnav a.on{background:var(--accent);color:#fff}
 </style>
 </head>
 <body>
 <div class="wrap">
+<nav class="topnav" aria-label="Pages"><a class="on" href="/">Accueil</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-ia-generative/">Formation IA générative</a></nav>
 <header>
   <span class="eyebrow">Tech Lead Data & IA · Paris</span>
   <h1>Zakaria Khchiche</h1>
