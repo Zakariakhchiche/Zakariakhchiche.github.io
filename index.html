@@ -11,10 +11,13 @@
 <meta property="og:url" content="https://zakariakhchiche.github.io/">
 <meta property="og:type" content="profile">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"Person","name":"Zakaria Khchiche","jobTitle":"Tech Lead Data & IA","url":"https://zakariakhchiche.github.io/",
+{"@context":"https://schema.org","@type":"Person","name":"Zakaria Khchiche","jobTitle":"Tech Lead Data & IA","url":"https://zakariakhchiche.github.io/","image":"https://github.com/Zakariakhchiche.png","description":"Tech Lead Data & IA freelance à Paris. Conception et mise en production d'agents IA sur Azure AI Foundry, Azure OpenAI et Copilot Studio, socle IA multi-LLM, RAG et data engineering (Databricks, Spark). Formateur IA générative avec Spar-x.","knowsLanguage":["fr","en"],"hasOccupation":{"@type":"Occupation","name":"Tech Lead Data & IA","occupationLocation":{"@type":"City","name":"Paris"}},
 "address":{"@type":"PostalAddress","addressLocality":"Paris","addressCountry":"FR"},
 "knowsAbout":["Agents IA","IA générative","Azure AI Foundry","Azure OpenAI","Copilot Studio","RAG","LLM","Databricks","Apache Spark","Power BI"],
 "sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://medium.com/@ZKHCHICHE","https://github.com/Zakariakhchiche","https://dev.to/zakaria_khchiche_490919ed"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qui est Zakaria Khchiche ?","acceptedAnswer":{"@type":"Answer","text":"Zakaria Khchiche est Tech Lead Data & IA freelance basé à Paris. Il conçoit et met en production des agents IA pour de grands comptes (SUEZ, TotalEnergies, Groupe SNCF, La Banque Postale) sur Azure AI Foundry, Azure OpenAI et Copilot Studio, et anime des formations IA générative avec Spar-x."}},{"@type":"Question","name":"Quels services propose Zakaria Khchiche ?","acceptedAnswer":{"@type":"Answer","text":"Conception et mise en production d'agents Copilot Studio, construction de socles IA sur Azure AI Foundry (AI Gateway, routage multi-LLM, sécurité, maîtrise des coûts), passage d'agents IA du POC à la production (RAG, validation humaine, supervision), data engineering Databricks et Spark, et formations IA générative en entreprise."}},{"@type":"Question","name":"Zakaria Khchiche est-il disponible en freelance ?","acceptedAnswer":{"@type":"Answer","text":"Oui, pour des missions de Tech Lead IA / Data, de conception d'agents IA et d'industrialisation de POC d'IA générative, à Paris ou à distance. Le plus simple est de le contacter sur Malt ou LinkedIn."}},{"@type":"Question","name":"Comment contacter Zakaria Khchiche ?","acceptedAnswer":{"@type":"Answer","text":"Via son profil Malt (https://www.malt.fr/profile/zakariakhchiche) ou LinkedIn (https://www.linkedin.com/in/zakariakhchiche/)."}}]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -96,7 +99,7 @@ nav.topnav a.on{background:var(--accent);color:#fff}
   <span class="eyebrow">Tech Lead Data & IA · Paris</span>
   <h1>Zakaria Khchiche</h1>
   <p class="lede">J'aide les grands comptes à passer d'un cas d'usage IA à une solution en production : agents IA sur Azure, plateformes data Databricks et Spark, pilotage de bout en bout. J'anime aussi des formations IA en entreprise.</p>
-  <div class="facts" id="facts"></div>
+  <div class="facts" id="facts"><span><b>58</b> compétences</span><span><b>7</b> grands comptes</span><span><b>5</b> projets publics</span></div>
   <div class="links">
     <a class="btn" href="https://www.malt.fr/profile/zakariakhchiche" target="_blank" rel="noopener me">Profil Malt</a>
     <a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/" target="_blank" rel="noopener me">LinkedIn</a>
@@ -110,6 +113,7 @@ nav.topnav a.on{background:var(--accent);color:#fff}
 <div class="map">
   <div class="stage">
     <div class="toolbar" id="toolbar" role="group" aria-label="Filtrer les domaines"></div>
+    <noscript><p style="padding:12px">Carte interactive des compétences : voir la liste « Compétences clés » plus bas.</p></noscript>
     <svg id="g" aria-label="Graphe des compétences reliées aux missions et aux projets"></svg>
     <span class="hint">glisser · zoomer · cliquer pour isoler</span>
   </div>
@@ -141,7 +145,7 @@ nav.topnav a.on{background:var(--accent);color:#fff}
 
 <section>
   <div><span class="eyebrow">Code public</span><h2>Réalisations sur GitHub</h2></div>
-  <div class="cards" id="cards"></div>
+  <div class="cards" id="cards"><article class="card" style="--cc:var(--c-agents)"><span class="kind"><span>Agents IA & LLM</span></span><h3><a href="https://github.com/Zakariakhchiche/vllm-production-serving" target="_blank" rel="noopener">vllm-production-serving</a></h3><p class="rdesc">Mise en production de LLM open source avec vLLM : dimensionnement GPU et cache KV, routeur qui réutilise le cache de préfixe, autoscaling KEDA, SLO Prometheus, banc de charge.</p><span class="stack">vLLM · Kubernetes · KEDA · Prometheus · Docker · FastAPI · Python</span></article><article class="card" style="--cc:var(--c-agents)"><span class="kind"><span>Agents IA & LLM</span></span><h3><a href="https://github.com/Zakariakhchiche/azure-ai-gateway" target="_blank" rel="noopener">azure-ai-gateway</a></h3><p class="rdesc">Passerelle multi-LLM : chaque requête part vers le modèle autorisé, suffisant et le moins cher. Les données sensibles restent dans le SI.</p><span class="stack">Azure OpenAI · Azure AI Foundry · AI Gateway multi-LLM · FastAPI · Python</span></article><article class="card" style="--cc:var(--c-data)"><span class="kind"><span>Data Engineering</span></span><h3><a href="https://github.com/Zakariakhchiche/lakehouse-pipeline-demo" target="_blank" rel="noopener">lakehouse-pipeline-demo</a></h3><p class="rdesc">Lakehouse bronze, silver, gold sur l'open data SNCF : Airflow orchestre Spark et Delta, avec contrôles qualité et quarantaine.</p><span class="stack">Airflow · Spark · Delta Lake · Databricks · Python · SQL</span></article><article class="card" style="--cc:var(--c-agents)"><span class="kind"><span>Agents IA & LLM</span></span><h3><a href="https://github.com/Zakariakhchiche/ai-company-stack" target="_blank" rel="noopener">ai-company-stack</a></h3><p class="rdesc">Stack d'automatisation d'entreprise multi-agents : CrewAI et LangGraph, modèles Ollama, services conteneurisés.</p><span class="stack">LangGraph · CrewAI · LangChain · Ollama · Docker · PostgreSQL · Redis</span></article><article class="card" style="--cc:var(--c-agents)"><span class="kind"><span>Agents IA & LLM</span></span><h3><a href="https://github.com/Zakariakhchiche/agrilife" target="_blank" rel="noopener">agrilife</a></h3><p class="rdesc">Assistant conversationnel qui guide les agriculteurs vers l'agriculture régénératrice.</p><span class="stack">React · OpenAI API</span></article></div>
 </section>
 
 <section>
@@ -151,6 +155,25 @@ nav.topnav a.on{background:var(--accent);color:#fff}
     <article class="card" style="--cc:var(--c-agents)"><span class="kind"><span>Open source</span></span><h3><a href="https://github.com/mistralai/mistral-common/pull/349" target="_blank" rel="noopener">Mistral AI · mistral-common</a></h3><p class="rdesc">Chargement des tokenizers Mistral en environnement hors ligne.</p></article>
     <article class="card" style="--cc:var(--c-web)"><span class="kind"><span>Article</span></span><h3><a href="https://dev.to/zakaria_khchiche_490919ed/three-silent-bugs-in-an-open-source-ai-agent-framework-igd" target="_blank" rel="noopener">Three silent bugs in an AI agent framework</a></h3><p class="rdesc">Retour d'expérience sur l'audit d'OGX. Tous les articles (vLLM, Copilot Studio, GitLab) sur <a href="https://medium.com/@ZKHCHICHE">Medium</a>.</p></article>
   </div>
+</section>
+
+<section>
+  <div><span class="eyebrow">Compétences</span><h2>Compétences clés</h2></div>
+  <ul>
+    <li><strong>Agents IA &amp; LLM</strong> : Azure AI Foundry, Azure OpenAI, Copilot Studio, AI Gateway multi-LLM, LangGraph, LangChain, CrewAI, vLLM, Ollama, RAG, NLP.</li>
+    <li><strong>Data engineering</strong> : Databricks, Spark, Airflow, Prefect, Kafka, Delta Lake, Azure Data Factory, Azure Synapse, Denodo, SQL, Python, Scala.</li>
+    <li><strong>Cloud &amp; DevOps</strong> : Azure, AWS, Docker, Kubernetes, KEDA, Prometheus, CI/CD, PostgreSQL, Redis, Cosmos DB.</li>
+    <li><strong>Microsoft &amp; BI</strong> : Power Platform, Power Automate, Power BI, SharePoint, Dataverse.</li>
+    <li><strong>Data science &amp; ML</strong> : machine learning, deep learning, scikit-learn, TensorFlow, PyTorch, pandas, Dataiku.</li>
+  </ul>
+</section>
+
+<section>
+  <div><span class="eyebrow">FAQ</span><h2>Questions fréquentes</h2></div>
+  <div><h3>Qui est Zakaria Khchiche ?</h3><p class="rdesc">Zakaria Khchiche est Tech Lead Data &amp; IA freelance basé à Paris. Il conçoit et met en production des agents IA pour de grands comptes (SUEZ, TotalEnergies, Groupe SNCF, La Banque Postale) sur Azure AI Foundry, Azure OpenAI et Copilot Studio, et anime des formations IA générative avec Spar-x.</p></div>
+  <div><h3>Quels services propose Zakaria Khchiche ?</h3><p class="rdesc">Conception et mise en production d'agents Copilot Studio, construction de socles IA sur Azure AI Foundry (AI Gateway, routage multi-LLM, sécurité, maîtrise des coûts), passage d'agents IA du POC à la production (RAG, validation humaine, supervision), data engineering Databricks et Spark, et formations IA générative en entreprise.</p></div>
+  <div><h3>Zakaria Khchiche est-il disponible en freelance ?</h3><p class="rdesc">Oui, pour des missions de Tech Lead IA / Data, de conception d'agents IA et d'industrialisation de POC d'IA générative, à Paris ou à distance. Le plus simple est de le contacter sur Malt ou LinkedIn.</p></div>
+  <div><h3>Comment contacter Zakaria Khchiche ?</h3><p class="rdesc">Via son profil Malt (https://www.malt.fr/profile/zakariakhchiche) ou LinkedIn (https://www.linkedin.com/in/zakariakhchiche/).</p></div>
 </section>
 
 <section>
