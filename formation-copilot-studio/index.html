@@ -1,1 +1,124 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Formation Copilot Studio : créer des agents IA en production – Spar-x, Zakaria Khchiche</title>
+<meta name="description" content="Formation Copilot Studio en entreprise, intra ou inter, 20 participants maximum : créer, connecter et mettre en production des agents IA. Animée par Zakaria Khchiche (200+ agents en production). Spar-x, organisme certifié Qualiopi, finançable par votre OPCO.">
+<link rel="canonical" href="https://zakariakhchiche.github.io/formation-copilot-studio/">
+<meta property="og:title" content="Formation Copilot Studio : des agents IA qui tiennent en production">
+<meta property="og:description" content="Formation pratique Copilot Studio, intra ou inter, 20 participants maximum. Spar-x, organisme certifié Qualiopi, finançable OPCO.">
+<meta property="og:url" content="https://zakariakhchiche.github.io/formation-copilot-studio/">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Course","name":"Formation Copilot Studio : créer des agents IA en production","description":"Formation pratique à Microsoft Copilot Studio : description de l'agent, instructions, base de connaissances, OCR, outils et agent flows, gouvernance et mise en production.","url":"https://zakariakhchiche.github.io/formation-copilot-studio/","inLanguage":"fr","teaches":["Microsoft Copilot Studio","agents IA","agent flows","Power Automate","base de connaissances","mise en production d'agents IA"],"provider":{"@type":"Organization","name":"Spar-x"},"instructor":{"@type":"Person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/","sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://www.wikidata.org/wiki/Q141613783"]},"hasCourseInstance":[{"@type":"CourseInstance","courseMode":"onsite","location":"Paris ou dans vos locaux"},{"@type":"CourseInstance","courseMode":"online"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"La formation Copilot Studio est-elle finançable par un OPCO ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Spar-x est un organisme certifié Qualiopi au titre des actions de formation, ce qui permet de demander une prise en charge à votre OPCO. Nous fournissons les documents nécessaires au dossier."}},
+{"@type":"Question","name":"Faut-il savoir coder pour suivre la formation ?","acceptedAnswer":{"@type":"Answer","text":"Non. Copilot Studio est une plateforme low-code. Il faut un compte Microsoft 365 avec accès à Copilot Studio, ou un environnement d'essai fourni pour la session."}},
+{"@type":"Question","name":"Combien de participants par session ?","acceptedAnswer":{"@type":"Answer","text":"20 participants maximum, pour que chacun construise son propre agent pendant la formation."}},
+{"@type":"Question","name":"Cette formation aide-t-elle à répondre à l'article 4 de l'AI Act ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Depuis juillet 2026, l'article 4 demande aux entreprises de prendre des mesures pour favoriser la maîtrise de l'IA de leurs équipes. Une formation documentée, avec attestation, est la façon la plus simple de le montrer."}}
+]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6;--c:#c2541f;
+--f-display:"Sora",system-ui,sans-serif;--f-body:"IBM Plex Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff;--c:#f0955f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.015em}
+h2{font-size:1.3rem}h3{font-size:1rem}
+p{margin:0;max-width:70ch}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.08rem}
+header,section{display:grid;gap:12px}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:500 .88rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 14px;text-decoration:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:10px;padding:16px;display:grid;gap:8px;align-content:start}
+.card p{font-size:.92rem;color:var(--muted)}
+.n{font-family:var(--f-mono);font-size:.78rem;color:var(--c)}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.fact b{display:block;font-family:var(--f-display)}
+.fact span{font-size:.88rem;color:var(--muted)}
+ul{margin:0;padding-left:20px}li{margin:4px 0}
+nav.top{font-family:var(--f-mono);font-size:.82rem;display:flex;flex-wrap:wrap;gap:6px 14px}
+footer{color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="top"><a href="/">← Zakaria Khchiche</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-ia-generative/">Formation IA générative</a><a href="/kit-ai-act/">Kit AI Act</a></nav>
+<header>
+  <span class="eyebrow">Formation · Spar-x · Organisme certifié Qualiopi</span>
+  <h1>Formation Copilot Studio : créer des agents IA qui tiennent en production</h1>
+  <p class="lede">Une démo d'agent se construit en une heure. Un agent que les équipes métier utilisent tous les jours demande six décisions. Cette formation les fait prendre, sur un vrai cas de votre entreprise, avec un formateur qui a mis plus de 200 agents en production.</p>
+  <div class="links">
+    <a class="btn primary" href="https://www.linkedin.com/in/zakariakhchiche/">Demander un devis ou une date</a>
+    <a class="btn" href="/kit-ai-act/">Kit AI Act gratuit</a>
+  </div>
+</header>
 
+<section class="facts" aria-label="Format">
+  <div class="fact"><b>20 max</b><span>participants par session</span></div>
+  <div class="fact"><b>Intra ou inter</b><span>dans vos locaux, à Paris ou à distance</span></div>
+  <div class="fact"><b>Finançable OPCO</b><span>Spar-x est certifié Qualiopi</span></div>
+  <div class="fact"><b>Sans code</b><span>accessible aux équipes métier et IT</span></div>
+</section>
+
+<section>
+  <div><span class="eyebrow">Programme</span><h2>Les six étapes, une par module</h2></div>
+  <div class="grid">
+    <article class="card"><span class="n">1 · Interface</span><h3>Décrire l'agent, pas dessiner ses conversations</h3><p>La nouvelle interface de Copilot Studio, l'orchestration générative et ce qu'elle change dans la conception.</p></article>
+    <article class="card"><span class="n">2 · Instructions</span><h3>Écrire des instructions qui tiennent</h3><p>Ce qu'il faut écrire, ce qu'il ne faut pas écrire, et comment tester un changement d'instructions.</p></article>
+    <article class="card"><span class="n">3 · Connaissances</span><h3>La base de connaissances</h3><p>SharePoint, fichiers et sites : la plupart des mauvaises réponses viennent des documents, pas du modèle.</p></article>
+    <article class="card"><span class="n">4 · OCR</span><h3>Les documents scannés</h3><p>Rendre exploitables les PDF images et formulaires que l'agent ne sait pas lire seul.</p></article>
+    <article class="card"><span class="n">5 · Outils</span><h3>Passer de répondre à agir</h3><p>Connecteurs, actions et validation humaine : créer un ticket plutôt qu'expliquer comment le créer.</p></article>
+    <article class="card"><span class="n">6 · Agent flows</span><h3>Le modèle raisonne, le flow garantit</h3><p>Quand utiliser un agent flow, et ce qui rend un agent résilient : erreurs, droits, suivi, mise en production.</p></article>
+  </div>
+  <p>Chaque participant repart avec un agent construit pendant la session sur un cas de son service. Le contenu détaillé de chaque étape est publié dans la série <a href="/copilot-studio/">Copilot Studio en production</a>.</p>
+</section>
+
+<section>
+  <div><span class="eyebrow">Pour qui</span><h2>Public et prérequis</h2></div>
+  <ul>
+    <li>Équipes métier qui veulent automatiser un processus, chefs de projet IA, équipes Power Platform et IT.</li>
+    <li>Aucun code requis. Un compte Microsoft 365 avec accès à Copilot Studio, ou un environnement d'essai fourni pour la session.</li>
+    <li>Évaluation des acquis en fin de formation et attestation remise à chaque participant.</li>
+  </ul>
+</section>
+
+<section>
+  <div><span class="eyebrow">Formateur</span><h2>Zakaria Khchiche</h2></div>
+  <p>Tech Lead Data &amp; IA. Il conçoit et met en production des agents IA sur Copilot Studio, Azure AI Foundry et Azure OpenAI pour de grands comptes : 20 cas d'usage d'IA générative et plus de 200 agents en production chez SUEZ. Contributeur open source (OGX, ex-Llama Stack de Meta). <a href="/">Son parcours</a>.</p>
+</section>
+
+<section>
+  <div><span class="eyebrow">Financement et AI Act</span><h2>Financement et conformité</h2></div>
+  <ul>
+    <li><strong>OPCO</strong> : Spar-x est certifié Qualiopi, ce qui permet de demander une prise en charge par votre OPCO. Nous fournissons les documents du dossier.</li>
+    <li><strong>AI Act, article 4</strong> : l'entreprise doit prendre des mesures pour favoriser la maîtrise de l'IA de ses équipes. Une formation documentée, avec attestation, entre dans votre registre. Voir le <a href="/kit-ai-act/">Kit AI Act</a>.</li>
+  </ul>
+  <p style="font-size:.85rem;color:var(--muted)">La certification qualité a été délivrée au titre de la catégorie d'action suivante : actions de formation.</p>
+</section>
+
+<section>
+  <h2>Questions fréquentes</h2>
+  <div><h3>Faut-il savoir coder ?</h3><p>Non. Copilot Studio est une plateforme low-code.</p></div>
+  <div><h3>Peut-on travailler sur nos propres cas ?</h3><p>Oui, c'est recommandé en intra : chaque participant construit un agent sur un cas réel de son service.</p></div>
+  <div><h3>Comment obtenir un devis ?</h3><p>Écrivez à Zakaria sur <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> en indiquant le nombre de participants, le format souhaité et votre OPCO. Réponse sous 24 h.</p></div>
+</section>
+
+<footer>Formation proposée par Spar-x, animée par Zakaria Khchiche · <a href="/">Accueil</a> · <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a> · <a href="https://medium.com/@ZKHCHICHE">Medium</a></footer>
+</div>
+</body>
+</html>
