@@ -2,91 +2,231 @@
 <html lang="fr">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Zakaria Khchiche – Tech Lead Data &amp; IA, Agents IA &amp; Azure AI Foundry</title>
 <meta name="description" content="Zakaria Khchiche, Tech Lead Data & IA freelance à Paris : agents IA en production sur Azure AI Foundry, Azure OpenAI et Copilot Studio, RAG, Databricks. Références SUEZ, TotalEnergies, SNCF. Formateur IA.">
 <link rel="canonical" href="https://zakariakhchiche.github.io/">
 <meta property="og:title" content="Zakaria Khchiche – Tech Lead Data & IA">
-<meta property="og:description" content="Agents IA en production sur Azure, RAG, data engineering. Freelance et formateur IA.">
+<meta property="og:description" content="Cartographie des compétences : agents IA sur Azure, data engineering, missions grands comptes et projets open source.">
 <meta property="og:url" content="https://zakariakhchiche.github.io/">
 <meta property="og:type" content="profile">
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Person",
-  "name": "Zakaria Khchiche",
-  "jobTitle": "Tech Lead Data & IA",
-  "url": "https://zakariakhchiche.github.io/",
-  "address": {"@type": "PostalAddress", "addressLocality": "Paris", "addressCountry": "FR"},
-  "knowsAbout": ["Agents IA", "IA générative", "Azure AI Foundry", "Azure OpenAI", "Copilot Studio", "RAG", "LLM", "Databricks", "Apache Spark", "Power BI"],
-  "sameAs": [
-    "https://www.linkedin.com/in/zakariakhchiche/",
-    "https://www.malt.fr/profile/zakariakhchiche",
-    "https://medium.com/@ZKHCHICHE",
-    "https://github.com/Zakariakhchiche",
-    "https://dev.to/zakaria_khchiche_490919ed"
-  ]
-}
+{"@context":"https://schema.org","@type":"Person","name":"Zakaria Khchiche","jobTitle":"Tech Lead Data & IA","url":"https://zakariakhchiche.github.io/",
+"address":{"@type":"PostalAddress","addressLocality":"Paris","addressCountry":"FR"},
+"knowsAbout":["Agents IA","IA générative","Azure AI Foundry","Azure OpenAI","Copilot Studio","RAG","LLM","Databricks","Apache Spark","Power BI"],
+"sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://medium.com/@ZKHCHICHE","https://github.com/Zakariakhchiche","https://dev.to/zakaria_khchiche_490919ed"]}
 </script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
-:root{--bg:#ffffff;--fg:#14181f;--muted:#5b6472;--line:#e3e6eb;--accent:#0a66c2;--card:#f6f8fa}
-@media (prefers-color-scheme:dark){:root{--bg:#0f1419;--fg:#e6e9ee;--muted:#9aa4b2;--line:#2a3542;--accent:#58a6ff;--card:#18202a}}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--fg);font:17px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
-main{max-width:760px;margin:0 auto;padding:56px 20px 64px}
-h1{font-size:2.2rem;line-height:1.15;margin:0 0 6px}
-.title{font-size:1.15rem;color:var(--muted);margin:0 0 22px}
-h2{font-size:1.15rem;margin:40px 0 12px;padding-bottom:6px;border-bottom:1px solid var(--line)}
-a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
-.links{display:flex;flex-wrap:wrap;gap:10px;margin:0 0 8px}
-.links a{border:1px solid var(--line);border-radius:999px;padding:6px 14px;font-weight:600;font-size:.95rem}
-ul{padding-left:20px;margin:0}li{margin:6px 0}
-.refs{color:var(--muted)}
-.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px;margin:10px 0}
-.card strong{display:block}
-footer{margin-top:48px;color:var(--muted);font-size:.9rem}
+/* Layout: en-tête d'identité, graphe interactif + panneau, puis réalisations et contact */
+:root{
+  --bg:#f5f6f8; --surface:#ffffff; --ink:#15202b; --muted:#5b6673; --line:#dde2e8; --accent:#2457d6;
+  --c-agents:#7a3fd1; --c-data:#d4572a; --c-cloud:#1f8a70; --c-web:#2b6cd4; --c-msft:#c28a00; --c-ml:#c03a6b; --c-mission:#15202b;
+  --f-display:"Sora",system-ui,sans-serif; --f-body:"IBM Plex Sans",system-ui,sans-serif; --f-mono:"IBM Plex Mono",ui-monospace,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#0f141a; --surface:#161d25; --ink:#e6ebf1; --muted:#9aa6b3; --line:#27313c; --accent:#7ea3ff;
+  --c-agents:#b08cf0; --c-data:#f08a5d; --c-cloud:#4fc3a1; --c-web:#6fa3ff; --c-msft:#e6b93a; --c-ml:#ef7aa6; --c-mission:#e6ebf1; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0f141a; --surface:#161d25; --ink:#e6ebf1; --muted:#9aa6b3; --line:#27313c; --accent:#7ea3ff;
+  --c-agents:#b08cf0; --c-data:#f08a5d; --c-cloud:#4fc3a1; --c-web:#6fa3ff; --c-msft:#e6b93a; --c-ml:#ef7aa6; --c-mission:#e6ebf1; color-scheme:dark}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:15px;line-height:1.55}
+.wrap{max-width:1180px;margin:0 auto;padding-inline:20px;padding-block:32px 60px;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--f-display);text-wrap:balance;margin:0}
+h1{font-size:clamp(1.8rem,4vw,2.6rem);letter-spacing:-.015em}
+h2{font-size:1.3rem} h3{font-size:1rem}
+p{margin:0;max-width:68ch}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+header{display:grid;gap:10px}
+.lede{color:var(--muted);font-size:1.05rem}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:500 .85rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:7px 12px;text-decoration:none}
+.btn:hover{border-color:var(--accent)}
+.facts{display:flex;flex-wrap:wrap;gap:8px 22px;font-family:var(--f-mono);font-size:.82rem;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:500;font-variant-numeric:tabular-nums}
+.map{display:grid;grid-template-columns:minmax(0,1fr) 290px;gap:16px}
+@media (max-width:860px){.map{grid-template-columns:1fr}}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:10px;overflow:hidden;position:relative;min-width:0}
+.toolbar{display:flex;flex-wrap:wrap;gap:6px;padding:10px 12px;border-bottom:1px solid var(--line)}
+.chip{font:500 .78rem var(--f-body);border:1px solid var(--line);background:transparent;color:var(--ink);border-radius:999px;padding:4px 10px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.chip[aria-pressed="false"]{opacity:.4}
+.chip:focus-visible,.tag:focus-visible,.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+svg#g{display:block;width:100%;height:600px;touch-action:none}
+@media (max-width:600px){svg#g{height:460px}}
+.lbl{font-family:var(--f-body);font-size:10.5px;fill:var(--ink);pointer-events:none;paint-order:stroke;stroke:var(--surface);stroke-width:3px}
+.lbl.hub{font-family:var(--f-display);font-size:12.5px;font-weight:700}
+.lbl.repo{font-family:var(--f-mono);font-size:10px;fill:var(--muted)}
+.dim{opacity:.1}
+.hint{position:absolute;bottom:8px;left:12px;font-size:.75rem;color:var(--muted);font-family:var(--f-mono)}
+aside.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:12px;align-content:start;min-width:0}
+.kind{font-family:var(--f-mono);font-size:.72rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.tags{display:flex;flex-wrap:wrap;gap:5px}
+.tag{font-family:var(--f-mono);font-size:.74rem;border:1px solid var(--line);border-radius:5px;padding:2px 6px;cursor:pointer;background:transparent;color:var(--ink)}
+.rdesc{font-size:.86rem;color:var(--muted)}
+.legend{display:grid;gap:6px;font-size:.82rem}
+.legend div{display:flex;gap:8px;align-items:center}
+.shape{width:12px;height:12px;flex:none;background:var(--muted)}
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:14px}
+@media (max-width:400px){.cards{grid-template-columns:1fr}}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:8px;align-content:start;border-top:3px solid var(--cc)}
+.card .kind{display:flex;justify-content:space-between;gap:8px}
+.card h3{font-family:var(--f-mono);font-size:.95rem}
+.card h3 a{color:var(--ink);text-decoration:none}
+.card h3 a:hover{color:var(--accent)}
+.stack{font-family:var(--f-mono);font-size:.72rem;color:var(--muted)}
+.missions{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.mission{border-left:3px solid var(--c-mission);padding:4px 14px;display:grid;gap:4px}
+.mission b{font-family:var(--f-display)}
+section{display:grid;gap:14px}
+footer{color:var(--muted);font-size:.85rem;display:flex;flex-wrap:wrap;gap:8px 16px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<main>
-<h1>Zakaria Khchiche</h1>
-<p class="title">Tech Lead Data &amp; IA · Agents IA &amp; Azure AI Foundry · Paris</p>
-<nav class="links" aria-label="Profils">
-<a href="https://www.linkedin.com/in/zakariakhchiche/" rel="me">LinkedIn</a>
-<a href="https://www.malt.fr/profile/zakariakhchiche" rel="me">Malt</a>
-<a href="https://medium.com/@ZKHCHICHE" rel="me">Medium</a>
-<a href="https://github.com/Zakariakhchiche" rel="me">GitHub</a>
-<a href="https://dev.to/zakaria_khchiche_490919ed" rel="me">dev.to</a>
-</nav>
+<div class="wrap">
+<header>
+  <span class="eyebrow">Tech Lead Data & IA · Paris</span>
+  <h1>Zakaria Khchiche</h1>
+  <p class="lede">J'aide les grands comptes à passer d'un cas d'usage IA à une solution en production : agents IA sur Azure, plateformes data Databricks et Spark, pilotage de bout en bout. J'anime aussi des formations IA en entreprise.</p>
+  <div class="facts" id="facts"></div>
+  <div class="links">
+    <a class="btn" href="https://www.malt.fr/profile/zakariakhchiche" target="_blank" rel="noopener me">Profil Malt</a>
+    <a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/" target="_blank" rel="noopener me">LinkedIn</a>
+    <a class="btn" href="https://github.com/Zakariakhchiche" target="_blank" rel="noopener">GitHub</a>
+    <a class="btn" href="https://medium.com/@ZKHCHICHE" target="_blank" rel="noopener">Medium</a>
+    <a class="btn" href="https://dev.to/zakaria_khchiche_490919ed" target="_blank" rel="noopener">dev.to</a>
+  </div>
+</header>
 
-<p>J'aide les grands comptes à faire passer leurs cas d'usage IA du prototype à la production : des agents fiables, sécurisés et aux coûts maîtrisés. J'interviens en freelance comme Tech Lead Data &amp; IA, et j'anime des formations IA en entreprise.</p>
+<div class="map">
+  <div class="stage">
+    <div class="toolbar" id="toolbar" role="group" aria-label="Filtrer les domaines"></div>
+    <svg id="g" aria-label="Graphe des compétences reliées aux missions et aux projets"></svg>
+    <span class="hint">glisser · zoomer · cliquer pour isoler</span>
+  </div>
+  <aside class="panel" id="panel" aria-live="polite"></aside>
+</div>
 
-<h2>Ce que je fais</h2>
-<ul>
-<li><strong>Agents IA et IA générative</strong> : conception d'agents et d'assistants (Azure AI Foundry, Azure OpenAI, Copilot Studio), RAG, intégration au SI (SharePoint, Dataverse, API métiers).</li>
-<li><strong>Socle IA</strong> : AI Gateway, routage multi-LLM selon le coût, la latence et la sensibilité des données, observabilité, évaluation.</li>
-<li><strong>Data engineering</strong> : Databricks, Spark, Airflow, Lakehouse Delta, Azure et AWS.</li>
-<li><strong>Formation</strong> : IA générative en entreprise, agents IA, RAG, écosystème Microsoft Azure IA.</li>
-</ul>
+<section>
+  <div><span class="eyebrow">Missions</span><h2>Grands comptes</h2></div>
+  <div class="missions">
+    <div class="mission"><b>SUEZ · 2026</b><span class="rdesc">Tech Lead Data & IA. Agents IA sur Azure AI Foundry, socle multi-LLM, Power Platform.</span></div>
+    <div class="mission"><b>TotalEnergies · 2025</b><span class="rdesc">Senior Data Engineer. Databricks, Spark, Prefect, Denodo, Kubernetes sur AWS et Azure.</span></div>
+    <div class="mission"><b>Groupe SNCF · 2023-2025</b><span class="rdesc">Senior Data Engineer. Azure Databricks, Spark, Airflow, Delta, Power BI.</span></div>
+    <div class="mission"><b>La Banque Postale · 2022-2024</b><span class="rdesc">Senior Data Engineer. Conception et évolutions applicatives data, Hadoop, Dataiku, Oracle.</span></div>
+    <div class="mission"><b>Les Mousquetaires (Stime) · 2021-2023</b><span class="rdesc">Senior Data Engineer. DSI du groupement : Azure Databricks, Data Factory, Cosmos DB.</span></div>
+    <div class="mission"><b>Volvo Group · 2021</b><span class="rdesc">Senior Data Engineer. Azure Databricks, Spark Scala, Delta, Data Factory.</span></div>
+    <div class="mission"><b>SAUR · 2019-2021</b><span class="rdesc">Senior Data Engineer. Leader de la gestion de l'eau : Spark, Data Factory, Kubernetes sur Azure.</span></div>
+  </div>
+</section>
 
-<h2>Références</h2>
-<p class="refs">SUEZ · TotalEnergies · Groupe SNCF · La Banque Postale · Les Mousquetaires · Volvo Group · SAUR</p>
+<section>
+  <div><span class="eyebrow">Code public</span><h2>Réalisations sur GitHub</h2></div>
+  <div class="cards" id="cards"></div>
+</section>
 
-<h2>Open source</h2>
-<div class="card"><strong><a href="https://github.com/ogx-ai/ogx/pull/6697">OGX (ex-Llama Stack, Meta)</a></strong>Audit et correctifs proposés pour 3 bugs silencieux : recherche hybride Elasticsearch, filtres pgvector, comptage des tokens (<a href="https://github.com/ogx-ai/ogx/pull/6698">PR #6698</a>, <a href="https://github.com/ogx-ai/ogx/issues/6699">issue #6699</a>).</div>
-<div class="card"><strong><a href="https://github.com/mistralai/mistral-common/pull/349">Mistral AI – mistral-common</a></strong>Chargement des tokenizers en environnement hors ligne.</div>
-<div class="card"><strong><a href="https://github.com/Zakariakhchiche/azure-ai-gateway">Azure AI Gateway</a></strong>Passerelle multi-LLM : chaque requête part vers le modèle autorisé, suffisant et le moins cher.</div>
+<section>
+  <div><span class="eyebrow">Contributions</span><h2>Open source et articles</h2></div>
+  <div class="cards">
+    <article class="card" style="--cc:var(--c-agents)"><span class="kind"><span>Open source</span></span><h3><a href="https://github.com/ogx-ai/ogx/pull/6697" target="_blank" rel="noopener">OGX (ex-Llama Stack, Meta)</a></h3><p class="rdesc">Audit et correctifs proposés pour 3 bugs silencieux : recherche hybride Elasticsearch, filtres pgvector, comptage des tokens (<a href="https://github.com/ogx-ai/ogx/pull/6698">PR #6698</a>, <a href="https://github.com/ogx-ai/ogx/issues/6699">issue #6699</a>).</p></article>
+    <article class="card" style="--cc:var(--c-agents)"><span class="kind"><span>Open source</span></span><h3><a href="https://github.com/mistralai/mistral-common/pull/349" target="_blank" rel="noopener">Mistral AI · mistral-common</a></h3><p class="rdesc">Chargement des tokenizers Mistral en environnement hors ligne.</p></article>
+    <article class="card" style="--cc:var(--c-web)"><span class="kind"><span>Article</span></span><h3><a href="https://dev.to/zakaria_khchiche_490919ed/three-silent-bugs-in-an-open-source-ai-agent-framework-igd" target="_blank" rel="noopener">Three silent bugs in an AI agent framework</a></h3><p class="rdesc">Retour d'expérience sur l'audit d'OGX. Tous les articles (vLLM, Copilot Studio, GitLab) sur <a href="https://medium.com/@ZKHCHICHE">Medium</a>.</p></article>
+  </div>
+</section>
 
-<h2>Articles</h2>
-<ul>
-<li><a href="https://dev.to/zakaria_khchiche_490919ed/three-silent-bugs-in-an-open-source-ai-agent-framework-igd">Three silent bugs in an open-source AI agent framework</a></li>
-<li><a href="https://medium.com/@ZKHCHICHE">Tous mes articles sur Medium</a> (vLLM, Copilot Studio, GitLab)</li>
-</ul>
+<section>
+  <div><span class="eyebrow">Contact</span><h2>Travailler ensemble</h2></div>
+  <p>Disponible pour des missions de Tech Lead IA / Data et des formations IA, à Paris ou à distance. Le plus simple : <a href="https://www.linkedin.com/in/zakariakhchiche/">m'écrire sur LinkedIn</a> ou via <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a>.</p>
+</section>
 
-<h2>Contact</h2>
-<p>Disponible pour des missions de Tech Lead IA / Data et des formations IA, à Paris ou à distance. Le plus simple : <a href="https://www.linkedin.com/in/zakariakhchiche/">m'écrire sur LinkedIn</a> ou via <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a>.</p>
+<footer><span>Zakaria Khchiche</span><span>Tech Lead Data & IA</span><span>Paris ou hybride</span></footer>
+</div>
 
-<footer>© 2026 Zakaria Khchiche</footer>
-</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script>
+const DOM={agents:"Agents IA & LLM",data:"Data Engineering",cloud:"Cloud & DevOps",web:"Web & API",msft:"Microsoft & BI",ml:"Data Science & ML"};
+const S={"Azure AI Foundry":"agents","vLLM":"agents","KEDA":"cloud","Prometheus":"cloud","Azure OpenAI":"agents","Copilot Studio":"agents","AI Gateway multi-LLM":"agents","OpenAI API":"agents","LangChain":"agents","LangGraph":"agents","CrewAI":"agents","Ollama":"agents","NLP":"agents",
+"Databricks":"data","Spark":"data","Airflow":"data","Prefect":"data","Kafka":"data","Denodo":"data","Delta Lake":"data","Azure Data Factory":"data","SQL":"data","Python":"data","Scala":"data","Scraping":"data","Open data":"data","Azure Synapse":"data","Hadoop":"data","Oracle":"data","Dataiku":"ml","Cosmos DB":"cloud",
+"Azure":"cloud","AWS":"cloud","Docker":"cloud","Kubernetes":"cloud","CI/CD":"cloud","Vercel":"cloud","Supabase":"cloud","PostgreSQL":"cloud","Redis":"cloud",
+"React":"web","Next.js":"web","TypeScript":"web","FastAPI":"web","Streamlit":"web","Flask":"web","Kotlin Android":"web",
+"Power Platform":"msft","Power Automate":"msft","Power BI":"msft","SharePoint / Dataverse":"msft",
+"Machine learning":"ml","scikit-learn":"ml","TensorFlow":"ml","PyTorch":"ml","pandas":"ml","Deep Learning":"ml","Whisper":"ml"};
+const MISSIONS={"SUEZ":["Azure AI Foundry","Azure OpenAI","Copilot Studio","AI Gateway multi-LLM","Power Platform","Power Automate","Power BI","SharePoint / Dataverse","Azure"],
+"TotalEnergies":["Databricks","Prefect","Spark","SQL","Python","Denodo","Docker","Kubernetes","AWS","Azure","Azure Data Factory","Azure Synapse","CI/CD"],
+"SNCF":["Databricks","Spark","Python","Scala","Airflow","Delta Lake","CI/CD","Power BI"],
+"La Banque Postale":["Hadoop","Dataiku","Oracle","SQL"],
+"Les Mousquetaires":["Azure","Databricks","Spark","Scala","Python","SQL","Azure Data Factory","Cosmos DB"],
+"Volvo Group":["Azure","Databricks","Spark","Scala","Python","Azure Data Factory","Delta Lake"],
+"SAUR":["Azure","Spark","Scala","SQL","Kubernetes","Azure Data Factory","Cosmos DB"]};
+const R=[
+["vllm-production-serving","agents","Mise en production de LLM open source avec vLLM : dimensionnement GPU et cache KV, routeur qui réutilise le cache de préfixe, autoscaling KEDA, SLO Prometheus, banc de charge.",["vLLM","Kubernetes","KEDA","Prometheus","Docker","FastAPI","Python"]],
+["azure-ai-gateway","agents","Passerelle multi-LLM : chaque requête part vers le modèle autorisé, suffisant et le moins cher. Les données sensibles restent dans le SI.",["Azure OpenAI","Azure AI Foundry","AI Gateway multi-LLM","FastAPI","Python"]],
+["lakehouse-pipeline-demo","data","Lakehouse bronze, silver, gold sur l'open data SNCF : Airflow orchestre Spark et Delta, avec contrôles qualité et quarantaine.",["Airflow","Spark","Delta Lake","Databricks","Python","Open data","SQL"]],
+["ai-company-stack","agents","Stack d'automatisation d'entreprise multi-agents : CrewAI et LangGraph, modèles Ollama, services conteneurisés.",["LangGraph","CrewAI","LangChain","Ollama","OpenAI API","FastAPI","Docker","PostgreSQL","Redis","Python"]],
+["agrilife","agents","Assistant conversationnel qui guide les agriculteurs vers l'agriculture régénératrice.",["React","OpenAI API"]]];
+const css=v=>getComputedStyle(document.documentElement).getPropertyValue(v).trim();
+document.getElementById("facts").innerHTML=`<span><b>${Object.keys(S).length}</b> compétences</span><span><b>7</b> grands comptes</span><span><b>${R.length}</b> projets publics</span>`;
+
+const nodes=[],links=[],byId={};
+const add=(id,type,x)=>{const n={id,type,...x};nodes.push(n);byId[id]=n};
+Object.entries(DOM).forEach(([k,v])=>add("dom:"+k,"domain",{label:v,dom:k}));
+Object.entries(S).forEach(([s,d])=>{add("s:"+s,"skill",{label:s,dom:d});links.push({source:"s:"+s,target:"dom:"+d,k:"dom"})});
+Object.entries(MISSIONS).forEach(([m,sk])=>{add("m:"+m,"mission",{label:m});sk.forEach(s=>links.push({source:"m:"+m,target:"s:"+s,k:"use"}))});
+R.forEach(r=>{add("r:"+r[0],"repo",{label:r[0],dom:r[1],desc:r[2]});r[3].forEach(s=>links.push({source:"r:"+r[0],target:"s:"+s,k:"use"}))});
+const deg={},nb={};links.forEach(l=>{deg[l.source]=(deg[l.source]||0)+1;deg[l.target]=(deg[l.target]||0)+1;(nb[l.source]??=new Set).add(l.target);(nb[l.target]??=new Set).add(l.source)});
+const col=n=>n.type==="mission"?css("--c-mission"):css("--c-"+n.dom);
+const rad=n=>n.type==="domain"?16:n.type==="mission"?11:n.type==="repo"?7:4+Math.min(deg[n.id],8)*.8;
+const svg=d3.select("#g"),root=svg.append("g");
+const W=svg.node().clientWidth,H=svg.node().clientHeight;
+svg.call(d3.zoom().scaleExtent([.3,4]).on("zoom",e=>root.attr("transform",e.transform)));
+const ang={};Object.keys(DOM).forEach((k,i)=>ang[k]=i/6*2*Math.PI);
+const sim=d3.forceSimulation(nodes)
+ .force("link",d3.forceLink(links).id(d=>d.id).distance(l=>l.k==="dom"?45:90).strength(l=>l.k==="dom"?.9:.15))
+ .force("charge",d3.forceManyBody().strength(d=>d.type==="domain"?-500:-90))
+ .force("x",d3.forceX(d=>d.type==="domain"?W/2+Math.cos(ang[d.dom])*W*.3:W/2).strength(d=>d.type==="domain"?.3:.03))
+ .force("y",d3.forceY(d=>d.type==="domain"?H/2+Math.sin(ang[d.dom])*H*.3:H/2).strength(d=>d.type==="domain"?.3:.03))
+ .force("col",d3.forceCollide(d=>rad(d)+3));
+const edge=root.append("g").selectAll("line").data(links).join("line").attr("stroke-width",1);
+const node=root.append("g").selectAll("g").data(nodes).join("g").style("cursor","pointer")
+ .call(d3.drag().on("start",(e,d)=>{if(!e.active)sim.alphaTarget(.2).restart();d.fx=d.x;d.fy=d.y}).on("drag",(e,d)=>{d.fx=e.x;d.fy=e.y}).on("end",(e,d)=>{if(!e.active)sim.alphaTarget(0);d.fx=null;d.fy=null}))
+ .on("click",(e,d)=>{e.stopPropagation();select(d.id)});
+node.each(function(d){const g=d3.select(this);
+ if(d.type==="repo")g.append("rect").attr("x",-rad(d)).attr("y",-rad(d)).attr("width",rad(d)*2).attr("height",rad(d)*2).attr("rx",1.5);
+ else if(d.type==="mission")g.append("path").attr("d",d3.symbol(d3.symbolDiamond,420)());
+ else g.append("circle").attr("r",rad(d))});
+const paint=()=>{node.selectAll("circle,rect,path").attr("fill",col);edge.attr("stroke",css("--line"))};paint();
+node.append("text").attr("class",d=>"lbl "+(d.type==="domain"||d.type==="mission"?"hub":d.type==="repo"?"repo":"")).attr("dy",d=>-rad(d)-4).attr("text-anchor","middle").text(d=>d.label).style("display",d=>d.type==="skill"&&deg[d.id]<3?"none":null);
+sim.on("tick",()=>{edge.attr("x1",d=>d.source.x).attr("y1",d=>d.source.y).attr("x2",d=>d.target.x).attr("y2",d=>d.target.y);node.attr("transform",d=>`translate(${d.x},${d.y})`)});
+svg.on("click",()=>select(null));
+matchMedia("(prefers-color-scheme: dark)").addEventListener("change",paint);
+new MutationObserver(paint).observe(document.documentElement,{attributes:true,attributeFilter:["data-theme"]});
+
+const on=new Set(Object.keys(DOM)),tb=document.getElementById("toolbar");
+Object.entries(DOM).forEach(([k,v])=>{const b=document.createElement("button");b.className="chip";b.id="f-"+k;b.setAttribute("aria-pressed","true");b.innerHTML=`<span class="dot" style="background:var(--c-${k})"></span>${v}`;b.onclick=()=>{on.has(k)?on.delete(k):on.add(k);b.setAttribute("aria-pressed",on.has(k));filt()};tb.appendChild(b)});
+const vis=d=>(d.type==="skill"||d.type==="domain")?on.has(d.dom):[...nb[d.id]].some(x=>vis(byId[x]));
+function filt(){node.style("display",d=>vis(d)?null:"none");edge.style("display",l=>vis(l.source)&&vis(l.target)?null:"none")}
+
+const panel=document.getElementById("panel");
+const tag=id=>`<button class="tag" data-id="${id}">${byId[id].label}</button>`;
+function select(id){
+ if(!id){node.classed("dim",false);edge.classed("dim",false);return intro()}
+ const keep=new Set([id,...nb[id]]);node.classed("dim",d=>!keep.has(d.id));edge.classed("dim",l=>l.source.id!==id&&l.target.id!==id);
+ const d=byId[id],n=[...nb[id]],g=t=>n.filter(x=>byId[x].type===t);
+ let h=`<span class="kind">${{skill:"Compétence · "+DOM[d.dom],domain:"Domaine",mission:"Mission",repo:"Projet GitHub"}[d.type]}</span><h3>${d.label}</h3>`;
+ if(d.type==="repo")h+=`<p class="rdesc">${d.desc}</p><a class="btn" href="https://github.com/Zakariakhchiche/${d.label}" target="_blank" rel="noopener">Voir le code</a>`;
+ [["mission","Missions"],["skill","Compétences"],["repo","Projets"]].forEach(([t,l])=>{const x=g(t);if(x.length)h+=`<div><span class="kind">${l} (${x.length})</span><div class="tags">${x.map(tag).join("")}</div></div>`});
+ h+=`<button class="chip" id="reset">Tout afficher</button>`;panel.innerHTML=h;
+ panel.querySelectorAll(".tag").forEach(b=>b.onclick=()=>select(b.dataset.id));document.getElementById("reset").onclick=()=>select(null)}
+function intro(){panel.innerHTML=`<span class="kind">Comment lire la carte</span>
+<p class="rdesc">Chaque compétence est reliée aux missions où je l'ai pratiquée et aux projets publics qui la montrent.</p>
+<div class="legend"><div><span class="dot" style="width:14px;height:14px;background:var(--accent)"></span>Domaine</div><div><span class="dot" style="background:var(--muted)"></span>Compétence</div><div><span class="shape" style="transform:rotate(45deg);background:var(--c-mission)"></span>Mission</div><div><span class="shape"></span>Projet GitHub</div></div>
+<p class="rdesc">Essayez <button class="tag" data-id="s:Databricks">Databricks</button> ou <button class="tag" data-id="r:azure-ai-gateway">azure-ai-gateway</button>.</p>`;
+panel.querySelectorAll(".tag").forEach(b=>b.onclick=()=>select(b.dataset.id))}
+intro();
+document.getElementById("cards").innerHTML=R.map(r=>`<article class="card" style="--cc:var(--c-${r[1]})"><span class="kind"><span>${DOM[r[1]]}</span></span><h3><a href="https://github.com/Zakariakhchiche/${r[0]}" target="_blank" rel="noopener">${r[0]}</a></h3><p class="rdesc">${r[2]}</p><span class="stack">${r[3].join(" · ")}</span></article>`).join("");
+</script>
 </body>
 </html>
