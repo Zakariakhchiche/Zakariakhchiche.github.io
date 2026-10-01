@@ -1,0 +1,31 @@
+# Zakaria Khchiche
+
+> Tech Lead Data & IA freelance à Paris. Conçoit et met en production des agents IA pour de grands comptes sur Azure AI Foundry, Azure OpenAI et Copilot Studio : socle IA multi-LLM, RAG, sécurité et maîtrise des coûts, data engineering Databricks et Spark. Anime des formations IA générative en entreprise avec Spar-x (sessions de 20 personnes maximum).
+
+Références : SUEZ (Tech Lead Data & IA, depuis 2026), TotalEnergies, Groupe SNCF, La Banque Postale, Les Mousquetaires (Stime), Volvo Group, SAUR.
+Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA et d'industrialisation de POC d'IA générative, à Paris ou à distance.
+
+## Offres
+
+- [Copilot Studio](https://zakariakhchiche.github.io/copilot-studio/) : conception et mise en production d'agents Copilot Studio, formation des équipes.
+- [Azure AI Foundry](https://zakariakhchiche.github.io/azure-ai-foundry/) : socle IA, AI Gateway, routage multi-LLM, sécurité et coûts.
+- [Agents IA en production](https://zakariakhchiche.github.io/agents-ia-production/) : passage du POC à la production (RAG, validation humaine, supervision).
+- [Formation IA générative](https://zakariakhchiche.github.io/formation-ia-generative/) : formations en entreprise sur cas réels.
+
+## Contributions open source
+
+- [OGX (ex-Llama Stack, Meta)](https://github.com/ogx-ai/ogx/pull/6697) : audit et correctifs proposés pour 3 bugs silencieux (Elasticsearch, pgvector, comptage des tokens).
+- [Mistral AI, mistral-common](https://github.com/mistralai/mistral-common/pull/349) : tokenizers en environnement hors ligne.
+- [azure-ai-gateway](https://github.com/Zakariakhchiche/azure-ai-gateway), [vllm-production-serving](https://github.com/Zakariakhchiche/vllm-production-serving), [ai-company-stack](https://github.com/Zakariakhchiche/ai-company-stack), [lakehouse-pipeline-demo](https://github.com/Zakariakhchiche/lakehouse-pipeline-demo).
+
+## Articles
+
+- [Copilot Studio in production (série)](https://medium.com/@ZKHCHICHE) sur Medium.
+- [Three silent bugs in an open-source AI agent framework](https://dev.to/zakaria_khchiche_490919ed/three-silent-bugs-in-an-open-source-ai-agent-framework-igd) sur dev.to.
+
+## Contact
+
+- [LinkedIn](https://www.linkedin.com/in/zakariakhchiche/)
+- [Malt](https://www.malt.fr/profile/zakariakhchiche)
+- [GitHub](https://github.com/Zakariakhchiche)
+- [Medium](https://medium.com/@ZKHCHICHE)
