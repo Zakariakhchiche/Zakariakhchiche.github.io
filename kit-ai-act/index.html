@@ -1,1 +1,152 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Kit AI Act article 4 : diagnostic et registre de formation IA (version 2026)</title>
+<meta name="description" content="Article 4 de l'AI Act après le règlement 2026/1744 : ce qui change pour la formation des salariés à l'IA, un diagnostic en 10 questions et un modèle de registre des formations à télécharger. Gratuit.">
+<link rel="canonical" href="https://zakariakhchiche.github.io/kit-ai-act/">
+<meta property="og:title" content="Kit AI Act article 4 : diagnostic et registre de formation IA">
+<meta property="og:description" content="Ce que la réécriture de l'article 4 change en 2026, un diagnostic en 10 questions et un registre de formation à télécharger.">
+<meta property="og:url" content="https://zakariakhchiche.github.io/kit-ai-act/">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"La formation des salariés à l'IA est-elle encore obligatoire avec l'AI Act ?","acceptedAnswer":{"@type":"Answer","text":"Depuis le règlement (UE) 2026/1744, entré en vigueur le 27 juillet 2026, l'article 4 demande aux fournisseurs et aux déployeurs de systèmes d'IA de prendre des mesures pour favoriser le développement de la maîtrise de l'IA de leur personnel. Il n'impose plus de garantir un niveau suffisant pour chaque personne. C'est une obligation de moyens : il faut agir et pouvoir montrer ce qui a été fait."}},
+{"@type":"Question","name":"Comment prouver ses actions de formation à l'IA ?","acceptedAnswer":{"@type":"Answer","text":"Aucune certification n'est imposée. Un registre interne qui liste les personnes concernées, les outils d'IA utilisés, les actions de formation, leurs dates et leurs justificatifs permet de documenter les mesures prises."}},
+{"@type":"Question","name":"Qui est concerné par l'article 4 de l'AI Act ?","acceptedAnswer":{"@type":"Answer","text":"Les fournisseurs et les déployeurs de systèmes d'IA, c'est-à-dire aussi une entreprise dont les équipes utilisent des outils comme ChatGPT, Microsoft Copilot ou des agents IA dans leur travail."}}
+]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6;--c:#1f8a70;--warn:#b7791f;--bad:#c53030;
+--f-display:"Sora",system-ui,sans-serif;--f-body:"IBM Plex Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff;--c:#4fc3a1;--warn:#f0b35f;--bad:#f08080}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.015em}
+h2{font-size:1.3rem}h3{font-size:1rem}
+p{margin:0;max-width:70ch}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.08rem}
+header,section{display:grid;gap:12px}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:500 .88rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 14px;text-decoration:none;cursor:pointer}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.compare{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:8px;align-content:start}
+.card p{font-size:.95rem}
+.card.new{border-top:3px solid var(--c)}
+.card.old{border-top:3px solid var(--line)}
+ol.quiz{margin:0;padding-left:22px;display:grid;gap:10px}
+ol.quiz li label{display:flex;gap:10px;align-items:flex-start;cursor:pointer}
+ol.quiz input{margin-top:5px;width:18px;height:18px;flex:none}
+.score{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--muted);border-radius:10px;padding:14px 16px}
+.score b{font-family:var(--f-display);font-size:1.15rem}
+table{border-collapse:collapse;width:100%;font-size:.88rem;background:var(--surface)}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}
+th{font-family:var(--f-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted)}
+.scroll{overflow-x:auto}
+nav.top{font-family:var(--f-mono);font-size:.82rem;display:flex;flex-wrap:wrap;gap:6px 14px}
+.note{font-size:.85rem;color:var(--muted)}
+footer{color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="top"><a href="/">← Zakaria Khchiche</a><a href="/copilot-studio/">Copilot Studio</a><a href="/formation-copilot-studio/">Formation Copilot Studio</a><a href="/formation-ia-generative/">Formation IA générative</a><a href="/kit-ai-act/">Kit AI Act</a></nav>
 
+<header>
+  <span class="eyebrow">AI Act · Article 4 · Version 2026</span>
+  <h1>Kit AI Act : former vos équipes à l'IA et pouvoir le montrer</h1>
+  <p class="lede">L'article 4 de l'AI Act a été réécrit en juillet 2026. Beaucoup de contenus en ligne parlent encore d'une « formation obligatoire avant août 2026 ». Voici ce que dit le texte aujourd'hui, un diagnostic en 10 questions et un modèle de registre à télécharger.</p>
+  <div class="links">
+    <a class="btn primary" href="#diagnostic">Faire le diagnostic</a>
+    <a class="btn" href="#registre">Télécharger le registre</a>
+  </div>
+</header>
+
+<section>
+  <div><span class="eyebrow">Ce qui a changé</span><h2>L'article 4, avant et après le règlement 2026/1744</h2></div>
+  <div class="compare">
+    <article class="card old"><h3>Avant (texte de 2024, appliqué depuis février 2025)</h3><p>Les fournisseurs et déployeurs prennent des mesures pour <strong>garantir un niveau suffisant</strong> de maîtrise de l'IA de leur personnel.</p></article>
+    <article class="card new"><h3>Depuis le 27 juillet 2026</h3><p>Ils prennent des mesures pour <strong>favoriser le développement</strong> de la maîtrise de l'IA de leur personnel, sans niveau à garantir pour chaque personne. La Commission et les États membres publient des exemples pratiques pour les y aider.</p></article>
+  </div>
+  <p>En pratique : l'obligation est allégée, mais elle reste. C'est une obligation de moyens. L'entreprise doit agir et pouvoir montrer ce qu'elle a fait. Aucune certification n'est exigée ; un <strong>registre interne</strong> des actions de formation suffit à le documenter.</p>
+  <p class="note">Sources : <a href="https://www.journaldunet.com/intelligence-artificielle/1554987-article-4-de-l-ai-act-reecrit-ce-qui-change-pour-la-formation-des-salaries-en-pme/">Journal du Net</a>, <a href="https://www.adoue-avocat.fr/articles/omnibus-ia-reglement-2026-1744-ce-qui-change">analyse du règlement 2026/1744 (cabinet Adoue)</a>. Cette page est informative et ne constitue pas un conseil juridique.</p>
+</section>
+
+<section id="diagnostic">
+  <div><span class="eyebrow">Diagnostic</span><h2>Où en êtes-vous&nbsp;? 10&nbsp;questions</h2></div>
+  <p>Cochez ce qui est vrai aujourd'hui dans votre entreprise. Rien n'est envoyé : le calcul se fait dans votre navigateur.</p>
+  <ol class="quiz" id="quiz">
+    <li><label><input type="checkbox">Nous avons la liste des outils d'IA utilisés par nos équipes (ChatGPT, Copilot, agents, outils métier).</label></li>
+    <li><label><input type="checkbox">Nous savons quels services et quels métiers les utilisent.</label></li>
+    <li><label><input type="checkbox">Une charte ou des règles d'usage de l'IA ont été diffusées (données confidentielles, vérification des réponses).</label></li>
+    <li><label><input type="checkbox">Les personnes qui utilisent l'IA ont reçu une formation ou une sensibilisation adaptée à leur usage.</label></li>
+    <li><label><input type="checkbox">Les équipes qui construisent des agents ou des automatisations ont été formées à ces outils.</label></li>
+    <li><label><input type="checkbox">Les managers savent quoi autoriser et quoi refuser dans l'usage de l'IA.</label></li>
+    <li><label><input type="checkbox">Chaque action de formation est datée et nous avons un justificatif (attestation, feuille de présence).</label></li>
+    <li><label><input type="checkbox">Ces informations sont réunies dans un registre ou un document unique.</label></li>
+    <li><label><input type="checkbox">Une personne est responsable de tenir ce registre à jour.</label></li>
+    <li><label><input type="checkbox">Les nouveaux arrivants sont formés à l'IA dans les trois mois.</label></li>
+  </ol>
+  <div class="score" id="score" aria-live="polite"><b>0 / 10</b><p>Cochez les affirmations vraies pour voir votre résultat.</p></div>
+</section>
+
+<section id="registre">
+  <div><span class="eyebrow">Modèle</span><h2>Registre des actions de maîtrise de l'IA</h2></div>
+  <p>Une ligne par action et par groupe de personnes. Le fichier se télécharge au format CSV et s'ouvre dans Excel ou Google Sheets.</p>
+  <div class="scroll"><table id="reg">
+    <thead><tr><th>Service</th><th>Personnes ou rôle</th><th>Outils d'IA utilisés</th><th>Usage</th><th>Action</th><th>Date</th><th>Durée</th><th>Organisme</th><th>Justificatif</th><th>Prochaine action</th></tr></thead>
+    <tbody>
+      <tr><td>Service client</td><td>12 conseillers</td><td>Microsoft Copilot</td><td>Rédaction de réponses</td><td>Sensibilisation usages et limites</td><td>2026-10-15</td><td>3 h</td><td>Interne</td><td>Feuille de présence</td><td>Atelier cas pratiques T1</td></tr>
+      <tr><td>DSI</td><td>4 développeurs Power Platform</td><td>Copilot Studio</td><td>Création d'agents</td><td>Formation Copilot Studio</td><td>2026-11-05</td><td>2 jours</td><td>Spar-x</td><td>Attestations</td><td>Revue des agents en production</td></tr>
+    </tbody>
+  </table></div>
+  <div class="links"><button class="btn primary" id="dl" type="button">Télécharger le registre (CSV)</button></div>
+  <p class="note">Les deux lignes sont des exemples à remplacer.</p>
+</section>
+
+<section>
+  <div><span class="eyebrow">Passer à l'action</span><h2>Former vos équipes, avec un formateur de terrain</h2></div>
+  <p>Spar-x, organisme certifié Qualiopi, propose des formations IA en groupes de 20 personnes maximum, finançables par votre OPCO, avec attestation pour votre registre. Elles sont animées par Zakaria Khchiche, qui a mis plus de 200 agents IA en production.</p>
+  <div class="links">
+    <a class="btn primary" href="/formation-copilot-studio/">Formation Copilot Studio</a>
+    <a class="btn" href="/formation-ia-generative/">Formation IA générative</a>
+    <a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/">Demander un devis</a>
+  </div>
+</section>
+
+<footer>Kit proposé par Zakaria Khchiche et Spar-x · <a href="/">Accueil</a> · <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a></footer>
+</div>
+<script>
+(function(){
+  var boxes=[].slice.call(document.querySelectorAll('#quiz input'));
+  var out=document.getElementById('score');
+  function render(){
+    var n=boxes.filter(function(b){return b.checked}).length, msg, col;
+    if(n<=3){msg="Vos actions ne sont pas encore documentées. Commencez par la liste des outils et des usages, puis une sensibilisation des utilisateurs.";col="var(--bad)";}
+    else if(n<=7){msg="La base est là. Il manque surtout la formation des équipes qui construisent avec l'IA et un registre tenu à jour.";col="var(--warn)";}
+    else{msg="Vous pouvez montrer ce que vous faites. Gardez le registre à jour et formez les nouveaux arrivants.";col="var(--c)";}
+    out.style.borderLeftColor=n?col:"var(--muted)";
+    out.innerHTML="<b>"+n+" / 10</b><p>"+(n?msg:"Cochez les affirmations vraies pour voir votre résultat.")+"</p>";
+  }
+  boxes.forEach(function(b){b.addEventListener('change',render)});
+  document.getElementById('dl').addEventListener('click',function(){
+    var rows=[].slice.call(document.querySelectorAll('#reg tr')).map(function(tr){
+      return [].slice.call(tr.children).map(function(c){return '"'+c.textContent.replace(/"/g,'""')+'"'}).join(';');
+    });
+    var blob=new Blob(["﻿"+rows.join("\r\n")],{type:"text/csv;charset=utf-8"});
+    var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download="registre-maitrise-ia.csv";
+    document.body.appendChild(a);a.click();setTimeout(function(){URL.revokeObjectURL(a.href);a.remove()},500);
+  });
+})();
+</script>
+</body>
+</html>
