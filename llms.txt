@@ -11,6 +11,8 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 - [Azure AI Foundry](https://zakariakhchiche.github.io/azure-ai-foundry/) : socle IA, AI Gateway, routage multi-LLM, sécurité et coûts.
 - [Agents IA en production](https://zakariakhchiche.github.io/agents-ia-production/) : passage du POC à la production (RAG, validation humaine, supervision).
 - [Formation IA générative](https://zakariakhchiche.github.io/formation-ia-generative/) : formations en entreprise sur cas réels.
+- [Formation Copilot Studio](https://zakariakhchiche.github.io/formation-copilot-studio/) : formation en entreprise (Spar-x, organisme certifié Qualiopi, finançable OPCO) pour créer et mettre en production des agents IA Copilot Studio, 6 modules, sans code, 20 participants maximum.
+- [Kit AI Act article 4](https://zakariakhchiche.github.io/kit-ai-act/) : ce qui change pour la maîtrise de l'IA depuis le règlement (UE) 2026/1744, diagnostic en 10 questions et modèle de registre des formations IA à télécharger.
 
 ## Contributions open source
 
