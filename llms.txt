@@ -13,6 +13,7 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 - [Formation IA générative](https://zakariakhchiche.github.io/formation-ia-generative/) : formations en entreprise sur cas réels.
 - [Formation Copilot Studio](https://zakariakhchiche.github.io/formation-copilot-studio/) : formation en entreprise (Spar-x, organisme certifié Qualiopi, finançable OPCO) pour créer et mettre en production des agents IA Copilot Studio, 6 modules, sans code, 20 participants maximum.
 - [Kit AI Act article 4](https://zakariakhchiche.github.io/kit-ai-act/) : ce qui change pour la maîtrise de l'IA depuis le règlement (UE) 2026/1744, diagnostic en 10 questions et modèle de registre des formations IA à télécharger.
+- [Demande de devis formation (Spar-x)](https://mte.typeform.com/spar-xv3?typeform-source=www.spar-x.fr) : formulaire pour demander un devis ou une date de formation IA.
 
 ## Contributions open source
 
