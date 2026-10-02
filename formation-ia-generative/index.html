@@ -3,16 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Formation IA générative en entreprise – Zakaria Khchiche</title>
-<meta name="description" content="Formations IA générative, Copilot Studio, agents IA et RAG pour les entreprises, animées par Zakaria Khchiche, Tech Lead Data & IA. Sessions de 20 personnes maximum, cas pratiques réels.">
+<title>Formation IA générative en entreprise (Qualiopi, OPCO) – Zakaria Khchiche</title>
+<meta name="description" content="Formation IA générative pour les entreprises : usages métiers, Copilot Studio, Azure OpenAI, RAG et agents IA en production. Animée par Zakaria Khchiche avec Spar-x (certifié Qualiopi, finançable OPCO), 20 personnes maximum.">
 <link rel="canonical" href="https://zakariakhchiche.github.io/formation-ia-generative/">
-<meta property="og:title" content="Formation IA générative et agents IA – Zakaria Khchiche">
-<meta property="og:description" content="Formations IA générative, Copilot Studio, agents IA et RAG pour les entreprises, animées par Zakaria Khchiche, Tech Lead Data & IA. Sessions de 20 personnes maximum, cas pratiques réels.">
+<meta property="og:title" content="Formation IA générative en entreprise – Zakaria Khchiche">
+<meta property="og:description" content="Formation IA générative pour les entreprises : usages métiers, Copilot Studio, Azure OpenAI, RAG et agents IA en production. Animée par Zakaria Khchiche avec Spar-x (certifié Qualiopi, finançable OPCO), 20 personnes maximum.">
 <meta property="og:url" content="https://zakariakhchiche.github.io/formation-ia-generative/">
 <meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"Formation IA générative en entreprise","url":"https://zakariakhchiche.github.io/formation-ia-generative/","areaServed":"FR","provider":{"@type":"Person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/","jobTitle":"Tech Lead Data & IA","sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://medium.com/@ZKHCHICHE","https://github.com/Zakariakhchiche"]}}
+{"@context":"https://schema.org","@type":"Course","name":"Formation IA générative en entreprise","description":"Formation IA générative pour les entreprises : usages métiers, Copilot Studio, Azure OpenAI, RAG et agents IA en production. Animée par Zakaria Khchiche avec Spar-x (certifié Qualiopi, finançable OPCO), 20 personnes maximum.","url":"https://zakariakhchiche.github.io/formation-ia-generative/","inLanguage":"fr","provider":{"@type":"Organization","name":"Spar-x","url":"https://www.spar-x.fr/"},"instructor":{"@type":"Person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/","jobTitle":"Tech Lead Data & IA","sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://medium.com/@ZKHCHICHE","https://github.com/Zakariakhchiche","https://www.wikidata.org/wiki/Q141613783"]},"hasCourseInstance":{"@type":"CourseInstance","courseMode":["Onsite","Online"],"maximumAttendeeCapacity":20},"teaches":["IA générative en entreprise","Microsoft Copilot Studio","Azure OpenAI","Azure AI Foundry","RAG","Agents IA en production","AI Act article 4"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"La formation IA générative est-elle finançable par un OPCO ?","acceptedAnswer":{"@type":"Answer","text":"Oui. La formation est délivrée par Spar-x, organisme certifié Qualiopi au titre des actions de formation. Elle peut donc être prise en charge par votre OPCO, selon ses règles et votre éligibilité."}},{"@type":"Question","name":"Faut-il savoir coder pour suivre la formation ?","acceptedAnswer":{"@type":"Answer","text":"Non pour les parcours métiers et managers : on travaille avec les outils que vos équipes utilisent déjà, comme Copilot et Copilot Studio. Les modules Azure OpenAI, RAG et mise en production s'adressent aux équipes techniques."}},{"@type":"Question","name":"Combien de participants par session ?","acceptedAnswer":{"@type":"Answer","text":"20 personnes maximum, pour que chacun pratique sur ses propres cas d'usage."}},{"@type":"Question","name":"La formation aide-t-elle à répondre à l'article 4 de l'AI Act ?","acceptedAnswer":{"@type":"Answer","text":"Elle contribue à développer la maîtrise de l'IA de vos équipes, ce que vise l'article 4 du règlement européen sur l'IA. Le kit gratuit vous aide à documenter ces actions. Ce contenu ne constitue pas un conseil juridique."}},{"@type":"Question","name":"Comment obtenir un devis ou une date ?","acceptedAnswer":{"@type":"Answer","text":"Remplissez le formulaire de demande de devis Spar-x en précisant le public, le nombre de participants et les thèmes souhaités."}}]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -40,6 +43,9 @@ header,section{display:grid;gap:12px}
 ul{margin:0;padding-left:20px}li{margin:4px 0}
 nav.top{font-family:var(--f-mono);font-size:.82rem;display:flex;flex-wrap:wrap;gap:6px 14px}
 footer{color:var(--muted);font-size:.85rem}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+summary{font-weight:600;cursor:pointer}
+details p{margin-top:8px;color:var(--muted)}
 </style>
 </head>
 <body>
@@ -47,32 +53,81 @@ footer{color:var(--muted);font-size:.85rem}
 <nav class="top"><a href="/">← Zakaria Khchiche</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-ia-generative/">Formation IA générative</a><a href="/formation-copilot-studio/">Formation Copilot Studio</a><a href="/kit-ai-act/">Kit AI Act</a></nav>
 <header>
   <span class="eyebrow">Formation · IA générative · Spar-x</span>
-  <h1>Former vos équipes à l'IA générative, sur des cas réels</h1>
-  <p class="lede">J'anime des formations IA en entreprise avec Spar-x, en sessions de 20 personnes maximum. Mes cas pratiques viennent de projets que j'ai mis en production chez de grands comptes, pas de démos.</p>
+  <h1>Formation IA générative en entreprise : former vos équipes sur des cas réels</h1>
+  <p class="lede">Une formation pratique pour apprendre à utiliser l'IA générative au travail, puis à construire des agents IA fiables. Elle est animée par Zakaria Khchiche, Tech Lead Data &amp; IA qui a mis plus de 200 agents IA en production, et délivrée par Spar-x, organisme certifié Qualiopi : elle est finançable par votre OPCO. Sessions de 20 personnes maximum.</p>
   <div class="links">
-    <a class="btn primary" href="https://mte.typeform.com/spar-xv3?typeform-source=www.spar-x.fr">Demander un devis</a>
+    <a class="btn primary" href="https://mte.typeform.com/spar-xv3?typeform-source=www.spar-x.fr">Demander un devis ou une date</a>
+    <a class="btn" href="/formation-copilot-studio/">Voir la formation Copilot Studio</a>
     <a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/">Échanger sur LinkedIn</a>
   </div>
 </header>
 <section>
+  <h2>Ce que vos équipes sauront faire</h2>
+  <ul>
+    <li>Choisir les bons usages de l'IA générative dans leur métier, et reconnaître ceux qui posent problème.</li>
+    <li>Rédiger des instructions précises et vérifier les réponses avant de s'en servir.</li>
+    <li>Protéger les données de l'entreprise : ce qu'on peut confier à un assistant IA, et ce qu'on ne doit pas lui confier.</li>
+    <li>Construire un agent simple avec Copilot Studio, relié à leurs propres documents.</li>
+    <li>Pour les équipes techniques : concevoir un RAG, maîtriser les coûts et préparer la mise en production.</li>
+  </ul>
+</section>
+<section>
   <h2>Thèmes de formation</h2>
   <div class="grid">
-    <article class="card"><h3>IA générative en entreprise</h3><p>Usages, limites, sécurité des données et bonnes pratiques pour les métiers.</p></article>
-    <article class="card"><h3>Concevoir des agents avec Copilot Studio</h3><p>Instructions, base de connaissances, documents scannés, outils et agent flows. <a href="/formation-copilot-studio/">Programme détaillé</a></p></article>
-    <article class="card"><h3>Azure AI Foundry et Azure OpenAI</h3><p>Construire un socle IA : choix des modèles, sécurité, coûts. <a href="/azure-ai-foundry/">En savoir plus</a></p></article>
-    <article class="card"><h3>RAG : connecter l'IA à vos documents</h3><p>Préparer les sources, filtrer, évaluer la qualité des réponses.</p></article>
-    <article class="card"><h3>Mettre un agent IA en production</h3><p>Tests, validation humaine, coûts, supervision. <a href="/agents-ia-production/">En savoir plus</a></p></article>
+    <article class="card"><h3>IA générative en entreprise</h3><p>Pour tous les collaborateurs. Usages par métier, limites des modèles, sécurité des données, bonnes pratiques de rédaction et de vérification.</p></article>
+    <article class="card"><h3>Concevoir des agents avec Copilot Studio</h3><p>Pour les métiers et les équipes IT. Instructions, base de connaissances, documents scannés, outils et agent flows. <a href="/formation-copilot-studio/">Programme détaillé</a></p></article>
+    <article class="card"><h3>Azure AI Foundry et Azure OpenAI</h3><p>Pour les équipes techniques. Choix des modèles, sécurité, quotas et coûts d'un socle IA d'entreprise. <a href="/azure-ai-foundry/">En savoir plus</a></p></article>
+    <article class="card"><h3>RAG : connecter l'IA à vos documents</h3><p>Pour les équipes data. Préparer les sources, découper, filtrer, puis évaluer la qualité des réponses avec des tests.</p></article>
+    <article class="card"><h3>Mettre un agent IA en production</h3><p>Pour les équipes qui livrent. Tests, validation humaine, supervision et suivi des coûts. <a href="/agents-ia-production/">En savoir plus</a></p></article>
   </div>
 </section>
 <section>
-  <h2>Format</h2>
+  <h2>Pour qui ?</h2>
+  <div class="grid">
+    <article class="card"><h3>Les utilisateurs métiers</h3><p>Gagner du temps au quotidien avec Copilot et les assistants IA, sans exposer de données sensibles.</p></article>
+    <article class="card"><h3>Les équipes qui construisent</h3><p>Développeurs, data engineers, équipes IT : concevoir des agents et des RAG qui tiennent en production.</p></article>
+    <article class="card"><h3>Les managers et décideurs</h3><p>Choisir les cas d'usage, fixer les règles d'usage et piloter le déploiement de l'IA dans leurs équipes.</p></article>
+  </div>
+</section>
+<section>
+  <h2>Format et financement</h2>
   <ul>
     <li>Sessions de 20 personnes maximum, en présentiel ou à distance.</li>
-    <li>Programme adapté au public : métiers, équipes techniques ou managers.</li>
-    <li>Spar-x est certifié Qualiopi : les formations sont finançables par votre OPCO.</li>
-    <li>Obligation de maîtrise de l'IA (AI Act, article 4) : faites le point avec notre <a href="/kit-ai-act/">kit gratuit</a>.</li>
-    <li>Formateur en activité : Tech Lead Data &amp; IA (SUEZ, TotalEnergies, Groupe SNCF), auteur d'articles techniques et contributeur open source.</li>
+    <li>Programme adapté au public et aux outils de l'entreprise : chaque participant travaille sur ses propres cas.</li>
+    <li>Formation délivrée par Spar-x, certifié Qualiopi : finançable par votre OPCO.</li>
+    <li>Demande de devis, de programme ou de date : <a href="https://mte.typeform.com/spar-xv3?typeform-source=www.spar-x.fr">formulaire Spar-x</a>.</li>
   </ul>
+</section>
+<section>
+  <h2>AI Act, article 4 : la maîtrise de l'IA</h2>
+  <p>L'article 4 du règlement européen sur l'IA demande aux entreprises qui utilisent des systèmes d'IA d'agir pour la maîtrise de l'IA de leurs équipes. Il a été modifié par le règlement (UE) 2026/1744, en vigueur depuis le 27 juillet 2026. Une formation documentée est le moyen le plus simple de montrer ce que vous avez fait. Pour faire le point, utilisez le <a href="/kit-ai-act/">kit gratuit AI Act article 4</a> : registre de formation, règles d'usage et checklist. Ce contenu ne constitue pas un conseil juridique.</p>
+</section>
+<section>
+  <h2>Le formateur</h2>
+  <p>Zakaria Khchiche est Tech Lead Data &amp; IA freelance, basé à Paris. Chez SUEZ, il a conçu 20 cas d'usage d'IA générative et mis plus de 200 agents IA en production. Il est intervenu pour TotalEnergies, Groupe SNCF, La Banque Postale, Les Mousquetaires, Volvo Group et SAUR. Il contribue à des projets open source d'IA (correctifs intégrés par les mainteneurs d'OGX, ex-Llama Stack) et publie des retours d'expérience sur <a href="https://medium.com/@ZKHCHICHE">Medium</a>. Les exemples de la formation viennent de ces projets.</p>
+  <div class="links">
+    <a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a>
+    <a class="btn" href="https://www.malt.fr/profile/zakariakhchiche">Malt</a>
+    <a class="btn" href="https://github.com/Zakariakhchiche">GitHub</a>
+  </div>
+</section>
+<section>
+  <h2>Questions fréquentes</h2>
+  <details><summary>La formation IA générative est-elle finançable par un OPCO ?</summary><p>Oui. La formation est délivrée par Spar-x, organisme certifié Qualiopi au titre des actions de formation. Elle peut donc être prise en charge par votre OPCO, selon ses règles et votre éligibilité.</p></details>
+  <details><summary>Faut-il savoir coder pour suivre la formation ?</summary><p>Non pour les parcours métiers et managers : on travaille avec les outils que vos équipes utilisent déjà, comme Copilot et Copilot Studio. Les modules Azure OpenAI, RAG et mise en production s'adressent aux équipes techniques.</p></details>
+  <details><summary>Combien de participants par session ?</summary><p>20 personnes maximum, pour que chacun pratique sur ses propres cas d'usage.</p></details>
+  <details><summary>La formation aide-t-elle à répondre à l'article 4 de l'AI Act ?</summary><p>Elle contribue à développer la maîtrise de l'IA de vos équipes, ce que vise l'article 4 du règlement européen sur l'IA. Le <a href="/kit-ai-act/">kit gratuit</a> vous aide à documenter ces actions. Ce contenu ne constitue pas un conseil juridique.</p></details>
+  <details><summary>Comment obtenir un devis ou une date ?</summary><p>Remplissez le <a href="https://mte.typeform.com/spar-xv3?typeform-source=www.spar-x.fr">formulaire de demande de devis Spar-x</a> en précisant le public, le nombre de participants et les thèmes souhaités.</p></details>
+</section>
+<section>
+  <h2>Ressources gratuites</h2>
+  <ul>
+    <li><a href="/kit-ai-act/">Kit AI Act article 4</a> : registre de formation, règles d'usage, checklist.</li>
+    <li><a href="/formation-copilot-studio/">Programme de la formation Copilot Studio</a>.</li>
+    <li><a href="/copilot-studio/">Copilot Studio : retours de terrain</a> et <a href="/agents-ia-production/">agents IA en production</a>.</li>
+    <li><a href="https://medium.com/@ZKHCHICHE">Articles sur Medium</a> : série Copilot Studio, RAG, passerelle IA, bugs corrigés en open source.</li>
+  </ul>
+  <div class="links"><a class="btn primary" href="https://mte.typeform.com/spar-xv3?typeform-source=www.spar-x.fr">Demander un devis ou une date</a></div>
 </section>
 <footer>Zakaria Khchiche · Tech Lead Data &amp; IA · <a href="/">Accueil</a> · <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a> · <a href="https://medium.com/@ZKHCHICHE">Medium</a> · <a href="https://github.com/Zakariakhchiche">GitHub</a></footer>
 </div>
