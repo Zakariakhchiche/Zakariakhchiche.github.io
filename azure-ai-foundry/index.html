@@ -4,15 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Consultant Azure AI Foundry et Azure OpenAI – Zakaria Khchiche</title>
-<meta name="description" content="Zakaria Khchiche, Tech Lead IA freelance sur Azure AI Foundry et Azure OpenAI : socle IA, AI Gateway, routage multi-LLM, sécurité des données et maîtrise des coûts. Paris ou à distance.">
+<meta name="description" content="Zakaria Khchiche, Tech Lead IA freelance sur Azure AI Foundry et Azure OpenAI : socle IA d'entreprise, AI Gateway, routage multi-LLM, sécurité des données, coûts et mise en production d'agents. Paris ou à distance.">
 <link rel="canonical" href="https://zakariakhchiche.github.io/azure-ai-foundry/">
-<meta property="og:title" content="Azure AI Foundry en production – Zakaria Khchiche">
-<meta property="og:description" content="Zakaria Khchiche, Tech Lead IA freelance sur Azure AI Foundry et Azure OpenAI : socle IA, AI Gateway, routage multi-LLM, sécurité des données et maîtrise des coûts. Paris ou à distance.">
+<meta property="og:title" content="Consultant Azure AI Foundry et Azure OpenAI – Zakaria Khchiche">
+<meta property="og:description" content="Zakaria Khchiche, Tech Lead IA freelance sur Azure AI Foundry et Azure OpenAI : socle IA d&#39;entreprise, AI Gateway, routage multi-LLM, sécurité des données, coûts et mise en production d&#39;agents. Paris ou à distance.">
 <meta property="og:url" content="https://zakariakhchiche.github.io/azure-ai-foundry/">
 <meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"Conseil Azure AI Foundry et Azure OpenAI","url":"https://zakariakhchiche.github.io/azure-ai-foundry/","areaServed":"FR","provider":{"@type":"Person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/","jobTitle":"Tech Lead Data & IA","sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://medium.com/@ZKHCHICHE","https://github.com/Zakariakhchiche"]}}
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Conseil Azure AI Foundry et Azure OpenAI","description":"Zakaria Khchiche, Tech Lead IA freelance sur Azure AI Foundry et Azure OpenAI : socle IA d'entreprise, AI Gateway, routage multi-LLM, sécurité des données, coûts et mise en production d'agents. Paris ou à distance.","url":"https://zakariakhchiche.github.io/azure-ai-foundry/","areaServed":"FR","serviceType":["Socle IA Azure AI Foundry","AI Gateway et routage multi-LLM","Mise en production d'agents IA","Formation Azure OpenAI"],"provider":{"@type":"Person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/","jobTitle":"Tech Lead Data & IA","knowsAbout":["Azure AI Foundry","Azure OpenAI","Microsoft Copilot Studio","AI Gateway","RAG","Agents IA","vLLM","Databricks"],"sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://medium.com/@ZKHCHICHE","https://github.com/Zakariakhchiche","https://www.wikidata.org/wiki/Q141613783"]}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu'est-ce qu'Azure AI Foundry ?","acceptedAnswer":{"@type":"Answer","text":"C'est la plateforme de Microsoft pour construire, déployer et superviser des applications et des agents d'IA générative sur Azure. Elle donne accès aux modèles Azure OpenAI et à d'autres modèles, avec la sécurité, les accès et le suivi d'une plateforme d'entreprise."}},{"@type":"Question","name":"Azure AI Foundry ou Copilot Studio : que choisir ?","acceptedAnswer":{"@type":"Answer","text":"Copilot Studio convient aux agents construits par les métiers, en low-code, dans l'environnement Microsoft 365. Azure AI Foundry convient aux équipes techniques qui ont besoin de choisir leurs modèles, de maîtriser l'architecture et d'intégrer l'IA à leurs applications. Dans un grand groupe, les deux cohabitent : le socle Azure sert aussi les agents Copilot Studio."}},{"@type":"Question","name":"Comment maîtriser les coûts d'Azure OpenAI ?","acceptedAnswer":{"@type":"Answer","text":"En faisant passer les requêtes par une passerelle qui choisit le modèle le moins cher qui suffit, en fixant des quotas par équipe et par cas d'usage, et en suivant la consommation de tokens de chaque agent. Un comptage de tokens faux fausse tout le suivi des coûts : c'est l'un des bugs que j'ai corrigés dans OGX."}},{"@type":"Question","name":"Comment protéger les données sensibles ?","acceptedAnswer":{"@type":"Answer","text":"Classer les cas d'usage selon la sensibilité des données, router les requêtes sensibles vers des modèles et des régions autorisés, gérer les accès par identité et tracer les appels. Ce travail se fait avec la DSI et l'équipe cybersécurité, dès la conception."}},{"@type":"Question","name":"Proposez-vous une formation Azure AI Foundry ?","acceptedAnswer":{"@type":"Answer","text":"Oui, le thème Azure AI Foundry et Azure OpenAI fait partie des formations IA générative que j'anime avec Spar-x, organisme certifié Qualiopi : elles sont finançables par votre OPCO."}}]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -40,20 +43,33 @@ header,section{display:grid;gap:12px}
 ul{margin:0;padding-left:20px}li{margin:4px 0}
 nav.top{font-family:var(--f-mono);font-size:.82rem;display:flex;flex-wrap:wrap;gap:6px 14px}
 footer{color:var(--muted);font-size:.85rem}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+summary{font-weight:600;cursor:pointer}
+details p{margin-top:8px;color:var(--muted)}
 </style>
 </head>
 <body>
 <div class="wrap">
-<nav class="top"><a href="/">← Zakaria Khchiche</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-ia-generative/">Formation IA générative</a></nav>
+<nav class="top"><a href="/">← Zakaria Khchiche</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-ia-generative/">Formation IA générative</a><a href="/formation-copilot-studio/">Formation Copilot Studio</a><a href="/kit-ai-act/">Kit AI Act</a></nav>
 <header>
   <span class="eyebrow">Azure AI Foundry · Azure OpenAI · Socle IA</span>
-  <h1>Construire un socle IA fiable sur Azure AI Foundry</h1>
-  <p class="lede">Chez SUEZ, je construis et fais évoluer le socle IA sur Azure AI Foundry : choix des modèles, AI Gateway, gestion des accès, observabilité et maîtrise des coûts. L'objectif : que chaque cas d'usage IA passe en production sans réinventer la sécurité ni exploser la facture.</p>
+  <h1>Consultant Azure AI Foundry : construire un socle IA fiable pour passer en production</h1>
+  <p class="lede">Je conçois et fais évoluer des socles IA sur Azure AI Foundry et Azure OpenAI : choix des modèles, AI Gateway, accès, observabilité et maîtrise des coûts. Chez SUEZ, ce socle porte plus de 200 agents IA en production et 20 cas d'usage d'IA générative. L'objectif : que chaque nouveau cas d'usage passe en production sans réinventer la sécurité ni exploser la facture.</p>
   <div class="links">
     <a class="btn primary" href="https://www.malt.fr/profile/zakariakhchiche">Me confier une mission (Malt)</a>
     <a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/">Échanger sur LinkedIn</a>
   </div>
 </header>
+<section>
+  <h2>Quand faire appel à moi</h2>
+  <ul>
+    <li>Vos premiers POC d'IA générative marchent, mais aucun n'est passé en production.</li>
+    <li>Chaque équipe appelle Azure OpenAI à sa façon, sans règles communes d'accès ni de suivi des coûts.</li>
+    <li>La facture de tokens augmente et personne ne sait quel agent consomme quoi.</li>
+    <li>La DSI ou la cybersécurité bloque les projets faute de garanties sur les données.</li>
+    <li>Vous devez choisir entre Copilot Studio, Azure AI Foundry ou des modèles auto-hébergés.</li>
+  </ul>
+</section>
 <section>
   <h2>Ce que je mets en place</h2>
   <ul>
@@ -65,11 +81,45 @@ footer{color:var(--muted);font-size:.85rem}
   </ul>
 </section>
 <section>
+  <h2>Ma méthode, en 4 étapes</h2>
+  <div class="grid">
+    <article class="card"><h3>1. Cadrer</h3><p>Lister les cas d'usage, leurs données et leurs contraintes. Choisir ceux qui ont une vraie chance d'aller en production.</p></article>
+    <article class="card"><h3>2. Poser le socle</h3><p>Ressources Azure AI Foundry, accès par identité, passerelle commune, quotas et journalisation.</p></article>
+    <article class="card"><h3>3. Livrer un premier agent</h3><p>Un cas réel, avec tests, validation humaine et suivi des coûts dès le premier jour.</p></article>
+    <article class="card"><h3>4. Industrialiser</h3><p>Rendre le socle réutilisable : chaque nouvel agent hérite de la sécurité, du suivi et des règles de coût.</p></article>
+  </div>
+</section>
+<section>
   <div><span class="eyebrow">Preuves</span><h2>Code et contributions</h2></div>
   <div class="grid">
     <article class="card"><h3><a href="https://github.com/Zakariakhchiche/azure-ai-gateway">azure-ai-gateway</a></h3><p>Passerelle multi-LLM sur Azure : chaque requête part vers le modèle autorisé, suffisant et le moins cher. Les données sensibles restent dans le SI. <a href="https://medium.com/@ZKHCHICHE/a-multi-llm-gateway-on-azure-route-each-request-to-the-cheapest-model-that-is-allowed-and-good-2d72878c6cfd">Lire l'article</a>.</p></article>
     <article class="card"><h3><a href="https://github.com/ogx-ai/ogx/pull/6697">Audit d'OGX (ex-Llama Stack)</a></h3><p>Trois bugs silencieux trouvés dans un framework d'agents open source, dont un sous-comptage des tokens qui fausse le suivi des coûts. Correctifs intégrés par les mainteneurs (PR #6697 et #6698 fusionnées).</p></article>
+    <article class="card"><h3><a href="https://github.com/Zakariakhchiche/vllm-production-serving">vllm-production-serving</a></h3><p>Servir un modèle open source avec vLLM en production, pour les cas où les données ne doivent pas quitter votre infrastructure.</p></article>
     <article class="card"><h3><a href="/copilot-studio/">Copilot Studio en production</a></h3><p>L'autre moitié de l'écosystème Microsoft : agents Copilot Studio, base de connaissances, outils et agent flows.</p></article>
+  </div>
+</section>
+<section>
+  <h2>Références</h2>
+  <p>Tech Lead Data &amp; IA freelance, basé à Paris. Chez SUEZ, je pilote le socle IA sur Azure AI Foundry et la mise en production des agents. Missions précédentes pour TotalEnergies, Groupe SNCF, La Banque Postale, Les Mousquetaires, Volvo Group et SAUR. Je publie mes retours d'expérience sur <a href="https://medium.com/@ZKHCHICHE">Medium</a>.</p>
+</section>
+<section>
+  <h2>Former vos équipes</h2>
+  <p>Vos développeurs et data engineers doivent prendre la main sur le socle ? J'anime avec Spar-x, organisme certifié Qualiopi, des formations finançables par votre OPCO : <a href="/formation-ia-generative/">formation IA générative</a> (dont un module Azure AI Foundry et Azure OpenAI) et <a href="/formation-copilot-studio/">formation Copilot Studio</a>. Pour l'obligation de maîtrise de l'IA, voir le <a href="/kit-ai-act/">kit gratuit AI Act article 4</a>.</p>
+</section>
+<section>
+  <h2>Questions fréquentes</h2>
+  <details><summary>Qu'est-ce qu'Azure AI Foundry ?</summary><p>C'est la plateforme de Microsoft pour construire, déployer et superviser des applications et des agents d'IA générative sur Azure. Elle donne accès aux modèles Azure OpenAI et à d'autres modèles, avec la sécurité, les accès et le suivi d'une plateforme d'entreprise.</p></details>
+  <details><summary>Azure AI Foundry ou Copilot Studio : que choisir ?</summary><p>Copilot Studio convient aux agents construits par les métiers, en low-code, dans l'environnement Microsoft 365. Azure AI Foundry convient aux équipes techniques qui ont besoin de choisir leurs modèles, de maîtriser l'architecture et d'intégrer l'IA à leurs applications. Dans un grand groupe, les deux cohabitent : le socle Azure sert aussi les agents Copilot Studio.</p></details>
+  <details><summary>Comment maîtriser les coûts d'Azure OpenAI ?</summary><p>En faisant passer les requêtes par une passerelle qui choisit le modèle le moins cher qui suffit, en fixant des quotas par équipe et par cas d'usage, et en suivant la consommation de tokens de chaque agent. Un comptage de tokens faux fausse tout le suivi des coûts : c'est l'un des bugs que j'ai corrigés dans <a href="https://github.com/ogx-ai/ogx/pull/6697">OGX</a>.</p></details>
+  <details><summary>Comment protéger les données sensibles ?</summary><p>Classer les cas d'usage selon la sensibilité des données, router les requêtes sensibles vers des modèles et des régions autorisés, gérer les accès par identité et tracer les appels. Ce travail se fait avec la DSI et l'équipe cybersécurité, dès la conception.</p></details>
+  <details><summary>Proposez-vous une formation Azure AI Foundry ?</summary><p>Oui, le thème Azure AI Foundry et Azure OpenAI fait partie des <a href="/formation-ia-generative/">formations IA générative</a> que j'anime avec Spar-x, organisme certifié Qualiopi : elles sont finançables par votre OPCO.</p></details>
+</section>
+<section>
+  <h2>Parlons de votre projet</h2>
+  <p>Décrivez votre contexte en quelques lignes : cas d'usage, volume, contraintes de données. Je vous réponds avec une première lecture du chemin vers la production.</p>
+  <div class="links">
+    <a class="btn primary" href="https://www.malt.fr/profile/zakariakhchiche">Me confier une mission (Malt)</a>
+    <a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/">Échanger sur LinkedIn</a>
   </div>
 </section>
 <footer>Zakaria Khchiche · Tech Lead Data &amp; IA · <a href="/">Accueil</a> · <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a> · <a href="https://medium.com/@ZKHCHICHE">Medium</a> · <a href="https://github.com/Zakariakhchiche">GitHub</a></footer>
