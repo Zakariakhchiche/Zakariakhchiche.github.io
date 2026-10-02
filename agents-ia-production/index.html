@@ -3,16 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Mise en production d'agents IA – Zakaria Khchiche, Tech Lead IA freelance</title>
-<meta name="description" content="Passer un agent IA du POC à la production : RAG, orchestration multi-agents, validation humaine, coûts LLM, tests des bugs silencieux. Tech Lead IA freelance à Paris.">
+<title>Mettre un agent IA en production – Zakaria Khchiche, Tech Lead IA freelance</title>
+<meta name="description" content="Passer un agent IA du POC à la production : RAG, orchestration multi-agents, validation humaine, coûts LLM, tests des bugs silencieux. Zakaria Khchiche, Tech Lead IA freelance à Paris, plus de 200 agents IA en production.">
 <link rel="canonical" href="https://zakariakhchiche.github.io/agents-ia-production/">
-<meta property="og:title" content="Agents IA : du POC à la production – Zakaria Khchiche">
-<meta property="og:description" content="Passer un agent IA du POC à la production : RAG, orchestration multi-agents, validation humaine, coûts LLM, tests des bugs silencieux. Tech Lead IA freelance à Paris.">
+<meta property="og:title" content="Mettre un agent IA en production – Zakaria Khchiche">
+<meta property="og:description" content="Passer un agent IA du POC à la production : RAG, orchestration multi-agents, validation humaine, coûts LLM, tests des bugs silencieux. Zakaria Khchiche, Tech Lead IA freelance à Paris, plus de 200 agents IA en production.">
 <meta property="og:url" content="https://zakariakhchiche.github.io/agents-ia-production/">
 <meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"Mise en production d'agents IA","url":"https://zakariakhchiche.github.io/agents-ia-production/","areaServed":"FR","provider":{"@type":"Person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/","jobTitle":"Tech Lead Data & IA","sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://medium.com/@ZKHCHICHE","https://github.com/Zakariakhchiche"]}}
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Mise en production d'agents IA","description":"Passer un agent IA du POC à la production : RAG, orchestration multi-agents, validation humaine, coûts LLM, tests des bugs silencieux. Zakaria Khchiche, Tech Lead IA freelance à Paris, plus de 200 agents IA en production.","url":"https://zakariakhchiche.github.io/agents-ia-production/","areaServed":"FR","serviceType":["Mise en production d'agents IA","RAG","Orchestration multi-agents","Maîtrise des coûts LLM","Formation agents IA"],"provider":{"@type":"Person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/","jobTitle":"Tech Lead Data & IA","knowsAbout":["Agents IA","RAG","LangGraph","CrewAI","vLLM","Azure AI Foundry","Microsoft Copilot Studio","pgvector"],"sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://medium.com/@ZKHCHICHE","https://github.com/Zakariakhchiche","https://www.wikidata.org/wiki/Q141613783"]}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Pourquoi la plupart des agents IA restent-ils au stade du POC ?","acceptedAnswer":{"@type":"Answer","text":"Parce qu'un POC est testé sur quelques questions choisies, alors qu'en production l'agent reçoit des milliers de demandes imprévues, sur des données réelles, avec des contraintes de sécurité et de coût. Sans tests, supervision et validation humaine, les erreurs passent inaperçues et la confiance tombe."}},{"@type":"Question","name":"Qu'est-ce qu'un bug silencieux dans un agent IA ?","acceptedAnswer":{"@type":"Answer","text":"Une erreur qui ne déclenche aucun message : un filtre qui ne filtre pas, un paramètre ignoré, des tokens mal comptés. L'agent répond quand même, mais mal. On les attrape en testant la valeur réellement envoyée, avec de vrais types de données. J'en ai trouvé trois dans OGX, un framework d'agents open source, corrigés depuis par les mainteneurs."}},{"@type":"Question","name":"Combien de temps pour passer un agent en production ?","acceptedAnswer":{"@type":"Answer","text":"Cela dépend du cas d'usage, des données et des validations internes. Le plus long est rarement le modèle : ce sont l'accès aux données, la sécurité et l'adoption par les utilisateurs. Un cadrage de départ permet de donner une estimation réaliste."}},{"@type":"Question","name":"Faut-il un humain dans la boucle ?","acceptedAnswer":{"@type":"Answer","text":"Oui pour toute action irréversible ou sensible : envoyer, payer, supprimer, engager l'entreprise. L'agent prépare, un humain valide, et chaque décision est tracée dans un journal d'audit."}},{"@type":"Question","name":"Proposez-vous une formation sur la mise en production d'agents ?","acceptedAnswer":{"@type":"Answer","text":"Oui, c'est un des thèmes des formations IA générative que j'anime avec Spar-x, organisme certifié Qualiopi, finançables par votre OPCO."}}]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -40,15 +43,18 @@ header,section{display:grid;gap:12px}
 ul{margin:0;padding-left:20px}li{margin:4px 0}
 nav.top{font-family:var(--f-mono);font-size:.82rem;display:flex;flex-wrap:wrap;gap:6px 14px}
 footer{color:var(--muted);font-size:.85rem}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+summary{font-weight:600;cursor:pointer}
+details p{margin-top:8px;color:var(--muted)}
 </style>
 </head>
 <body>
 <div class="wrap">
-<nav class="top"><a href="/">← Zakaria Khchiche</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-ia-generative/">Formation IA générative</a></nav>
+<nav class="top"><a href="/">← Zakaria Khchiche</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-ia-generative/">Formation IA générative</a><a href="/formation-copilot-studio/">Formation Copilot Studio</a><a href="/kit-ai-act/">Kit AI Act</a></nav>
 <header>
   <span class="eyebrow">Agents IA · RAG · LLM · Production</span>
-  <h1>Faire passer vos agents IA du POC à la production</h1>
-  <p class="lede">Un prototype d'agent IA impressionne en démo. En production, il doit être fiable, sécurisé, mesurable et rentable. C'est ce passage que j'accompagne, du cadrage à l'adoption par les utilisateurs.</p>
+  <h1>Mettre un agent IA en production : du POC à un agent fiable, mesuré et rentable</h1>
+  <p class="lede">Un prototype d'agent IA impressionne en démo. En production, il doit être fiable, sécurisé, mesurable et rentable. C'est ce passage que j'accompagne, du cadrage à l'adoption par les utilisateurs. Chez SUEZ, j'ai conçu 20 cas d'usage d'IA générative et mis plus de 200 agents IA en production.</p>
   <div class="links">
     <a class="btn primary" href="https://www.malt.fr/profile/zakariakhchiche">Me confier une mission (Malt)</a>
     <a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/">Échanger sur LinkedIn</a>
@@ -65,12 +71,54 @@ footer{color:var(--muted);font-size:.85rem}
   </ul>
 </section>
 <section>
+  <h2>Ma checklist avant la mise en production</h2>
+  <div class="grid">
+    <article class="card"><h3>1. Un jeu de questions de test</h3><p>Des questions réelles, avec les réponses attendues, rejouées à chaque modification de l'agent ou de ses sources.</p></article>
+    <article class="card"><h3>2. Des sources propres</h3><p>Documents à jour, découpage adapté, métadonnées fiables pour filtrer. Les documents scannés sont vérifiés à part.</p></article>
+    <article class="card"><h3>3. Des filtres testés</h3><p>Vérifier que chaque filtre et chaque paramètre est réellement appliqué, pas seulement accepté sans erreur.</p></article>
+    <article class="card"><h3>4. Une validation humaine</h3><p>Pour toute action irréversible, avec un journal d'audit qui garde la trace de chaque décision.</p></article>
+    <article class="card"><h3>5. Un budget suivi</h3><p>Tokens comptés par agent et par cas d'usage, modèle le moins cher qui suffit, alertes de dépassement.</p></article>
+    <article class="card"><h3>6. Une supervision</h3><p>Qualité des réponses, erreurs, latence et usage suivis en continu, avec des objectifs de service.</p></article>
+    <article class="card"><h3>7. Un accès maîtrisé</h3><p>L'agent ne voit que les données que l'utilisateur a le droit de voir. Validé avec la DSI et la cybersécurité.</p></article>
+    <article class="card"><h3>8. Des utilisateurs formés</h3><p>Un agent que personne ne sait utiliser reste un POC. La formation fait partie de la mise en production.</p></article>
+  </div>
+</section>
+<section>
   <div><span class="eyebrow">Preuves</span><h2>Ce que j'ai construit et publié</h2></div>
   <div class="grid">
-    <article class="card"><h3><a href="https://dev.to/zakaria_khchiche_490919ed/three-silent-bugs-in-an-open-source-ai-agent-framework-igd">3 bugs silencieux dans OGX</a></h3><p>Audit d'un framework d'agents open source (ex-Llama Stack, Meta) : recherche hybride, filtres pgvector et comptage des tokens.</p></article>
+    <article class="card"><h3><a href="https://dev.to/zakaria_khchiche_490919ed/three-silent-bugs-in-an-open-source-ai-agent-framework-igd">3 bugs silencieux dans OGX</a></h3><p>Audit d'un framework d'agents open source (ex-Llama Stack, Meta) : recherche hybride, filtres pgvector et comptage des tokens. Correctifs intégrés par les mainteneurs (<a href="https://github.com/ogx-ai/ogx/pull/6697">PR #6697</a> et #6698 fusionnées).</p></article>
     <article class="card"><h3><a href="https://github.com/Zakariakhchiche/ai-company-stack">ai-company-stack</a></h3><p>Architecture multi-agents (CrewAI, LangGraph) avec validation humaine dans Slack et journal d'audit.</p></article>
     <article class="card"><h3><a href="https://github.com/Zakariakhchiche/vllm-production-serving">vllm-production-serving</a></h3><p>Mise en production de LLM open source avec vLLM : dimensionnement GPU, routeur qui réutilise le cache, autoscaling KEDA, SLO Prometheus.</p></article>
     <article class="card"><h3><a href="https://github.com/mistralai/mistral-common/pull/349">Contribution Mistral AI</a></h3><p>Chargement des tokenizers Mistral en environnement hors ligne, pour les infrastructures fermées.</p></article>
+    <article class="card"><h3><a href="https://github.com/Zakariakhchiche/azure-ai-gateway">azure-ai-gateway</a></h3><p>Passerelle multi-LLM sur Azure : chaque requête part vers le modèle autorisé, suffisant et le moins cher. <a href="https://medium.com/@ZKHCHICHE/a-multi-llm-gateway-on-azure-route-each-request-to-the-cheapest-model-that-is-allowed-and-good-2d72878c6cfd">Lire l'article</a>.</p></article>
+  </div>
+</section>
+<section>
+  <h2>Sur quelles plateformes</h2>
+  <p>Je mets des agents en production sur <a href="/azure-ai-foundry/">Azure AI Foundry et Azure OpenAI</a>, sur <a href="/copilot-studio/">Microsoft Copilot Studio</a> pour les agents construits avec les métiers, et sur des modèles open source auto-hébergés avec vLLM quand les données ne doivent pas quitter votre infrastructure. Le choix dépend des données, des utilisateurs et du budget, pas de la mode.</p>
+</section>
+<section>
+  <h2>Références</h2>
+  <p>Tech Lead Data &amp; IA freelance, basé à Paris. Missions pour SUEZ, TotalEnergies, Groupe SNCF, La Banque Postale, Les Mousquetaires, Volvo Group et SAUR. Retours d'expérience publiés sur <a href="https://medium.com/@ZKHCHICHE">Medium</a> et code sur <a href="https://github.com/Zakariakhchiche">GitHub</a>.</p>
+</section>
+<section>
+  <h2>Former vos équipes</h2>
+  <p>Pour que vos équipes construisent et exploitent elles-mêmes leurs agents, j'anime avec Spar-x, organisme certifié Qualiopi, des formations finançables par votre OPCO : <a href="/formation-ia-generative/">formation IA générative</a> (dont un module mise en production d'agents) et <a href="/formation-copilot-studio/">formation Copilot Studio</a>. Pour l'obligation de maîtrise de l'IA, voir le <a href="/kit-ai-act/">kit gratuit AI Act article 4</a>.</p>
+</section>
+<section>
+  <h2>Questions fréquentes</h2>
+  <details><summary>Pourquoi la plupart des agents IA restent-ils au stade du POC ?</summary><p>Parce qu'un POC est testé sur quelques questions choisies, alors qu'en production l'agent reçoit des milliers de demandes imprévues, sur des données réelles, avec des contraintes de sécurité et de coût. Sans tests, supervision et validation humaine, les erreurs passent inaperçues et la confiance tombe.</p></details>
+  <details><summary>Qu'est-ce qu'un bug silencieux dans un agent IA ?</summary><p>Une erreur qui ne déclenche aucun message : un filtre qui ne filtre pas, un paramètre ignoré, des tokens mal comptés. L'agent répond quand même, mais mal. On les attrape en testant la valeur réellement envoyée, avec de vrais types de données. J'en ai trouvé trois dans <a href="https://github.com/ogx-ai/ogx/pull/6697">OGX</a>, un framework d'agents open source, corrigés depuis par les mainteneurs.</p></details>
+  <details><summary>Combien de temps pour passer un agent en production ?</summary><p>Cela dépend du cas d'usage, des données et des validations internes. Le plus long est rarement le modèle : ce sont l'accès aux données, la sécurité et l'adoption par les utilisateurs. Un cadrage de départ permet de donner une estimation réaliste.</p></details>
+  <details><summary>Faut-il un humain dans la boucle ?</summary><p>Oui pour toute action irréversible ou sensible : envoyer, payer, supprimer, engager l'entreprise. L'agent prépare, un humain valide, et chaque décision est tracée dans un journal d'audit.</p></details>
+  <details><summary>Proposez-vous une formation sur la mise en production d'agents ?</summary><p>Oui, c'est un des thèmes des <a href="/formation-ia-generative/">formations IA générative</a> que j'anime avec Spar-x, organisme certifié Qualiopi, finançables par votre OPCO.</p></details>
+</section>
+<section>
+  <h2>Votre agent est bloqué au stade du POC ?</h2>
+  <p>Décrivez-moi le cas d'usage, les données et ce qui bloque. Je vous réponds avec les points à traiter en priorité pour passer en production.</p>
+  <div class="links">
+    <a class="btn primary" href="https://www.malt.fr/profile/zakariakhchiche">Me confier une mission (Malt)</a>
+    <a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/">Échanger sur LinkedIn</a>
   </div>
 </section>
 <footer>Zakaria Khchiche · Tech Lead Data &amp; IA · <a href="/">Accueil</a> · <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a> · <a href="https://medium.com/@ZKHCHICHE">Medium</a> · <a href="https://github.com/Zakariakhchiche">GitHub</a></footer>
