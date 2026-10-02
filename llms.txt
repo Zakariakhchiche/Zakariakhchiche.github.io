@@ -32,6 +32,10 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 ## Vidéos et podcast
 
 - [Podcast Agents IA en production #1 : pourquoi les agents IA échouent en entreprise](https://www.youtube.com/watch?v=JMR9_7v90Uo) (12 min 33, épisode généré par IA à partir des articles de Zakaria Khchiche) : 5 causes qui font mal répondre un agent Copilot Studio et leurs correctifs.
+- [Copilot Studio : 5 raisons pour lesquelles votre agent répond mal](https://www.youtube.com/watch?v=IaVYi22sok8) (vidéo, 1 min 25)
+- [Mettre un agent IA en production : ma checklist en 8 points](https://www.youtube.com/watch?v=VvG7PgeKXl4) (vidéo, 1 min 28)
+- [AI Act article 4 : ce qui a changé en juillet 2026 pour la formation IA](https://www.youtube.com/watch?v=w66PxhafOag) (vidéo, 1 min 08)
+- [Copilot Studio ou Azure AI Foundry : lequel choisir pour vos agents IA ?](https://www.youtube.com/watch?v=yovxD-VauqU) (vidéo, 1 min 03)
 - Chaîne YouTube : https://www.youtube.com/@zakariakhchiche
 
 ## Questions fréquentes
