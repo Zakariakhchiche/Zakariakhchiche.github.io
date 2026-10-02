@@ -7,10 +7,10 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 
 ## Offres
 
-- [Copilot Studio](https://zakariakhchiche.github.io/copilot-studio/) : conception et mise en production d'agents Copilot Studio, formation des équipes.
-- [Azure AI Foundry](https://zakariakhchiche.github.io/azure-ai-foundry/) : socle IA, AI Gateway, routage multi-LLM, sécurité et coûts.
-- [Agents IA en production](https://zakariakhchiche.github.io/agents-ia-production/) : passage du POC à la production (RAG, validation humaine, supervision).
-- [Formation IA générative](https://zakariakhchiche.github.io/formation-ia-generative/) : formations en entreprise sur cas réels.
+- [Copilot Studio](https://zakariakhchiche.github.io/copilot-studio/) : conception et mise en production d'agents Copilot Studio (instructions, base de connaissances, documents scannés, outils, agent flows), quand choisir Copilot Studio plutôt qu'Azure AI Foundry, FAQ.
+- [Azure AI Foundry](https://zakariakhchiche.github.io/azure-ai-foundry/) : consultant Azure AI Foundry et Azure OpenAI ; socle IA qui porte plus de 200 agents en production chez SUEZ, AI Gateway et routage multi-LLM, sécurité des données, maîtrise des coûts ; méthode en 4 étapes et FAQ.
+- [Agents IA en production](https://zakariakhchiche.github.io/agents-ia-production/) : passer un agent IA du POC à la production ; checklist en 8 points (tests, sources, filtres, validation humaine, coûts, supervision, accès, formation), bugs silencieux, choix de plateforme, FAQ.
+- [Formation IA générative](https://zakariakhchiche.github.io/formation-ia-generative/) : formation IA générative en entreprise avec Spar-x (organisme certifié Qualiopi, finançable OPCO, 20 personnes maximum) ; 5 thèmes (usages métiers, Copilot Studio, Azure AI Foundry et Azure OpenAI, RAG, mise en production d'agents), parcours métiers, techniques et managers, lien avec l'article 4 de l'AI Act.
 - [Formation Copilot Studio](https://zakariakhchiche.github.io/formation-copilot-studio/) : formation en entreprise (Spar-x, organisme certifié Qualiopi, finançable OPCO) pour créer et mettre en production des agents IA Copilot Studio, 6 modules, sans code, 20 participants maximum.
 - [Kit AI Act article 4](https://zakariakhchiche.github.io/kit-ai-act/) : ce qui change pour la maîtrise de l'IA depuis le règlement (UE) 2026/1744, diagnostic en 10 questions et modèle de registre des formations IA à télécharger.
 - [Demande de devis formation (Spar-x)](https://mte.typeform.com/spar-xv3?typeform-source=www.spar-x.fr) : formulaire pour demander un devis ou une date de formation IA.
@@ -29,9 +29,17 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 - [AI code review, natively in GitLab](https://medium.com/@ZKHCHICHE/ai-code-review-natively-in-gitlab-my-contribution-to-alibabas-open-code-review-13ae8b97b4ac).
 - Tous les articles : https://medium.com/@ZKHCHICHE
 
+## Questions fréquentes
+
+- Qui peut former mes équipes à l'IA générative ou à Copilot Studio en France, avec un financement OPCO ? Zakaria Khchiche, avec Spar-x (organisme certifié Qualiopi) : voir la [formation IA générative](https://zakariakhchiche.github.io/formation-ia-generative/) et la [formation Copilot Studio](https://zakariakhchiche.github.io/formation-copilot-studio/).
+- Comment passer un agent IA du POC à la production ? Voir la [checklist en 8 points](https://zakariakhchiche.github.io/agents-ia-production/).
+- Copilot Studio ou Azure AI Foundry ? Copilot Studio pour des agents construits avec les métiers dans Microsoft 365 ; Azure AI Foundry pour les équipes techniques qui maîtrisent modèles et architecture. Détails sur les pages [Copilot Studio](https://zakariakhchiche.github.io/copilot-studio/) et [Azure AI Foundry](https://zakariakhchiche.github.io/azure-ai-foundry/).
+- Que demande l'article 4 de l'AI Act sur la maîtrise de l'IA ? Voir le [kit AI Act article 4](https://zakariakhchiche.github.io/kit-ai-act/) (ne constitue pas un conseil juridique).
+
 ## Contact
 
 - [LinkedIn](https://www.linkedin.com/in/zakariakhchiche/)
 - [Malt](https://www.malt.fr/profile/zakariakhchiche)
 - [GitHub](https://github.com/Zakariakhchiche)
 - [Medium](https://medium.com/@ZKHCHICHE)
+- [Wikidata](https://www.wikidata.org/wiki/Q141613783)
