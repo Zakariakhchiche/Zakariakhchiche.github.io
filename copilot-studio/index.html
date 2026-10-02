@@ -12,7 +12,7 @@
 <meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"ProfessionalService","name":"Accompagnement et formation Copilot Studio","url":"https://zakariakhchiche.github.io/copilot-studio/","areaServed":"FR","provider":{"@type":"Person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/","jobTitle":"Tech Lead Data & IA","sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://medium.com/@ZKHCHICHE"]},"serviceType":["Conception d'agents Copilot Studio","Formation Copilot Studio"]}
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Accompagnement et formation Copilot Studio","url":"https://zakariakhchiche.github.io/copilot-studio/","areaServed":"FR","provider":{"@type":"Person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/","jobTitle":"Tech Lead Data & IA","sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://medium.com/@ZKHCHICHE","https://github.com/Zakariakhchiche","https://www.wikidata.org/wiki/Q141613783"]},"serviceType":["Conception d'agents Copilot Studio","Formation Copilot Studio"]}
 </script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
@@ -41,11 +41,17 @@ header,section{display:grid;gap:12px}
 ul{margin:0;padding-left:20px}li{margin:4px 0}
 nav.top{font-family:var(--f-mono);font-size:.82rem}
 footer{color:var(--muted);font-size:.85rem}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+summary{font-weight:600;cursor:pointer}
+details p{margin-top:8px;color:var(--muted)}
 </style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Qu'est-ce que Microsoft Copilot Studio ?","acceptedAnswer":{"@type":"Answer","text":"C'est l'outil de Microsoft pour créer des agents IA en low-code : on décrit le rôle de l'agent, on lui donne des sources de connaissances (SharePoint, fichiers, sites web), des outils et des agent flows, puis on le publie dans Teams, Microsoft 365 Copilot ou un site web."}},{"@type":"Question","name":"Copilot Studio ou Azure AI Foundry : que choisir ?","acceptedAnswer":{"@type":"Answer","text":"Copilot Studio convient aux agents construits avec les métiers, rapidement, dans l'environnement Microsoft 365. Azure AI Foundry convient aux équipes techniques qui ont besoin de choisir leurs modèles et de maîtriser toute l'architecture. Dans un grand groupe, les deux cohabitent."}},{"@type":"Question","name":"Pourquoi mon agent Copilot Studio répond mal ?","acceptedAnswer":{"@type":"Answer","text":"Le plus souvent, à cause des sources : documents obsolètes, doublons, fichiers scannés illisibles. Viennent ensuite des instructions trop vagues. On corrige d'abord la base de connaissances, puis les instructions, et on vérifie avec un jeu de questions de test."}},{"@type":"Question","name":"Faut-il savoir coder pour utiliser Copilot Studio ?","acceptedAnswer":{"@type":"Answer","text":"Non pour créer un agent simple. Pour le connecter au SI (API, serveurs MCP, Dataverse) et l'industrialiser, il faut des compétences techniques ou un accompagnement."}},{"@type":"Question","name":"Proposez-vous une formation Copilot Studio ?","acceptedAnswer":{"@type":"Answer","text":"Oui, une formation pratique animée avec Spar-x, organisme certifié Qualiopi, finançable par votre OPCO, en sessions de 20 personnes maximum. Chaque participant construit un agent sur ses propres cas."}}]}
+</script>
 </head>
 <body>
 <div class="wrap">
-<nav class="top"><a href="/">← Zakaria Khchiche · Tech Lead Data &amp; IA</a></nav>
+<nav class="top"><a href="/">← Zakaria Khchiche</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-ia-generative/">Formation IA générative</a><a href="/formation-copilot-studio/">Formation Copilot Studio</a><a href="/kit-ai-act/">Kit AI Act</a></nav>
 
 <header>
   <span class="eyebrow">Copilot Studio · Microsoft · Agents IA</span>
@@ -91,6 +97,28 @@ footer{color:var(--muted);font-size:.85rem}
   </div>
 </section>
 
+<section>
+  <h2>Quand Copilot Studio est le bon choix</h2>
+  <ul>
+    <li>Vos utilisateurs vivent dans Teams et Microsoft 365, et l'agent doit y être disponible.</li>
+    <li>Les connaissances sont dans SharePoint, des fichiers ou des sites internes.</li>
+    <li>Les métiers doivent pouvoir faire évoluer l'agent sans attendre une équipe de développement.</li>
+    <li>Vous voulez un premier agent utile rapidement, puis l'industrialiser avec la DSI.</li>
+  </ul>
+  <p>Quand il faut choisir finement les modèles, maîtriser les coûts à grande échelle ou intégrer l'IA à une application métier, je travaille plutôt sur <a href="/azure-ai-foundry/">Azure AI Foundry</a>. Voir aussi ma <a href="/agents-ia-production/">checklist de mise en production d'un agent IA</a>.</p>
+</section>
+<section>
+  <h2>Références</h2>
+  <p>Tech Lead Data &amp; IA freelance, basé à Paris. Chez SUEZ, j'ai conçu 20 cas d'usage d'IA générative et mis plus de 200 agents IA en production. Missions précédentes pour TotalEnergies, Groupe SNCF, La Banque Postale, Les Mousquetaires, Volvo Group et SAUR. Formateur Copilot Studio avec Spar-x. Pour l'obligation de maîtrise de l'IA de vos équipes, voir le <a href="/kit-ai-act/">kit gratuit AI Act article 4</a>.</p>
+</section>
+<section>
+  <h2>Questions fréquentes</h2>
+  <details><summary>Qu'est-ce que Microsoft Copilot Studio ?</summary><p>C'est l'outil de Microsoft pour créer des agents IA en low-code : on décrit le rôle de l'agent, on lui donne des sources de connaissances (SharePoint, fichiers, sites web), des outils et des agent flows, puis on le publie dans Teams, Microsoft 365 Copilot ou un site web.</p></details>
+  <details><summary>Copilot Studio ou Azure AI Foundry : que choisir ?</summary><p>Copilot Studio convient aux agents construits avec les métiers, rapidement, dans l'environnement Microsoft 365. <a href="/azure-ai-foundry/">Azure AI Foundry</a> convient aux équipes techniques qui ont besoin de choisir leurs modèles et de maîtriser toute l'architecture. Dans un grand groupe, les deux cohabitent.</p></details>
+  <details><summary>Pourquoi mon agent Copilot Studio répond mal ?</summary><p>Le plus souvent, à cause des sources : documents obsolètes, doublons, fichiers scannés illisibles. Viennent ensuite des instructions trop vagues. On corrige d'abord la base de connaissances, puis les instructions, et on vérifie avec un jeu de questions de test.</p></details>
+  <details><summary>Faut-il savoir coder pour utiliser Copilot Studio ?</summary><p>Non pour créer un agent simple. Pour le connecter au SI (API, serveurs MCP, Dataverse) et l'industrialiser, il faut des compétences techniques ou un accompagnement.</p></details>
+  <details><summary>Proposez-vous une formation Copilot Studio ?</summary><p>Oui, une <a href="/formation-copilot-studio/">formation pratique</a> animée avec Spar-x, organisme certifié Qualiopi, finançable par votre OPCO, en sessions de 20 personnes maximum. Chaque participant construit un agent sur ses propres cas.</p></details>
+</section>
 <footer>Zakaria Khchiche · Tech Lead Data &amp; IA · <a href="/">Accueil</a> · <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a> · <a href="https://medium.com/@ZKHCHICHE">Medium</a></footer>
 </div>
 </body>
