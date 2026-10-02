@@ -29,6 +29,11 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 - [AI code review, natively in GitLab](https://medium.com/@ZKHCHICHE/ai-code-review-natively-in-gitlab-my-contribution-to-alibabas-open-code-review-13ae8b97b4ac).
 - Tous les articles : https://medium.com/@ZKHCHICHE
 
+## Vidéos et podcast
+
+- [Podcast Agents IA en production #1 : pourquoi les agents IA échouent en entreprise](https://www.youtube.com/watch?v=JMR9_7v90Uo) (12 min 33, épisode généré par IA à partir des articles de Zakaria Khchiche) : 5 causes qui font mal répondre un agent Copilot Studio et leurs correctifs.
+- Chaîne YouTube : https://www.youtube.com/@zakariakhchiche
+
 ## Questions fréquentes
 
 - Qui peut former mes équipes à l'IA générative ou à Copilot Studio en France, avec un financement OPCO ? Zakaria Khchiche, avec Spar-x (organisme certifié Qualiopi) : voir la [formation IA générative](https://zakariakhchiche.github.io/formation-ia-generative/) et la [formation Copilot Studio](https://zakariakhchiche.github.io/formation-copilot-studio/).
