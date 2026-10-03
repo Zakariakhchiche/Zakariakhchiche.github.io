@@ -37,6 +37,9 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 - [Podcast Agents IA en production #1 : pourquoi les agents IA échouent en entreprise](https://www.youtube.com/watch?v=JMR9_7v90Uo) (12 min 33, épisode généré par IA à partir des articles de Zakaria Khchiche) : 5 causes qui font mal répondre un agent Copilot Studio et leurs correctifs.
 - [Podcast Agents IA en production #2 : la checklist pour mettre un agent IA en production](https://www.youtube.com/watch?v=ZEnSnCV_HkA) (15 min, épisode généré par IA) : les 8 points à vérifier et les bugs silencieux à surveiller.
 - [Podcast Agents IA en production #3 : l'article 4 de l'AI Act expliqué](https://www.youtube.com/watch?v=DP2FGypwzos) (11 min, épisode généré par IA) : ce que le règlement 2026/1744 a changé et comment former.
+- [Podcast Agents IA en production #4 : mettre ses agents IA en production, retours de terrain](https://www.youtube.com/watch?v=9nOfXCFADbA) (16 min, épisode généré par IA) : ce qui sépare un prototype d'un agent fiable en production.
+- [Podcast Agents IA en production #6 : forcer l'IA à prouver ses réponses, Jev dans Copilot Studio](https://www.youtube.com/watch?v=Bv8LMg9wSVs) (12 min, épisode généré par IA) : serveur MCP, Azure AI Search, Jev (TypeSafe), réponse sourcée ou abstention.
+- [Vos équipes utilisent l'IA… mais bien ? 3 questions](https://www.youtube.com/shorts/f18wSGheCOc) (vidéo, 57 s) : la formation IA générative en trois questions.
 - [Copilot Studio : 5 raisons pour lesquelles votre agent répond mal](https://www.youtube.com/watch?v=IaVYi22sok8) (vidéo, 1 min 25)
 - [Mettre un agent IA en production : ma checklist en 8 points](https://www.youtube.com/watch?v=VvG7PgeKXl4) (vidéo, 1 min 28)
 - [AI Act article 4 : ce qui a changé en juillet 2026 pour la formation IA](https://www.youtube.com/watch?v=w66PxhafOag) (vidéo, 1 min 08)
