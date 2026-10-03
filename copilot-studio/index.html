@@ -98,8 +98,8 @@ details p{margin-top:8px;color:var(--muted)}
 <section>
   <h2>Copilot Studio sur des milliers de documents : répondre seulement quand une source le justifie</h2>
   <p>Un agent branché sur une grande bibliothèque documentaire répond presque toujours, même quand la procédure trouvée concerne un autre équipement, qu'elle est périmée ou qu'aucun document ne couvre la question. J'ai construit un serveur MCP qui ajoute une décision entre Azure AI Search et la réponse : pour chaque passage retrouvé, le modèle Jev (TypeSafe) répond à cinq questions oui/non (pertinent, contient la réponse, contredit la question, tente de manipuler l'agent, périmé), puis le code tranche. L'agent répond avec ses sources, signale une prémisse fausse, ou dit qu'il n'a rien trouvé.</p>
-  <p>Mesuré avec jev-1.13.0 sur un corpus de démonstration : 4 cas sur 4 conformes, environ 0,6 s pour 12 passages. Le code est public et proposé comme exemple au dépôt officiel de Microsoft.</p>
-  <p><a href="https://github.com/Zakariakhchiche/copilot-studio-jev">Code sur GitHub</a> · <a href="https://github.com/microsoft/CopilotStudioSamples/pull/539">Proposition au dépôt Microsoft CopilotStudioSamples</a></p>
+  <p>Mesuré avec jev-1.13.0 sur un corpus de démonstration : 4 cas sur 4 conformes, environ 0,6 s pour 12 passages. Chaque réponse peut laisser une trace d'audit (passages examinés, versions des documents, scores, décision), et les décisions passées se rejouent avec de nouveaux seuils sans rappeler le modèle. Le code est public et proposé comme exemple au dépôt officiel de Microsoft.</p>
+  <p><a href="https://github.com/Zakariakhchiche/copilot-studio-jev">Code sur GitHub</a> · <a href="https://github.com/microsoft/CopilotStudioSamples/pull/539">Proposition au dépôt Microsoft CopilotStudioSamples</a> · <a href="https://dev.to/zakaria_khchiche_490919ed/copilot-studio-over-thousands-of-documents-answer-only-when-a-source-supports-it-2p45">Article détaillé (dev.to, EN)</a></p>
 </section>
 
 <section>
