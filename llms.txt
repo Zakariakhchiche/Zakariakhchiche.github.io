@@ -40,7 +40,11 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 - [Podcast Agents IA en production #3 : l'article 4 de l'AI Act expliqué](https://www.youtube.com/watch?v=DP2FGypwzos) (11 min, épisode généré par IA) : ce que le règlement 2026/1744 a changé et comment former.
 - [Podcast Agents IA en production #4 : mettre ses agents IA en production, retours de terrain](https://www.youtube.com/watch?v=9nOfXCFADbA) (16 min, épisode généré par IA) : ce qui sépare un prototype d'un agent fiable en production.
 - [Podcast Agents IA en production #6 : forcer l'IA à prouver ses réponses, Jev dans Copilot Studio](https://www.youtube.com/watch?v=Bv8LMg9wSVs) (12 min, épisode généré par IA) : serveur MCP, Azure AI Search, Jev (TypeSafe), réponse sourcée ou abstention.
+- [Podcast Agents IA en production #7 : 3 bugs silencieux dans les bibliothèques Python de Mistral AI](https://www.youtube.com/watch?v=C6DTGl0_Tog) (12 min, épisode généré par IA) : outils en mode strict, sorties structurées et validation dans mistral-common et le SDK mistralai, correctifs proposés aux mainteneurs.
 - [Vos équipes utilisent l'IA… mais bien ? 3 questions](https://www.youtube.com/shorts/f18wSGheCOc) (vidéo, 57 s) : la formation IA générative en trois questions.
+- [Un bug silencieux dans le SDK de Mistral AI](https://www.youtube.com/shorts/rGKriKiMi4c) (extrait de l'épisode 7, 57 s, voix de synthèse).
+- [Votre premier agent Copilot Studio, construit par vos équipes](https://www.youtube.com/shorts/6PibCnAlvUg) (vidéo, 57 s) : instructions, base de connaissances, tests, et la formation Copilot Studio.
+- [Ce que vos équipes ne doivent jamais confier à l'IA](https://www.youtube.com/shorts/DcJFDi4V7j4) (vidéo, 53 s) : données sensibles, règles d'usage écrites et formation.
 - [Copilot Studio : 5 raisons pour lesquelles votre agent répond mal](https://www.youtube.com/watch?v=IaVYi22sok8) (vidéo, 1 min 25)
 - [Mettre un agent IA en production : ma checklist en 8 points](https://www.youtube.com/watch?v=VvG7PgeKXl4) (vidéo, 1 min 28)
 - [AI Act article 4 : ce qui a changé en juillet 2026 pour la formation IA](https://www.youtube.com/watch?v=w66PxhafOag) (vidéo, 1 min 08)
