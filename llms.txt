@@ -5,6 +5,10 @@
 Références : SUEZ (Tech Lead Data & IA, depuis 2026), TotalEnergies, Groupe SNCF, La Banque Postale, Les Mousquetaires (Stime), Volvo Group, SAUR.
 Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA et d'industrialisation de POC d'IA générative, à Paris ou à distance.
 
+## Livre
+
+- [Agents Copilot en production](https://zakariakhchiche.github.io/livre/) (octobre 2026, PDF gratuit de 100 pages, [dépôt GitHub](https://github.com/Zakariakhchiche/agents-copilot-en-production)) : la stratégie Microsoft pour des agents IA fiables, gouvernés et sobres en coûts. Copilot Studio et ses trois harnais, Microsoft Foundry, Azure AI Search, Agent Framework, MCP ; cadrage et business case, conception (le modèle comprend, le déterministe décide), connaissances et choix des extraits, évaluation, sécurité, gouvernance et AI Act, modèle de coût en crédits Copilot, ALM, adoption, un premier agent en 90 jours, étude de cas avec code open source.
+
 ## Offres
 
 - [Copilot Studio](https://zakariakhchiche.github.io/copilot-studio/) : conception et mise en production d'agents Copilot Studio (instructions, base de connaissances, documents scannés, outils, agent flows), quand choisir Copilot Studio plutôt qu'Azure AI Foundry, FAQ.
