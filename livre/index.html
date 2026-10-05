@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agents Copilot en production : le livre de Zakaria Khchiche</title>
+<meta name="description" content="Livre gratuit en PDF : la stratégie Microsoft pour des agents IA fiables, gouvernés et sobres en coûts. Copilot Studio, Microsoft Foundry, Azure AI Search, MCP, évaluation, coût, gouvernance et AI Act, et un premier agent en 90 jours.">
+<link rel="canonical" href="https://zakariakhchiche.github.io/livre/">
+<meta property="og:title" content="Agents Copilot en production, le livre">
+<meta property="og:description" content="La stratégie Microsoft pour des agents IA fiables, gouvernés et sobres en coûts. PDF gratuit, 100 pages.">
+<meta property="og:url" content="https://zakariakhchiche.github.io/livre/">
+<meta property="og:image" content="https://raw.githubusercontent.com/Zakariakhchiche/agents-copilot-en-production/main/couverture/couverture.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Book","name":"Agents Copilot en production","alternativeHeadline":"La stratégie Microsoft pour des agents IA fiables, gouvernés et sobres en coûts","inLanguage":"fr","bookFormat":"https://schema.org/EBook","numberOfPages":100,"datePublished":"2026-10-05","bookEdition":"Première édition","isAccessibleForFree":true,"url":"https://zakariakhchiche.github.io/livre/","image":"https://raw.githubusercontent.com/Zakariakhchiche/agents-copilot-en-production/main/couverture/couverture.jpg","sameAs":"https://github.com/Zakariakhchiche/agents-copilot-en-production","about":["Microsoft Copilot Studio","Microsoft Foundry","Azure AI Search","Agents IA","Gouvernance de l'IA","AI Act"],"author":{"@type":"Person","name":"Zakaria Khchiche","jobTitle":"Tech Lead Data & IA","url":"https://zakariakhchiche.github.io/","sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://github.com/Zakariakhchiche","https://medium.com/@ZKHCHICHE"]}}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Pourquoi la plupart des agents Copilot Studio restent-ils au stade du prototype ?","acceptedAnswer":{"@type":"Answer","text":"Rarement pour une raison technique. Les causes les plus fréquentes sont un périmètre trop large, des documents non préparés, l'absence de jeu de questions de référence, des règles de gestion confiées au modèle, une sécurité traitée trop tard, un coût découvert après coup et l'absence de propriétaire métier."}},
+{"@type":"Question","name":"Combien coûte un agent Copilot Studio ?","acceptedAnswer":{"@type":"Answer","text":"Il se calcule avant de construire : un parcours type en crédits Copilot multiplié par un volume. Avec le barème d'octobre 2026, une réponse générative coûte 2 crédits et une action d'agent 5 ; la conception du parcours peut faire varier le coût de plus de cinq fois."}},
+{"@type":"Question","name":"Combien de temps pour mettre un premier agent en production ?","acceptedAnswer":{"@type":"Answer","text":"Environ 90 jours pour un agent qui informe ou assiste, en quatre phases (cadrage, construction, pilote, déploiement) séparées par des portes de validation, si les prérequis sont en place."}}
+]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6;--book:#b86e00;
+--f-display:"Sora",system-ui,sans-serif;--f-body:"IBM Plex Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff;--book:#f0a73a}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.015em}
+h2{font-size:1.3rem}h3{font-size:1rem}
+p{margin:0;max-width:70ch}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.08rem}
+header,section{display:grid;gap:12px}
+nav.top{font-family:var(--f-mono);font-size:.82rem;display:flex;flex-wrap:wrap;gap:6px 14px}
+.hero{display:grid;grid-template-columns:220px 1fr;gap:28px;align-items:start}
+.hero img{width:100%;max-width:220px;border-radius:4px;box-shadow:0 6px 24px rgba(0,0,0,.18)}
+.hero > div{display:grid;gap:12px;min-width:0}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:500 .88rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 14px;text-decoration:none}
+.btn.primary{background:var(--book);border-color:var(--book);color:#fff}
+.rules{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px;display:grid;gap:6px;align-content:start}
+.card b{font-family:var(--f-display);color:var(--book)}
+ol.toc{margin:0;padding-left:26px;display:grid;gap:4px}
+ol.toc li::marker{font-family:var(--f-mono);color:var(--muted)}
+.note{font-size:.85rem;color:var(--muted)}
+footer{color:var(--muted);font-size:.85rem}
+@media (max-width:620px){.hero{grid-template-columns:1fr}.hero img{max-width:180px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="top"><a href="/">Accueil</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-copilot-studio/">Formation Copilot Studio</a><a href="/kit-ai-act/">Kit AI Act</a></nav>
+
+<header class="hero">
+  <img src="https://raw.githubusercontent.com/Zakariakhchiche/agents-copilot-en-production/main/couverture/couverture.jpg" alt="Couverture du livre Agents Copilot en production" width="220" height="311">
+  <div>
+    <span class="eyebrow">Livre · PDF gratuit · octobre 2026</span>
+    <h1>Agents Copilot en production</h1>
+    <p class="lede">La stratégie Microsoft pour des agents IA fiables, gouvernés et sobres en coûts. 100 pages pour passer du prototype à un agent qui tourne, pour les chefs de projet comme pour les équipes techniques.</p>
+    <div class="links">
+      <a class="btn primary" href="https://github.com/Zakariakhchiche/agents-copilot-en-production/blob/main/pdf/Agents-Copilot-en-production.pdf">Lire le livre (PDF)</a>
+      <a class="btn" href="https://github.com/Zakariakhchiche/agents-copilot-en-production">Dépôt GitHub</a>
+      <a class="btn" href="https://github.com/Zakariakhchiche/agents-copilot-en-production/blob/main/source/livre.md">Texte intégral</a>
+    </div>
+  </div>
+</header>
+
+<section>
+  <h2>La thèse en trois règles</h2>
+  <div class="rules">
+    <div class="card"><b>Étroit</b><p>Un périmètre précis avec des données propres. Un agent qui répond juste à 40 questions gagne la confiance ; un agent qui répond à tout, mal, la perd.</p></div>
+    <div class="card"><b>Mesuré</b><p>Un jeu de questions réelles, rejoué à chaque changement. Aucune publication sans seuil atteint.</p></div>
+    <div class="card"><b>Sobre</b><p>Le modèle comprend, le déterministe décide : les règles de gestion vont dans des flux, pas dans le prompt.</p></div>
+  </div>
+</section>
+
+<section>
+  <h2>Sommaire</h2>
+  <ol class="toc">
+    <li>Pourquoi la plupart des agents restent au stade du prototype</li>
+    <li>La pile Microsoft des agents en 2026, et le choix de l'harnais</li>
+    <li>Cadrer : choisir le bon cas d'usage, chiffrer le business case</li>
+    <li>Concevoir l'agent : instructions, sujets et part du déterministe</li>
+    <li>Les connaissances : documents, recherche et les extraits qui comptent</li>
+    <li>Les outils : connecteurs, flux d'agent, MCP et autres agents</li>
+    <li>Fiabilité et résilience : un agent qui sait échouer proprement</li>
+    <li>Évaluer : la mesure qui rend tout le reste possible</li>
+    <li>Sécurité, gouvernance et AI Act</li>
+    <li>Le coût : modéliser, puis optimiser</li>
+    <li>Exploiter : ALM, déploiement et maintenance</li>
+    <li>Adoption, formation et organisation</li>
+    <li>La feuille de route : un premier agent en 90 jours</li>
+  </ol>
+  <p class="note">Plus une étude de cas complète (un agent qui lit des milliers de contrats, avec <a href="https://github.com/Zakariakhchiche/copilot-studio-knowledge-rerank">son code open source</a>) et des annexes : checklist de mise en production, gabarit de jeu de référence, calcul du coût, glossaire et sources.</p>
+</section>
+
+<section>
+  <h2>Pour qui</h2>
+  <p>Chefs de projet et product owners qui doivent cadrer, chiffrer et piloter un agent. Makers et développeurs Power Platform qui le construisent. Architectes, DSI, RSSI et DPO qui doivent le sécuriser et le gouverner. Toutes les informations Microsoft ont été vérifiées dans la documentation officielle en octobre 2026.</p>
+</section>
+
+<section>
+  <h2>Former vos équipes avec la méthode du livre</h2>
+  <p>La <a href="/formation-copilot-studio/">formation Copilot Studio</a>, animée avec Spar-x (organisme certifié Qualiopi, finançable par votre OPCO, 20 participants au plus), suit la méthode du livre : chaque participant repart avec un agent construit sur son propre cas d'usage.</p>
+  <div class="links"><a class="btn" href="https://mte.typeform.com/spar-xv3?typeform-source=www.spar-x.fr">Demander un devis</a><a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/">Échanger sur LinkedIn</a></div>
+</section>
+
+<footer>© 2026 Zakaria Khchiche · Tous droits réservés · Lecture et partage du lien libres. Microsoft, Copilot et Azure sont des marques de Microsoft ; cet ouvrage est indépendant. Les passages sur l'AI Act ne constituent pas un conseil juridique.</footer>
+</div>
+</body>
+</html>
