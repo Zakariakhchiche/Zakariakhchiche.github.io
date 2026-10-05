@@ -110,6 +110,13 @@ details p{margin-top:8px;color:var(--muted)}
 </section>
 
 <section>
+  <h2>Copilot Studio ne lit que 15 extraits : choisir lesquels</h2>
+  <p>Un agent Copilot Studio construit sa réponse à partir de 15 extraits au maximum, toutes sources de connaissance confondues. Sur des milliers de documents, tout se joue sur ces 15 places : si un avenant annulé ou un passage hors sujet les prend, l'agent répond mal, avec aplomb. Avec le déclencheur <code>OnKnowledgeRequested</code>, l'agent délègue la recherche à une API : Azure AI Search remonte 50 à 100 candidats filtrés sur les droits de l'utilisateur, Jev ne garde que ceux qui répondent vraiment, selon un critère écrit par le métier, et écarte les versions abrogées et les injections de prompt.</p>
+  <p>Le dépôt inclut un banc d'évaluation pour trancher sans rien engager : recherche seule, classement sémantique natif d'Azure AI Search, puis Jev, sur vos propres questions. Avec la recherche seule, sur le corpus fictif fourni, l'agent reçoit en moyenne 13 extraits dont 12 hors sujet.</p>
+  <p><a href="https://github.com/Zakariakhchiche/copilot-studio-knowledge-rerank">Code sur GitHub (FR/EN, licence MIT)</a></p>
+</section>
+
+<section>
   <h2>Deux façons de travailler ensemble</h2>
   <div class="grid">
     <article class="card"><h3>Mission freelance</h3><p>Conception ou reprise d'agents Copilot Studio, passage du prototype à la production, intégration au SI. Paris ou à distance.</p><a href="https://www.malt.fr/profile/zakariakhchiche">Voir mon profil Malt</a></article>
