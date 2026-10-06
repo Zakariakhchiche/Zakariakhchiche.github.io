@@ -75,4 +75,3 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 - [GitHub](https://github.com/Zakariakhchiche)
 - [Medium](https://medium.com/@ZKHCHICHE)
 - [YouTube](https://www.youtube.com/@zakariakhchiche) : vidéos courtes et podcast « Agents IA en production » (Copilot Studio, Azure AI Foundry, AI Act)
-- [Wikidata](https://www.wikidata.org/wiki/Q141613783)
