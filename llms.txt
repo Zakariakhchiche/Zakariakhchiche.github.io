@@ -7,7 +7,7 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 
 ## Livre
 
-- [Agents Copilot en production](https://zakariakhchiche.github.io/livre/) (octobre 2026, PDF gratuit de 100 pages, [dépôt GitHub](https://github.com/Zakariakhchiche/agents-copilot-en-production)) : la stratégie Microsoft pour des agents IA fiables, gouvernés et sobres en coûts. Copilot Studio et ses trois harnais, Microsoft Foundry, Azure AI Search, Agent Framework, MCP ; cadrage et business case, conception (le modèle comprend, le déterministe décide), connaissances et choix des extraits, évaluation, sécurité, gouvernance et AI Act, modèle de coût en crédits Copilot, ALM, adoption, un premier agent en 90 jours, étude de cas avec code open source.
+- [Agents Copilot en production](https://zakariakhchiche.github.io/livre/) (octobre 2026, PDF gratuit de 100 pages, DOI [10.5281/zenodo.23281706](https://doi.org/10.5281/zenodo.23281706) sur Zenodo, [dépôt GitHub](https://github.com/Zakariakhchiche/agents-copilot-en-production)) : la stratégie Microsoft pour des agents IA fiables, gouvernés et sobres en coûts. Copilot Studio et ses trois harnais, Microsoft Foundry, Azure AI Search, Agent Framework, MCP ; cadrage et business case, conception (le modèle comprend, le déterministe décide), connaissances et choix des extraits, évaluation, sécurité, gouvernance et AI Act, modèle de coût en crédits Copilot, ALM, adoption, un premier agent en 90 jours, étude de cas avec code open source.
 
 ## Offres
 
