@@ -1,6 +1,6 @@
 # Zakaria Khchiche
 
-> Tech Lead Data & IA freelance à Paris. Conçoit et met en production des agents IA pour de grands comptes sur Azure AI Foundry, Azure OpenAI et Copilot Studio : socle IA multi-LLM, RAG, sécurité et maîtrise des coûts, data engineering Databricks et Spark. Anime des formations IA générative en entreprise avec Spar-x (sessions de 20 personnes maximum).
+> Tech Lead Data & IA freelance à Paris. Conçoit et met en production des agents IA pour de grands comptes sur Azure AI Foundry, Azure OpenAI et Copilot Studio : socle IA multi-LLM, RAG, sécurité et maîtrise des coûts, data engineering Databricks et Spark (gouvernance Unity Catalog). Anime des formations IA générative en entreprise avec Spar-x (sessions de 20 personnes maximum).
 
 Références : SUEZ (Tech Lead Data & IA, depuis 2026), TotalEnergies, Groupe SNCF, La Banque Postale, Les Mousquetaires (Stime), Volvo Group, SAUR.
 Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA et d'industrialisation de POC d'IA générative, à Paris ou à distance.
