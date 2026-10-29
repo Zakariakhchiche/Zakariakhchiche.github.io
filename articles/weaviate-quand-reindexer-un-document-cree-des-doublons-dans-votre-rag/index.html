@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Weaviate : quand réindexer un document crée des doublons dans votre RAG – Zakaria Khchiche</title>
+<meta name="description" content="Mon troisième correctif accepté dans OGX (ex-Llama Stack), et le test à ajouter à vos pipelines d’ingestion RAG.">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/weaviate-quand-reindexer-un-document-cree-des-doublons-dans-votre-rag/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Weaviate : quand réindexer un document crée des doublons dans votre RAG">
+<meta property="og:description" content="Mon troisième correctif accepté dans OGX (ex-Llama Stack), et le test à ajouter à vos pipelines d’ingestion RAG.">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/weaviate-quand-reindexer-un-document-cree-des-doublons-dans-votre-rag/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Weaviate : quand réindexer un document crée des doublons dans votre RAG","description":"Mon troisième correctif accepté dans OGX (ex-Llama Stack), et le test à ajouter à vos pipelines d’ingestion RAG.","datePublished":"2026-10-16","inLanguage":"fr","url":"https://zakariakhchiche.github.io/articles/weaviate-quand-reindexer-un-document-cree-des-doublons-dans-votre-rag/","mainEntityOfPage":"https://zakariakhchiche.github.io/articles/weaviate-quand-reindexer-un-document-cree-des-doublons-dans-votre-rag/","image":"https://zakariakhchiche.github.io/og-image.png","author":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/"},"sameAs":["https://medium.com/@ZKHCHICHE/weaviate-quand-r%C3%A9indexer-un-document-cr%C3%A9e-des-doublons-dans-votre-rag-ace20b7c82e7"]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>Weaviate : quand réindexer un document crée des doublons dans votre RAG</h1>
+  <p class="muted">Mon troisième correctif accepté dans OGX (ex-Llama Stack), et le test à ajouter à vos pipelines d’ingestion RAG.</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-10-16">16 octobre 2026</time> · également publié sur <a href="https://medium.com/@ZKHCHICHE/weaviate-quand-r%C3%A9indexer-un-document-cr%C3%A9e-des-doublons-dans-votre-rag-ace20b7c82e7">Medium</a></p>
+</header>
+<article>
+<p>Le 2 octobre 2026, les mainteneurs d’OGX ont fusionné ma PR #6705. Elle corrige un bug discret du connecteur Weaviate : réindexer un document ne remplaçait pas l’ancienne version, il en ajoutait une nouvelle à côté. Aucune erreur, aucun avertissement. Le RAG renvoyait simplement les deux versions.</p>
+<h2>Le symptôme</h2>
+<p>Vous mettez à jour une procédure, vous relancez l’ingestion, et l’agent cite tantôt l’ancienne règle, tantôt la nouvelle. Les deux passages remontent dans la recherche, parfois côte à côte. Pour l’utilisateur, l’agent « hésite ». En réalité, la base contient deux copies du même morceau de document.</p>
+<h2>La cause</h2>
+<p>Le connecteur Weaviate laissait Weaviate attribuer un identifiant (UUID) aléatoire à chaque objet. Insérer un chunk dont le chunk_id existait déjà créait donc un second objet au lieu de remplacer le premier.</p>
+<p>Les autres bases vectorielles du projet (PGVector, Qdrant, Elasticsearch, Milvus, ChromaDB, SQLite-vec) se comportaient déjà en « upsert » : même identifiant, l’ancienne version est remplacée. Weaviate était l’exception.</p>
+<h2>La correction</h2>
+<p>L’identifiant de l’objet est maintenant calculé à partir du chunk_id. Le même chunk produit toujours le même UUID, et l’import par lot de Weaviate écrase l’objet existant. L’insertion devient un upsert, comme sur les autres bases.</p>
+<p>Ce que j’ai vérifié avant de proposer la PR :</p>
+<ul><li>trois tests unitaires, dont deux échouent sans le correctif ;</li>
+<li>un test réel sur un serveur Weaviate 1.32.4 : même chunk inséré deux fois avec un contenu différent, 2 objets avant le correctif, 1 seul après.</li>
+</ul>
+<h2>Ce qu’a ajouté le mainteneur</h2>
+<p>Ma première version utilisait uuid5, qui repose sur SHA-1. Le mainteneur a ajouté un commit pour dériver l’identifiant avec SHA-256, afin de rester compatible avec la norme de sécurité FIPS. Il a ensuite ouvert une PR de suivi (#6710) pour aligner la suppression des chunks sur ces nouveaux identifiants. C’est la partie que je préfère dans l’open source : un correctif accepté devient une base sur laquelle l’équipe construit.</p>
+<h2>Une limite à connaître</h2>
+<p>Les objets écrits avant le correctif gardent leur UUID aléatoire. La première réindexation d’un de ces chunks laisse donc encore l’ancienne copie à côté de la nouvelle ; les suivantes sont propres. Si vous utilisez Weaviate avec OGX, prévoyez une réindexation complète (purge puis ingestion) après la mise à jour.</p>
+<h2>Le test à ajouter à vos pipelines RAG</h2>
+<p>Ce bug ne se voit pas à la première ingestion. Il apparaît à la deuxième. Le test qui l’attrape est simple :</p>
+<ol><li>ingérer un document ;</li>
+<li>le modifier, puis l’ingérer à nouveau ;</li>
+<li>compter les objets stockés pour ce document : le nombre doit rester le même ;</li>
+<li>lancer une recherche sur le passage modifié : seule la nouvelle version doit remonter.</li>
+</ol>
+<p>C’est le même type de bug que ceux que j’avais trouvés lors de l’audit d’OGX : un filtre qui ne filtre pas, des tokens mal comptés, et maintenant des doublons. Rien ne plante, la qualité baisse en silence. Seul un test sur le comportement réel les attrape.</p>
+<h2>Ressources</h2>
+<ul><li>La PR : <a href="https://github.com/ogx-ai/ogx/pull/6705">github.com/ogx-ai/ogx/pull/6705</a></li>
+<li>Ma checklist en 8 points avant de mettre un agent IA en production : <a href="https://zakariakhchiche.github.io/agents-ia-production/">zakariakhchiche.github.io/agents-ia-production</a></li>
+<li>Formation IA générative en entreprise (RAG, agents, mise en production), avec Spar-x, organisme certifié Qualiopi, finançable par votre OPCO : <a href="https://zakariakhchiche.github.io/formation-ia-generative/">zakariakhchiche.github.io/formation-ia-generative</a></li>
+<li>Formation Copilot Studio : <a href="https://zakariakhchiche.github.io/formation-copilot-studio/">zakariakhchiche.github.io/formation-copilot-studio</a></li>
+</ul>
+<p>Demander un devis ou une date de formation : <a href="https://forms.gle/ARaTCq9ADgqvJfKL8">formulaire Spar-x</a></p>
+<p><em>Zakaria Khchiche, Tech Lead Data &amp; IA freelance à Paris. Plus de 200 agents IA mis en production chez SUEZ. </em><a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a><em> · </em><a href="https://zakariakhchiche.github.io/">Site</a></p>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
