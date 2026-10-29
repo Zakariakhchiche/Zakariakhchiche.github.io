@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>5 bugs silencieux dans Microsoft Agent Framework, et comment savoir si vos agents sont touchés – Zakaria Khchiche</title>
+<meta name="description" content="Lien de consentement perdu, citations disparues, appels d’outils en parallèle, filtres Qdrant faux, proxy ignoré : ce que j’ai trouvé en auditant le…">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/5-bugs-silencieux-dans-microsoft-agent-framework-et-comment-savoir-si-vos-agents-sont-touches/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="5 bugs silencieux dans Microsoft Agent Framework, et comment savoir si vos agents sont touchés">
+<meta property="og:description" content="Lien de consentement perdu, citations disparues, appels d’outils en parallèle, filtres Qdrant faux, proxy ignoré : ce que j’ai trouvé en auditant le…">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/5-bugs-silencieux-dans-microsoft-agent-framework-et-comment-savoir-si-vos-agents-sont-touches/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"5 bugs silencieux dans Microsoft Agent Framework, et comment savoir si vos agents sont touchés","description":"Lien de consentement perdu, citations disparues, appels d’outils en parallèle, filtres Qdrant faux, proxy ignoré : ce que j’ai trouvé en auditant le…","datePublished":"2026-10-08","inLanguage":"fr","url":"https://zakariakhchiche.github.io/articles/5-bugs-silencieux-dans-microsoft-agent-framework-et-comment-savoir-si-vos-agents-sont-touches/","mainEntityOfPage":"https://zakariakhchiche.github.io/articles/5-bugs-silencieux-dans-microsoft-agent-framework-et-comment-savoir-si-vos-agents-sont-touches/","image":"https://zakariakhchiche.github.io/og-image.png","author":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/"},"sameAs":["https://medium.com/@ZKHCHICHE/5-bugs-silencieux-dans-microsoft-agent-framework-et-comment-savoir-si-vos-agents-sont-touch%C3%A9s-89248099cf2d"]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>5 bugs silencieux dans Microsoft Agent Framework, et comment savoir si vos agents sont touchés</h1>
+  <p class="muted">Lien de consentement perdu, citations disparues, appels d’outils en parallèle, filtres Qdrant faux, proxy ignoré : ce que j’ai trouvé en auditant le framework d’agents de Microsoft.</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-10-08">8 octobre 2026</time> · également publié sur <a href="https://medium.com/@ZKHCHICHE/5-bugs-silencieux-dans-microsoft-agent-framework-et-comment-savoir-si-vos-agents-sont-touch%C3%A9s-89248099cf2d">Medium</a></p>
+</header>
+<article>
+<p>Microsoft Agent Framework est le framework open source de Microsoft pour construire des agents IA en Python et en .NET. En octobre 2026, j’ai audité plusieurs de ses connecteurs Python. J’y ai trouvé cinq bugs du même type : aucun ne lève d’erreur. L’agent répond, les tests passent, mais une information est perdue ou une option est ignorée.</p>
+<p>Pour chacun, j’ai ouvert une issue avec une reproduction autonome, puis une pull request avec le correctif et des tests qui échouent sans lui. Quatre des cinq bugs ont été reproduits par le système de tri automatique de Microsoft.</p>
+<h2>En résumé</h2>
+<ul><li><strong>Foundry, sans streaming :</strong> la demande de consentement OAuth d’un outil disparaît. L’agent renvoie une réponse vide, sans lien de connexion.</li>
+<li><strong>Anthropic, en streaming :</strong> les citations (sources web, documents) sont perdues. Le texte est complet, les sources ne le sont plus.</li>
+<li><strong>Anthropic, appels d’outils :</strong> l’option qui interdit les appels d’outils en parallèle est ignorée dès que tool_choice n’est pas fixé, y compris à chaque tour de boucle après le premier.</li>
+<li><strong>Qdrant 1.19 :</strong> les filtres « est vide », « n’est pas vide », « contient tout » et « différent de » renvoient de mauvais résultats depuis un changement de comportement du serveur.</li>
+<li><strong>TypeSafe (modèle Jev) :</strong> le connecteur ignore les variables de proxy de l’entreprise et ne peut donc pas joindre l’API derrière un proxy.</li>
+</ul>
+<h2>1. Foundry : le lien de consentement OAuth disparaît</h2>
+<p>Quand un outil Foundry (boîte à outils, connexion MCP) a besoin que l’utilisateur se connecte, le service renvoie un élément oauth_consent_request avec un lien. En streaming, le framework le transmet. Sans streaming, qui est le mode par défaut d’agent.run(), cet élément tombait dans une branche « non géré », simplement journalisée en debug. Résultat : un message vide, pas d’exception, et l’utilisateur ne sait pas qu’il doit se connecter.</p>
+<p><strong>À vérifier chez vous :</strong> si vos agents Foundry utilisent des outils qui demandent un consentement, testez le premier appel d’un nouvel utilisateur sans streaming. Une réponse vide est le symptôme.</p>
+<h2>2. Anthropic : les citations sont perdues en streaming</h2>
+<p>Avec les citations activées (recherche web, documents), Claude envoie en streaming les sources sous forme d’événements citations_delta. Le connecteur n’avait pas de cas pour ce type d’événement. Le texte arrivait entier, mais la liste des sources était vide. Pour un agent qui doit justifier ses réponses, c’est la partie la plus importante qui manque.</p>
+<p><strong>À vérifier :</strong> comparez les annotations d’une même question avec et sans stream=True.</p>
+<h2>3. Anthropic : l’interdiction des appels en parallèle est ignorée</h2>
+<p>Chez Anthropic, on désactive les appels d’outils en parallèle via tool_choice. Le connecteur ne transmettait l’option allow_multiple_tool_calls=False que si tool_choice était fixé. Or la boucle d’appel d’outils remet tool_choice à vide après le premier tour quand il vaut « required ». Le premier appel respecte la consigne, les suivants non. Si vos outils ne supportent pas d’être appelés en même temps (écritures en base, actions métier), c’est un vrai risque.</p>
+<a href="https://events.zoom.us/ev/AjBDzTIgBOjbXyyuF_i2JHKceeuBRp1dycq5phbyKx5EiRMkuSIE~ArkW9LST0g8ykivRZyFH3rRErP9ufAxV9j5V344fZoBICauQAZumvmLfFw"></a><p><strong>À vérifier :</strong> inspectez les requêtes envoyées après le premier tour de la boucle : disable_parallel_tool_use doit y figurer.</p>
+<h2>4. Qdrant 1.19 : des filtres qui renvoient de mauvais résultats</h2>
+<p>Qdrant 1.19 a changé deux comportements : un champ absent compte désormais comme « 0 valeur », et le test « est null » correspond aussi aux listes qui contiennent null. Le connecteur s’appuyait sur l’ancien comportement. Sur un serveur 1.19.1, 10 des 39 cas de la suite de tests de filtres échouent, et certains filtrages lèvent une erreur de désérialisation. La CI du projet tournant sur Qdrant 1.16, rien ne le signalait. Le tri automatique de Microsoft a obtenu exactement les mêmes chiffres.</p>
+<p><strong>À vérifier :</strong> si vous avez mis à jour votre serveur Qdrant, rejouez vos requêtes filtrées sur des données qui contiennent des champs absents ou des listes avec null.</p>
+<h2>5. TypeSafe : le proxy de l’entreprise est ignoré</h2>
+<p>Le connecteur du modèle Jev remplaçait le transport HTTP de la bibliothèque TypeSafe pour rajouter un en-tête d’authentification que la bibliothèque envoyait déjà. Effet de bord : la bibliothèque HTTP n’applique les variables HTTPS_PROXY et NO_PROXY que si on ne lui impose pas de transport. Derrière un proxy d’entreprise, le connecteur tentait une connexion directe et échouait, alors que la bibliothèque seule fonctionnait.</p>
+<h2>Ce que ces bugs ont en commun</h2>
+<ul><li><strong>Ils ne lèvent pas d’erreur.</strong> Une branche « cas non géré » journalisée en debug, une valeur par défaut, une option transmise seulement dans un cas.</li>
+<li><strong>Ils apparaissent aux frontières.</strong> Entre streaming et non-streaming, entre le premier tour de boucle et les suivants, entre deux versions d’un serveur.</li>
+<li><strong>Les tests unitaires ne les voient pas</strong> s’ils ne testent qu’un seul mode. Le bon réflexe : tester chaque fonctionnalité dans les deux modes (streaming ou non) et contre la version réelle du service.</li>
+</ul>
+<h2>Les liens</h2>
+<ul><li>Foundry : issue #8975, PR #8976</li>
+<li>Anthropic, citations : issue #8977, PR #8978</li>
+<li>Anthropic, appels en parallèle : issue #8979, PR #8980</li>
+<li>Qdrant 1.19 : issue #8981, PR #8982</li>
+<li>TypeSafe : issue #8983, <a href="https://github.com/microsoft/agent-framework/pull/8984">PR #8984</a> (correctif fusionné le 6 octobre 2026)</li>
+</ul>
+<p>Toutes sur github.com/microsoft/agent-framework.</p>
+<h2>À propos</h2>
+<p>Zakaria Khchiche est Tech Lead Data &amp; IA freelance à Paris : plus de 200 agents IA en production chez de grands comptes. LinkedIn : <a href="https://www.linkedin.com/in/zakariakhchiche/">https://www.linkedin.com/in/zakariakhchiche/</a> · Site : <a href="https://zakariakhchiche.github.io/">https://zakariakhchiche.github.io/</a></p>
+<p>Vous voulez que vos équipes construisent des agents fiables ? J’anime avec Spar-x, organisme certifié Qualiopi, des formations finançables par les OPCO : <a href="https://zakariakhchiche.github.io/agents-ia-production/">https://zakariakhchiche.github.io/agents-ia-production/</a></p>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
