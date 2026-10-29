@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Un outil OpenAI que Mistral refusait : le « strict: null » du SDK – Zakaria Khchiche</title>
+<meta name="description" content="Une définition d’outil produite par le SDK OpenAI ne passait pas la conversion de mistral-common. Correctif de deux lignes, fusionné par Mistral AI le 21…">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/un-outil-openai-que-mistral-refusait-le-strict-null-du-sdk/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Un outil OpenAI que Mistral refusait : le « strict: null » du SDK">
+<meta property="og:description" content="Une définition d’outil produite par le SDK OpenAI ne passait pas la conversion de mistral-common. Correctif de deux lignes, fusionné par Mistral AI le 21…">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/un-outil-openai-que-mistral-refusait-le-strict-null-du-sdk/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Un outil OpenAI que Mistral refusait : le « strict: null » du SDK","description":"Une définition d’outil produite par le SDK OpenAI ne passait pas la conversion de mistral-common. Correctif de deux lignes, fusionné par Mistral AI le 21…","datePublished":"2026-10-21","inLanguage":"fr","url":"https://zakariakhchiche.github.io/articles/un-outil-openai-que-mistral-refusait-le-strict-null-du-sdk/","mainEntityOfPage":"https://zakariakhchiche.github.io/articles/un-outil-openai-que-mistral-refusait-le-strict-null-du-sdk/","image":"https://zakariakhchiche.github.io/og-image.png","author":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/"},"sameAs":["https://medium.com/@ZKHCHICHE/un-outil-openai-que-mistral-refusait-le-strict-null-du-sdk-3f5a8a507766"]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>Un outil OpenAI que Mistral refusait : le « strict: null » du SDK</h1>
+  <p class="muted">Une définition d’outil produite par le SDK OpenAI ne passait pas la conversion de mistral-common. Correctif de deux lignes, fusionné par Mistral AI le 21 octobre 2026.</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-10-21">21 octobre 2026</time> · également publié sur <a href="https://medium.com/@ZKHCHICHE/un-outil-openai-que-mistral-refusait-le-strict-null-du-sdk-3f5a8a507766">Medium</a></p>
+</header>
+<article>
+<p><strong>En bref</strong> : <code>Function.from_openai</code> de mistral-common rejetait toute définition d'outil contenant <code>"strict": null</code>. C'est pourtant ce que le SDK OpenAI produit par défaut quand on sérialise un outil. Mon correctif (<a href="https://github.com/mistralai/mistral-common/pull/396">PR #396</a>) a été fusionné par les mainteneurs de Mistral AI le 21 octobre 2026. Il sera dans la prochaine version publiée après la 1.12.0. En attendant, il existe un contournement d'une ligne, décrit plus bas.</p>
+<h2>Le symptôme</h2>
+<p>Vous migrez des agents d’OpenAI vers Mistral, ou vous exposez une passerelle compatible OpenAI devant des modèles Mistral. Vos outils sont décrits avec les types du SDK OpenAI, puis convertis par mistral-common :</p>
+<pre><code>from openai.types.shared import FunctionDefinition
+from mistral_common.protocol.instruct.tool_calls import Function</code></pre>
+<pre><code>outil = FunctionDefinition(name="get_weather", parameters={"type": "object"})
+Function.from_openai(outil.model_dump())</code></pre>
+<p>Résultat sur mistral-common 1.12.0 :</p>
+<pre><code>pydantic_core._pydantic_core.ValidationError: 1 validation error for Function
+strict
+  Input should be a valid boolean [type=bool_type, input_value=None, input_type=NoneType]</code></pre>
+<p>L’outil est pourtant valide. Le problème touche aussi <code>Tool.from_openai</code> et <code>ChatCompletionRequest.from_openai(tools=...)</code>, qui passent par la même fonction.</p>
+<h2>La cause</h2>
+<p>Dans le schéma OpenAI, <code>strict</code> est <strong>optionnel et nullable</strong>. Le SDK OpenAI le sérialise donc à <code>None</code> quand on ne le renseigne pas :</p>
+<pre><code>{'name': 'get_weather', 'description': None, 'parameters': {'type': 'object'}, 'strict': None}</code></pre>
+<p><code>Function.from_openai</code> remplaçait déjà les <code>None</code> de <code>parameters</code> et de <code>description</code> par des valeurs par défaut, mais pas celui de <code>strict</code>. Côté Mistral, <code>strict</code> est un booléen qui vaut <code>False</code> par défaut. Pydantic refusait donc <code>None</code>.</p>
+<p>C’est un bug silencieux d’intégration : chaque bibliothèque a raison prise isolément, et l’erreur n’apparaît qu’à la jonction des deux.</p>
+<h2>Le correctif</h2>
+<p>Deux lignes dans <code>Function.from_openai</code> : si <code>strict</code> vaut <code>None</code>, on retire le champ, et le modèle reprend sa valeur par défaut (<code>False</code>).</p>
+<pre><code>if filtered.get("strict") is None:
+    filtered.pop("strict", None)</code></pre>
+<p>Aucun changement pour <code>True</code> ou <code>False</code>. Deux tests couvrent <code>Function.from_openai</code> et <code>Tool.from_openai</code> avec <code>"strict": None</code>. La suite complète passe (1 294 tests), ainsi que ruff et mypy.</p>
+<p>Chronologie :</p>
+<ul><li><a href="https://github.com/mistralai/mistral-common/issues/393">issue #393</a> le 20 octobre (reproduction minimale) ;</li>
+<li><a href="https://github.com/mistralai/mistral-common/pull/396">PR #396</a> le même jour ;</li>
+<li>fusion par les mainteneurs le 21 octobre.</li>
+</ul>
+<h2>Si vous êtes sur la 1.12.0 aujourd’hui</h2>
+<p>Tant que la nouvelle version n’est pas publiée, sérialisez vos outils sans les champs nuls :</p>
+<pre><code>Function.from_openai(outil.model_dump(exclude_none=True))</code></pre>
+<p>Si vos outils arrivent en JSON brut (par exemple dans une passerelle), retirez <code>strict</code> quand il vaut <code>null</code> avant la conversion.</p>
+<h2>Un deuxième signalement, corrigé autrement par Mistral</h2>
+<p>Le même jour, j’ai signalé une incohérence dans les tokenizers (<a href="https://github.com/mistralai/mistral-common/issues/395">issue #395</a>). <code>Tekkenizer.decode</code> acceptait encore les anciennes politiques de jetons spéciaux en entier (0, 1, 2), mais <code>id_to_byte_piece</code> les rejetait.</p>
+<p>J’avais proposé d’aligner <code>id_to_byte_piece</code> sur <code>decode</code>. Les mainteneurs ont reconnu le bug et choisi l'inverse : ils ont supprimé la compatibilité avec les entiers partout (<a href="https://github.com/mistralai/mistral-common/pull/402">PR #402</a>, 21 octobre). C'est leur décision de conception, et elle est cohérente.</p>
+<p><strong>Conséquence pratique</strong> : si votre code appelle <code>decode(..., special_token_policy=1)</code>, il échouera à la prochaine version. Passez dès maintenant à l'énumération, ou à sa valeur texte :</p>
+<pre><code>from mistral_common.tokens.tokenizers.base import SpecialTokenPolicy
+tokenizer.decode(tokens, special_token_policy=SpecialTokenPolicy.KEEP)  # ou "keep"</code></pre>
+<h2>À retenir</h2>
+<ul><li>Un outil sérialisé par le SDK OpenAI contient <code>"strict": None</code>. mistral-common 1.12.0 le rejette, la prochaine version l'acceptera.</li>
+<li>Contournement immédiat : <code>model_dump(exclude_none=True)</code>.</li>
+<li>Les politiques de jetons spéciaux en entier (0, 1, 2) disparaissent : utilisez <code>SpecialTokenPolicy</code>.</li>
+<li>Dans une migration OpenAI → Mistral, testez la conversion de vos outils tels que votre code les produit réellement, pas seulement des dictionnaires écrits à la main.</li>
+</ul>
+<h2>Pour aller plus loin</h2>
+<p>C’est la deuxième contribution que Mistral AI intègre après la <a href="https://github.com/mistralai/mistral-common/pull/349">PR #349</a> sur les tokenizers hors ligne (article). D’autres correctifs sont en attente de revue : 3 bugs silencieux dans les bibliothèques Python de Mistral AI.</p>
+<p><em>Zakaria Khchiche, Tech Lead Data &amp; IA freelance : plus de 200 agents IA en production (Copilot Studio, Azure AI Foundry, Azure OpenAI), contributeur à Microsoft Agent Framework et à Mistral AI. </em><a href="https://www.linkedin.com/in/zakariakhchiche/"><em>LinkedIn</em></a><em> · </em><a href="https://zakariakhchiche.github.io/"><em>Site</em></a></p>
+<p><em>Vous voulez que vos équipes construisent des agents comme ceux-ci ? Je propose une </em><a href="https://zakariakhchiche.github.io/formation-copilot-studio/"><em>formation pratique Copilot Studio</em></a><em> (avec Spar-x, organisme certifié Qualiopi, finançable par votre OPCO) et un </em><a href="https://zakariakhchiche.github.io/kit-ai-act/"><em>kit gratuit sur l’article 4 de l’AI Act</em></a><em>.</em></p>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
