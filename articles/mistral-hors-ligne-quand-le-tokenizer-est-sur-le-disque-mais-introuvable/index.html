@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mistral hors ligne : quand le tokenizer est sur le disque mais introuvable – Zakaria Khchiche</title>
+<meta name="description" content="Qui est concerné">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mistral hors ligne : quand le tokenizer est sur le disque mais introuvable">
+<meta property="og:description" content="Qui est concerné">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Mistral hors ligne : quand le tokenizer est sur le disque mais introuvable","description":"Qui est concerné","datePublished":"2026-10-05","inLanguage":"fr","url":"https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/","mainEntityOfPage":"https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/","image":"https://zakariakhchiche.github.io/og-image.png","author":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/"},"sameAs":["https://medium.com/@ZKHCHICHE/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable-b6d30b0bb78a"]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>Mistral hors ligne : quand le tokenizer est sur le disque mais introuvable</h1>
+  <p class="muted">Qui est concerné</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-10-05">5 octobre 2026</time> · également publié sur <a href="https://medium.com/@ZKHCHICHE/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable-b6d30b0bb78a">Medium</a></p>
+</header>
+<article>
+<p></p>
+<p>Un serveur d'inférence isolé d'Internet. Un disque dédié aux modèles. Le tokenizer de Mistral téléchargé à l'avance, bien rangé dans son dossier. Et au démarrage :</p>
+<pre><code>FileNotFoundError : Aucun fichier local trouvé pour l’ID de dépôt mistralai/Mistral-7B-v0.1 et la révision None.pour  l' identifiant de dépôt mistralai/Mistral- 7B -v0.1 et la révision None .</code></pre>
+<p>Le fichier est là. La bibliothèque cherche ailleurs.</p>
+<p>J'ai trouvé ce bug dans <a href="https://github.com/mistralai/mistral-common">mistral-common</a> , la bibliothèque open source de Mistral AI qui prépare les requêtes pour ses modèles. Le correctif a été relu, approuvé et intégré par un mainteneur de Mistral AI ( <a href="https://github.com/mistralai/mistral-common/pull/349">PR #349</a> , <a href="https://github.com/mistralai/mistral-common/issues/348">issue #348</a> ).</p>
+<h2>Qui est concerné</h2>
+<p>Les équipes qui font tourner des modèles Mistral <strong>sans accès à Internet</strong> , et qui rangent leurs modèles <strong>ailleurs que dans le cache par défaut</strong> de Hugging Face. C'est précisément le cas des grands comptes : réseau isolé pour des raisons de sécurité, proxy d'entreprise, disque dédié aux modèles sur le serveur GPU.</p>
+<p>Deux situations déclenchent le bug :</p>
+<ul><li>l'appel interdit le réseau ( <code>local_files_only=True</code>) ;</li>
+<li>le Hub est injoignable (coupure, pare-feu, <code>HF_HUB_OFFLINE=1</code>) et la bibliothèque bascule d'elle-même sur les fichiers locaux.</li>
+</ul>
+<p>Avec le cache par défaut, ou avec le réseau, rien ne se passe. C'est pour cela que le bug passe inaperçu en développement et apparaît le jour du déploiement.</p>
+<h2>La cause : deux étapes, deux dossiers</h2>
+<p>Hors ligne, le chargement du tokenizer enchaîne deux fonctions :</p>
+<ol><li><code>list_local_hf_repo_files</code>liste les fichiers en cache pour trouver le tokenizer ( <code>tekken.json</code>). Elle regardait <strong>toujours</strong> le cache par défaut <code>HF_HUB_CACHE</code>, et n'avait pas de paramètre <code>cache_dir</code>.</li>
+<li><code>hf_hub_download</code>récupérer ensuite le fichier. Elle, reçoit bien <code>cache_dir</code>et regarde dans le dossier personnalisé.</li>
+</ol>
+<pre><code># avant : la liste ignore le dossier choisi par l'utilisateur 
+repo_cache = Path(huggingface_hub.constants.HF_HUB_CACHE) / ...</code></pre>
+<p>Si le tokenizer n'est que dans <code>cache_dir</code>, la liste revient vide et la fonction abandonne avant même d'essayer de lire le fichier. Le cas inverse échoue aussi, un cran plus loin.</p>
+<h2>Le correctif : 5 lignes, la même règle que Hugging Face</h2>
+<p>Les deux étapes lisent maintenant le même dossier : <code>cache_dir</code>s'il est fourni, sinon le cache par défaut, exactement la règle de <code>hf_hub_download</code>.</p>
+<pre><code>cache_root = Path(cache_dir) si cache_dir n'est  pas None sinon  Path ( huggingface_hub.constants.HF_HUB_CACHE ) 
+repo_cache = cache_root / huggingface_hub.constants.REPO_ID_SEPARATOR. join ([ "models" , *repo_id.split( "/" )])</code></pre>
+<ul><li><strong>Rétrocompatible</strong> : nouveau paramètre optionnel, comportement identique sans lui.</li>
+<li><strong>6 tests de non-régression</strong> , dont 5 échouent sans le correctif : dossier fourni en texte ou en <code>Path</code>, chargement complet hors ligne, bascule après coupure réseau, <code>HF_HUB_OFFLINE=1</code>.</li>
+<li><strong>Périmètre minimal</strong> : pas de nouvelle fonctionnalité glissée dans le correctif.</li>
+</ul>
+<p>Le mainteneur a demandé une seule retouche, appliquée par lui-même : retirer un commentaire. Le code n'a pas changé.</p>
+<h2>En attendant la nouvelle version</h2>
+<p>Si vous êtes touché et ne pouvez pas encore mettre à jour mistral-common : faites pointer <code>HF_HUB_CACHE</code>vers le même dossier que votre <code>cache_dir</code>. Les deux étapes lisent alors le même endroit.</p>
+<p>D'après la lecture de leur code source, Transformers ( <code>cache_dir</code>) et vLLM ( <code>--download-dir</code>avec <code>tokenizer_mode=mistral</code>) transmettent ce dossier à mistral-common : ils sont probablement concernés aussi hors ligne. Je ne l'ai pas testé de bout en bout.</p>
+<h2>Ce que ça change pour une équipe qui industrialise des agents</h2>
+<ol><li><strong>Testez le déploiement réel, pas le poste du développeur.</strong> Ce bug n'existe que sans réseau et avec un dossier de modèles personnalisé : exactement la configuration de production, jamais celle du portable.</li>
+<li><strong>Coupez le réseau dans vos tests.</strong> <code>HF_HUB_OFFLINE=1</code> dans un test d'intégration aurait suffi à le voir.</li>
+<li><strong>Une option qui n'est pas transmise partout est un bug.</strong> Lorsqu'une fonction accepte <code>cache_dir</code>, vérifiez que chaque appel interne le reçoit.</li>
+<li><strong>Contribuez en retour.</strong> Cinq lignes et six tests : c'est le prix d'un correctif qui protège tous ceux qui déploient Mistral hors ligne.</li>
+</ol>
+<p>Vous déployez des modèles Mistral en réseau isolé ? Quels autres pièges avez-vous rencontrés ?</p>
+<p>Pour en parler ou faire auditer vos propres agents : <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a> · Medium · <a href="https://zakariakhchiche.github.io/">Site</a></p>
+<p>Vous formez vos équipes à l'IA générative ? J'anime avec Spar-x (organisme certifié Qualiopi, formations finançables par votre OPCO) une formation Copilot Studio : <a href="https://zakariakhchiche.github.io/formation-copilot-studio/">https://zakariakhchiche.github.io/formation-copilot-studio/</a> et j'ai publié un kit AI Act article 4 gratuit : <a href="https://zakariakhchiche.github.io/kit-ai-act/">https://zakariakhchiche.github.io/kit-ai-act/</a></p>
+<p>Le bug raconté en podcast (12 min) :</p>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
