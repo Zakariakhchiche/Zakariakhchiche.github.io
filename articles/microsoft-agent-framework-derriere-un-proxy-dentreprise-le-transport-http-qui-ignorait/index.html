@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Microsoft Agent Framework derrière un proxy d'entreprise : le transport HTTP qui ignorait HTTPS_PROXY – Zakaria Khchiche</title>
+<meta name="description" content="Le contexte">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/microsoft-agent-framework-derriere-un-proxy-dentreprise-le-transport-http-qui-ignorait/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Microsoft Agent Framework derrière un proxy d'entreprise : le transport HTTP qui ignorait HTTPS_PROXY">
+<meta property="og:description" content="Le contexte">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/microsoft-agent-framework-derriere-un-proxy-dentreprise-le-transport-http-qui-ignorait/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Microsoft Agent Framework derrière un proxy d'entreprise : le transport HTTP qui ignorait HTTPS_PROXY","description":"Le contexte","datePublished":"2026-10-15","inLanguage":"fr","url":"https://zakariakhchiche.github.io/articles/microsoft-agent-framework-derriere-un-proxy-dentreprise-le-transport-http-qui-ignorait/","mainEntityOfPage":"https://zakariakhchiche.github.io/articles/microsoft-agent-framework-derriere-un-proxy-dentreprise-le-transport-http-qui-ignorait/","image":"https://zakariakhchiche.github.io/og-image.png","author":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/"},"sameAs":["https://medium.com/@ZKHCHICHE/microsoft-agent-framework-derri%C3%A8re-un-proxy-dentreprise-le-transport-http-qui-ignorait-41d6de99876b"]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>Microsoft Agent Framework derrière un proxy d'entreprise : le transport HTTP qui ignorait HTTPS_PROXY</h1>
+  <p class="muted">Le contexte</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-10-15">15 octobre 2026</time> · également publié sur <a href="https://medium.com/@ZKHCHICHE/microsoft-agent-framework-derri%C3%A8re-un-proxy-dentreprise-le-transport-http-qui-ignorait-41d6de99876b">Medium</a></p>
+</header>
+<article>
+<p><em>Mon premier correctif fusionné dans le framework d’agents de Microsoft, et le test à ajouter à vos propres intégrations.</em></p>
+<p>Un agent qui marche sur le poste du développeur, puis qui ne joint plus son API une fois déployé chez le client. Pas d’exception claire, pas de trace utile : simplement un appel qui n’aboutit pas. Dans une grande entreprise, le premier suspect est souvent le même : le proxy.</p>
+<p>C’est ce qui m’est arrivé avec le connecteur TypeSafe (Jev) de Microsoft Agent Framework. Le correctif a été fusionné par l’équipe Microsoft le 6 octobre 2026 : <a href="https://github.com/microsoft/agent-framework/pull/8984">microsoft/agent-framework#8984</a>.</p>
+<h2>Le contexte</h2>
+<p>J’utilise Jev, le modèle de TypeSafe, pour décider si un passage retrouvé dans une grande base documentaire justifie vraiment une réponse. Microsoft Agent Framework fournit un connecteur Python vers TypeSafe. Dans un environnement d’entreprise, les serveurs sortent sur Internet par un proxy, configuré avec les variables <code>HTTPS_PROXY</code>, <code>HTTP_PROXY</code>, <code>ALL_PROXY</code> et <code>NO_PROXY</code>.</p>
+<p>Le constat : le SDK TypeSafe utilisé seul joignait l’API dans cet environnement. Le même appel passé par le connecteur d’Agent Framework, non.</p>
+<h2>La cause</h2>
+<p>Quand le connecteur crée lui-même son client (<code>AsyncTypeSafeClient</code>), il lui passait un transport HTTP personnalisé, <code>_ApiKeyTransport</code>, dont le seul rôle était d'ajouter l'en-tête <code>Authorization: Bearer &lt;clé&gt;</code>.</p>
+<p>Or httpx ne lit les variables de proxy que lorsqu’aucun transport personnalisé n’est fourni. En remplaçant le transport, le connecteur désactivait donc, sans le vouloir et sans le signaler, toute la configuration réseau de l’entreprise.</p>
+<p>C’est un bug silencieux typique : aucune erreur à la création du client, aucun avertissement. Le réglage existe, il est simplement ignoré.</p>
+<h2>Le correctif</h2>
+<p>Le transport personnalisé était redondant : le SDK TypeSafe (versions 0.7.1 et 0.7.2) envoie déjà lui-même l’en-tête <code>Authorization</code>. Il masque d'ailleurs cet en-tête dans les journaux et les messages d'erreur, pas dans la requête envoyée.</p>
+<a href="https://events.zoom.us/ev/AjBDzTIgBOjbXyyuF_i2JHKceeuBRp1dycq5phbyKx5EiRMkuSIE~ArkW9LST0g8ykivRZyFH3rRErP9ufAxV9j5V344fZoBICauQAZumvmLfFw"></a><p>Le correctif :</p>
+<ol><li>supprime <code>_ApiKeyTransport</code> : le SDK construit son transport par défaut, et les variables de proxy s'appliquent de nouveau ;</li>
+<li>met à jour la note du fichier <code>AGENTS.md</code> du connecteur : les clients créés par le connecteur s'appuient sur le SDK pour l'en-tête d'authentification et gardent son transport ;</li>
+<li>garde des tests au niveau du transport, qui vérifient que la clé configurée part bien dans la requête réellement envoyée.</li>
+</ol>
+<p>Moins de code, et un comportement réseau standard.</p>
+<h2>Le test à ajouter à vos propres intégrations</h2>
+<p>La leçon dépasse ce connecteur. Chaque fois qu’un client HTTP reçoit un transport, un adaptateur ou une session personnalisés, vérifiez deux choses :</p>
+<ul><li><strong>le proxy</strong> : lancez l’intégration avec <code>HTTPS_PROXY</code> pointant vers un proxy de test, et vérifiez que la requête y passe bien ;</li>
+<li><strong>l’en-tête réellement envoyé</strong> : testez la requête qui part sur le réseau (avec un transport simulé qui capture la requête), pas seulement la configuration de l’objet.</li>
+</ul>
+<p>Un test sur la configuration dit « la clé est réglée ». Un test sur la requête dit « la clé est envoyée, par le bon chemin ».</p>
+<h2>À retenir</h2>
+<ul><li>Remplacer le transport httpx fait ignorer <code>HTTPS_PROXY</code>, <code>NO_PROXY</code> et les autres variables de proxy.</li>
+<li>Avant d’ajouter un transport pour un simple en-tête, vérifiez si le SDK ne l’envoie pas déjà.</li>
+<li>Testez ce qui part sur le réseau, pas ce que l’objet croit envoyer.</li>
+</ul>
+<p>C’est mon premier correctif dans Microsoft Agent Framework. J’en ai aussi fait fusionner chez Mistral AI (mistral-common) et dans OGX (ex-Llama Stack), toujours avec la même méthode : auditer une brique en conditions réelles avant de l’adopter, et corriger à la source.</p>
+<p><em>Zakaria Khchiche est Tech Lead Data &amp; IA freelance à Paris. Il construit et exploite des agents IA en production pour de grands comptes et contribue à des frameworks d’agents open source. </em><a href="https://www.linkedin.com/in/zakariakhchiche/"><em>LinkedIn</em></a><em> · </em><a href="https://zakariakhchiche.github.io/"><em>Site</em></a></p>
+<p><em>Vous voulez que vos équipes construisent des agents comme ceux-ci ? J’anime avec Spar-x (organisme certifié Qualiopi, formation finançable par votre OPCO) une formation Copilot Studio pratique : </em><a href="https://zakariakhchiche.github.io/formation-copilot-studio/"><em>programme de la formation</em></a><em>. Et un kit gratuit pour l’article 4 de l’AI Act : </em><a href="https://zakariakhchiche.github.io/kit-ai-act/"><em>kit AI Act</em></a><em>.</em></p>
+<p>À lire aussi : Localiser une signature dans un document scanné avec Jev 1.14 et Microsoft Agent Framework</p>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
