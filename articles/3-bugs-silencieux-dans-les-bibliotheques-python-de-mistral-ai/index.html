@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3 bugs silencieux dans les bibliothèques Python de Mistral AI – Zakaria Khchiche</title>
+<meta name="description" content="Contexte : les deux bibliothèques">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-les-bibliotheques-python-de-mistral-ai/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3 bugs silencieux dans les bibliothèques Python de Mistral AI">
+<meta property="og:description" content="Contexte : les deux bibliothèques">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-les-bibliotheques-python-de-mistral-ai/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"3 bugs silencieux dans les bibliothèques Python de Mistral AI","description":"Contexte : les deux bibliothèques","datePublished":"2026-10-04","inLanguage":"fr","url":"https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-les-bibliotheques-python-de-mistral-ai/","mainEntityOfPage":"https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-les-bibliotheques-python-de-mistral-ai/","image":"https://zakariakhchiche.github.io/og-image.png","author":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/"},"sameAs":["https://medium.com/@ZKHCHICHE/3-bugs-silencieux-dans-les-biblioth%C3%A8ques-python-de-mistral-ai-72d061df6aa7"]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>3 bugs silencieux dans les bibliothèques Python de Mistral AI</h1>
+  <p class="muted">Contexte : les deux bibliothèques</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-10-04">4 octobre 2026</time> · également publié sur <a href="https://medium.com/@ZKHCHICHE/3-bugs-silencieux-dans-les-biblioth%C3%A8ques-python-de-mistral-ai-72d061df6aa7">Medium</a></p>
+</header>
+<article>
+<p>Un schéma d'outil qui à l'air juste. Un validateur qui répond « valide ». Une sortie structurée qui se parse. À chaque fois, le code tourne sans erreur, et le résultat est quand même faux.</p>
+<p>J'ai audité les deux bibliothèques Python au cœur de la stack de Mistral AI et j'y ai trouvé trois bugs de ce type. Les trois sont reproduits, corrigés avec des tests de non-régression et proposés en amont.</p>
+<h2>Contexte : les deux bibliothèques</h2>
+<ul><li><a href="https://github.com/mistralai/mistral-common">mistral-common</a> valide les requêtes de chat et les transformations en tokens. vLLM et Hugging Face Transformers s'appuient dessus pour servir les modèles Mistral.</li>
+<li><a href="https://github.com/mistralai/client-python">client-python</a> est le SDK officiel <code>mistralai</code>. Son module <code>extra</code>transforme des fonctions Python en outils et des modèles Pydantic en sorties structurées.</li>
+</ul>
+<p>Un agent construit sur Mistral passe par les deux à chaque appel. Un bug silencieux à ce niveau se propage à tous les agents construits dessus.</p>
+<h2>Bug 1 : les paramètres optionnels deviennent obligatoires</h2>
+<p><code>create_tool_call</code>transformer une fonction Python en outil que le modèle peut appeler. Avec l'écriture Pydantic recommandée, la valeur par défaut se perd :</p>
+<pre><code>def get_weather(
+    city: Annotated[str, Field(description="City name")],
+    unit: Annotated[str, Field(description="celsius or fahrenheit")] = "celsius",
+) -&gt; str: ...</code></pre>
+<pre><code>create_tool_call(get_weather).function.parameters["required"] 
+# ['city', 'unit'] attendu : ['city']</code></pre>
+<p>La valeur par défaut est dans la signature de la fonction, pas dans le <code>Field</code>extrait de <code>Annotated</code>: elle n'arrive jamais dans le schéma. Les outils sont envoyés en mode <code>strict=True</code>: le modèle est obligé de remplir <code>unit</code>à chaque appel, et la valeur par défaut prévue par le développeur n'est jamais utilisée.</p>
+<p>Signalé dans l' <a href="https://github.com/mistralai/client-python/issues/632">issue #632</a> , avec le correctif et deux tests prêts sur ma fourchette.</p>
+<h2>Bug 2 : un champ dictionnaire qui ne peut contenir aucune clé</h2>
+<p><code>chat.parse</code>permet de demander une réponse conforme à un modèle Pydantic. Avant l'envoi, le SDK rend le schéma strict en ajoutant <code>additionalProperties: false</code>sur chaque objet.</p>
+<p>Le problème : pour un champion <code>dict[str, int]</code>, Pydantic utilise déjà <code>additionalProperties</code>pour décrire les valeurs. Le SDK l'écrase. Le schéma Pydantic <code>{"additionalProperties": {"type": "integer"}}</code>devient <code>{"additionalProperties": false}</code>.</p>
+<p>Avec ce deuxième schéma, <code>{"apples": 3}</code>est invalide : le champ ne peut être que vide. Le correctif n'ajoute la clé que si elle est absente, ce que fait déjà le SDK d'OpenAI.</p>
+<p>Signalé dans l' <a href="https://github.com/mistralai/client-python/issues/633">issue #633</a> , avec le correctif et un test. Je n'ai pu vérifier que la partie client : je n'ai pas testé l'API de bout en bout.</p>
+<h2>Bug 3 : un retour à la ligne passe le validateur</h2>
+<p>mistral-common vérifie que les noms de fonction respectent <code>^[a-zA-Z0-9_-]{1,64}$</code>et que les identifiants d'appel d'outil font 9 caractères alphanumériques. La vérification utilise <code>re.match</code>, et en Python <code>$</code>accepte aussi une <code>\n</code>finale.</p>
+<p>Résultat : <code>"get_weather\n"</code>et <code>"abcDEF123\n"</code>(10 caractères) sont acceptés, et le nom invalide se retrouve dans le prompt tokenisé. Le correctif tient en un mot par appel : <code>fullmatch</code>au lieu de <code>match</code>.</p>
+<p>Corrigé dans la <a href="https://github.com/mistralai/mistral-common/pull/354">pull request #354</a> ( <a href="https://github.com/mistralai/mistral-common/issues/353">issue #353</a> ).</p>
+<h2>Ce que ça change pour une équipe qui industrialise des agents</h2>
+<ol><li><strong>Vérifiez ce qui est envoyé, pas seulement ce qui est écrit.</strong> Affichez au moins une fois le schéma que votre SDK envoie réellement au modèle. Les bugs 1 et 2 sont invisibles dans le code Python.</li>
+<li><strong>Le mode strict augmente l’enjeu.</strong> Un schéma faux en mode strict n'est pas ignoré : le modèle doit le respecter.</li>
+<li><code><strong>re.match</strong></code><strong>+ </strong><code><strong>$</strong></code><strong>n'est pas une correspondance complète.</strong> Utilisez <code>re.fullmatch</code>pour valider, dans votre code également.</li>
+<li><strong>Contribuez en retour.</strong> Chaque correctif fait quelques lignes. Le proposer en amont protège tous ceux qui utilisent la même pile.</li>
+</ol>
+<p>Vous construisez des agents sur Mistral ? Je serais curieux de savoir quelles surprises vous avez rencontrées.</p>
+<p>Pour en parler ou faire auditer vos propres agents : <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a> · Medium · <a href="https://zakariakhchiche.github.io/">Site</a></p>
+<p>Vous formez vos équipes à l'IA générative ? J'anime avec Spar-x (organisme certifié Qualiopi, formations finançables par votre OPCO) une formation Copilot Studio : <a href="https://zakariakhchiche.github.io/formation-copilot-studio/">https://zakariakhchiche.github.io/formation-copilot-studio/</a> et j'ai publié un kit AI Act article 4 gratuit : <a href="https://zakariakhchiche.github.io/kit-ai-act/">https://zakariakhchiche.github.io/kit-ai-act/</a></p>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
