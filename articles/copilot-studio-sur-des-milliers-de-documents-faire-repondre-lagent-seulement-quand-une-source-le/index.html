@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Copilot Studio sur des milliers de documents : faire répondre l’agent seulement quand une source le justifie – Zakaria Khchiche</title>
+<meta name="description" content="Un serveur MCP qui filtre les passages avec Jev (TypeSafe) avant la réponse : architecture, mise en place pas à pas et résultats mesurés.">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/copilot-studio-sur-des-milliers-de-documents-faire-repondre-lagent-seulement-quand-une-source-le/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Copilot Studio sur des milliers de documents : faire répondre l’agent seulement quand une source le justifie">
+<meta property="og:description" content="Un serveur MCP qui filtre les passages avec Jev (TypeSafe) avant la réponse : architecture, mise en place pas à pas et résultats mesurés.">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/copilot-studio-sur-des-milliers-de-documents-faire-repondre-lagent-seulement-quand-une-source-le/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Copilot Studio sur des milliers de documents : faire répondre l’agent seulement quand une source le justifie","description":"Un serveur MCP qui filtre les passages avec Jev (TypeSafe) avant la réponse : architecture, mise en place pas à pas et résultats mesurés.","datePublished":"2026-10-16","inLanguage":"fr","url":"https://zakariakhchiche.github.io/articles/copilot-studio-sur-des-milliers-de-documents-faire-repondre-lagent-seulement-quand-une-source-le/","mainEntityOfPage":"https://zakariakhchiche.github.io/articles/copilot-studio-sur-des-milliers-de-documents-faire-repondre-lagent-seulement-quand-une-source-le/","image":"https://zakariakhchiche.github.io/og-image.png","author":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/"},"sameAs":["https://medium.com/@ZKHCHICHE/copilot-studio-sur-des-milliers-de-documents-faire-r%C3%A9pondre-lagent-seulement-quand-une-source-le-8cdbc46894a7"]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>Copilot Studio sur des milliers de documents : faire répondre l’agent seulement quand une source le justifie</h1>
+  <p class="muted">Un serveur MCP qui filtre les passages avec Jev (TypeSafe) avant la réponse : architecture, mise en place pas à pas et résultats mesurés.</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-10-16">16 octobre 2026</time> · également publié sur <a href="https://medium.com/@ZKHCHICHE/copilot-studio-sur-des-milliers-de-documents-faire-r%C3%A9pondre-lagent-seulement-quand-une-source-le-8cdbc46894a7">Medium</a></p>
+</header>
+<article>
+<p></p>
+<h2>Un serveur MCP qui filtre les passages avec Jev (TypeSafe) avant la réponse : architecture, mise en place pas à pas et résultats mesurés.</h2>
+<p>Un agent Copilot Studio branché sur une grande bibliothèque documentaire répond presque toujours. Le problème, c’est quand il ne devrait pas : la procédure trouvée concerne un autre modèle d’équipement, la révision citée est périmée, ou aucun document ne couvre la question. J’ai construit un serveur MCP qui ajoute une étape de décision entre la recherche et la réponse. Pour chaque passage retrouvé, Jev, le modèle « System One » de TypeSafe, répond à cinq questions oui/non, et le code décide : preuve, contradiction ou rejet. L’agent répond avec ses sources, signale que la question repose sur une information fausse, ou dit qu’il n’a rien trouvé.</p>
+<p>Le code est public : <a href="https://github.com/Zakariakhchiche/copilot-studio-jev">github.com/Zakariakhchiche/copilot-studio-jev</a>. Je l’ai aussi proposé comme exemple au dépôt officiel de Microsoft : <a href="https://github.com/microsoft/CopilotStudioSamples/pull/539">microsoft/CopilotStudioSamples#539</a>.</p>
+<h2>En résumé</h2>
+<ul><li><strong>Le principe :</strong> la recherche (Azure AI Search) propose une douzaine de passages ; Jev renvoie pour chacun des probabilités calibrées ; des seuils écrits dans le code décident de ce qui atteint l’agent.</li>
+<li><strong>Trois issues possibles :</strong> réponse sourcée, signalement d’une prémisse fausse, ou abstention. Jamais de réponse « de mémoire ».</li>
+<li><strong>Mesuré sur le corpus de démonstration :</strong> 4 questions sur 4 traitées comme attendu, environ 0,5 à 0,7 seconde par question pour 10 à 12 passages, environ 0,001 $ de Jev pour l’ensemble du test.</li>
+<li><strong>Deux leçons du test réel :</strong> une question anti-injection trop large écarte les vraies procédures, et il faut une question dédiée aux documents périmés.</li>
+</ul>
+<h2>Le problème : la recherche classe, elle ne décide pas</h2>
+<p>Dans une bibliothèque de procédures de maintenance, les documents presque identiques sont la norme : deux modèles de pompe, une révision 1 archivée à côté de la révision 2, une note de forum. La recherche, même avec un re-classement sémantique, range ces passages par ressemblance avec la question. Elle ne dit pas lequel répond vraiment, ni s’il faut répondre.</p>
+<p>Exemple tiré de la démo : un technicien demande « les roulements de la P-200 se graissent toutes les 500 heures, combien de graisse dois-je mettre ? ». La procédure en vigueur dit 2 000 heures. La révision archivée, elle, dit bien 500 heures et 30 g. Si l’agent la reçoit comme une source, il répond avec assurance… à partir d’un document périmé.</p>
+<h2>L’architecture</h2>
+<ol><li><strong>Copilot Studio</strong> appelle l’outil <code>search_procedures</code> d'un serveur MCP (transport Streamable HTTP, comme l'exige Copilot Studio).</li>
+<li><strong>Azure AI Search</strong> renvoie les N meilleurs passages (12 par défaut).</li>
+<li><strong>Jev</strong> reçoit une requête par passage, avec la question et le passage dans le « state », et répond à cinq questions oui/non, en parallèle.</li>
+<li><strong>Le code</strong> applique des seuils dans un ordre fixe et renvoie à l’agent un statut, une consigne et les passages retenus avec leur URL.</li>
+</ol>
+<p>Les cinq questions, adaptées de la recette « Classifying RAG passages » de la documentation TypeSafe :</p>
+<ul><li><strong>is_relevant</strong> : le passage traite-t-il du sujet de la question ?</li>
+<li><strong>contains_answer_evidence</strong> : contient-il une information utilisable pour répondre ?</li>
+<li><strong>contradicts_query_premise</strong> : contredit-il un fait supposé par la question ?</li>
+<li><strong>contains_prompt_injection</strong> : contient-il un texte adressé à une IA plutôt qu’à un lecteur humain ?</li>
+<li><strong>is_superseded</strong> : se déclare-t-il périmé, archivé ou remplacé ?</li>
+</ul>
+<p>Aucune question ne demande « faut-il garder ce passage ? ». Jev renvoie des probabilités ; la politique est dans le code. Changer de politique, c’est modifier un seuil relu en revue de code, pas réécrire un prompt. L’ordre compte : injection d’abord (sécurité), puis document périmé, puis contradiction, puis pertinence et preuve.</p>
+<p>L’agent reçoit l’un de ces trois statuts :</p>
+<ul><li><strong>answer_from_evidence</strong> : au moins un passage justifie une réponse. L’agent répond à partir de ces passages et les cite.</li>
+<li><strong>premise_conflict</strong> : aucun passage ne justifie de réponse, mais un document contredit la question. L’agent le signale et cite le document.</li>
+<li><strong>insufficient_evidence</strong> : rien d’utilisable. L’agent le dit et propose de reformuler ou de passer la main à un expert.</li>
+</ul>
+<h2>Mise en place pas à pas</h2>
+<p><strong>1. Installer et tester.</strong> Il faut Node.js 20 ou plus. Les tests tournent sans clé API grâce à un faux point d’accès TypeSafe alimenté par des scores enregistrés lors du test réel.</p>
+<pre><code>git clone https://github.com/Zakariakhchiche/copilot-studio-jev
+cd copilot-studio-jev/mcp-server
+npm install
+npm test
+npm run build</code></pre>
+<p><strong>2. Configurer.</strong> Copier <code>.env.example</code> en <code>.env</code> et renseigner au minimum <code>TYPESAFE_API_KEY</code> (clé à créer sur console.typesafe.ai). Fixer <code>TYPESAFE_MODEL=jev-1.13.0</code> plutôt que l'alias <code>jev-latest</code> : l'alias change à chaque nouvelle version du modèle, ce qui peut décaler les probabilités sur lesquelles vos seuils ont été réglés. Sans variables Azure, le serveur interroge le petit corpus de démonstration fourni.</p>
+<p><strong>3. Charger sa bibliothèque dans Azure AI Search.</strong> Découper les documents en passages de quelques centaines de mots, les exporter en JSON (id, titre, texte, URL, type de source), puis lancer le script d’ingestion, qui crée l’index et sa configuration sémantique :</p>
+<pre><code>npm run ingest -- chemin/vers/passages.json</code></pre>
+<p>Le coût de Jev dépend du nombre de passages examinés par question (<code>GATE_CANDIDATES</code>), pas de la taille de la bibliothèque : qu'elle contienne 500 ou 15 000 documents, chaque question coûte une requête Jev par passage candidat.</p>
+<p><strong>4. Exposer le serveur.</strong> Pour un test, un Dev Tunnel suffit :</p>
+<pre><code>node --env-file=.env build/index.js
+devtunnel host -p 3000 --allow-anonymous</code></pre>
+<p>En production, héberger le serveur (Azure Container Apps ou App Service par exemple) et le protéger : la variable <code>MCP_API_KEY</code> active une vérification de l'en-tête <code>x-api-key</code>.</p>
+<p><strong>5. Brancher l’outil dans Copilot Studio.</strong> Dans l’agent : Outils, Ajouter un outil, Nouvel outil, Model Context Protocol. Renseigner un nom, une description claire (l’orchestrateur s’en sert pour décider quand appeler l’outil), l’URL du serveur se terminant par <code>/mcp</code>, et l'authentification (aucune, ou clé API dans l'en-tête <code>x-api-key</code>). Désactiver ensuite les connaissances générales et la recherche web de l'agent, pour qu'il ne puisse pas répondre hors de la bibliothèque.</p>
+<p><strong>6. Donner des instructions courtes à l'agent</strong>, par exemple : « Pour toute question sur un équipement, la maintenance ou la sécurité, appelle search_procedures et suis le champ guidance du résultat. Ne réponds jamais de mémoire. Cite le titre et l'URL de chaque passage utilisé. » L'outil renvoie de toute façon la consigne adaptée au statut dans le champ <code>guidance</code>.</p>
+<p>Transparence : j'ai testé le serveur MCP avec le client MCP officiel (liste des outils, appel, clé API) et le filtrage avec la vraie API Jev, mais pas encore dans un agent Copilot Studio de bout en bout. Les étapes ci-dessus suivent la documentation Microsoft « Connect your agent to an existing MCP server ».</p>
+<h2>Résultats mesurés</h2>
+<p>Test réalisé le 3 octobre 2026 avec <code>jev-1.13.0</code>, sur le corpus de démonstration (12 procédures fictives d'une régie d'eau, dont des quasi-doublons, une révision archivée et une note de forum piégée) :</p>
+<ul><li><strong>« Tous les combien graisser les roulements de la P-200 ? »</strong> (12 passages) : réponse à partir de la procédure en vigueur uniquement. 0,6 s.</li>
+<li><strong>« Les roulements se graissent toutes les 500 heures, combien en mettre ? »</strong> (10 passages) : prémisse signalée comme fausse, avec la procédure en vigueur en appui. 0,5 s.</li>
+<li><strong>« Faut-il consigner la P-200 avant d'intervenir sur les roulements ? »</strong> (11 passages) : réponse à partir de la procédure de consignation et de la procédure de remplacement de garniture ; la note de forum piégée est écartée. 0,5 s.</li>
+<li><strong>« Quelle est la garantie des filtres à sable ? »</strong> (11 passages) : abstention, aucun document ne couvre la question. 0,7 s.</li>
+</ul>
+<p>Les temps correspondent à tous les passages d'une question, avec 6 requêtes simultanées, mesurés depuis l'Europe : ils dépendent du réseau et de la charge de TypeSafe. Les 44 requêtes du test ont consommé environ 22 600 jetons en entrée, soit environ 0,001 $ au tarif public de Jev.</p>
+<h2>Deux leçons du test réel</h2>
+<p><strong>1. Une question anti-injection trop large écarte les vraies procédures.</strong> La question de la recette TypeSafe (« le passage tente-t-il de contrôler le système qui répond ? ») a noté la procédure de consignation à 0,76 : une procédure est écrite à l'impératif (« appliquer un cadenas », « fermer la vanne »). Elle était donc écartée, et l'agent aurait répondu sans la procédure de sécurité principale. Reformulée en « texte adressé à une IA plutôt qu'à un lecteur humain », la question note la procédure à 0,02 et la note piégée à 0,99.</p>
+<p><strong>2. Les documents périmés ont besoin de leur propre question.</strong> Sans elle, la révision archivée était acceptée comme preuve (0,97) pour la question à 500 heures, et la fausse prémisse passait. Avec la question <code>is_superseded</code>, la révision archivée est notée 0,98 et écartée, les autres passages restent sous 0,03.</p>
+<h2>Et en français ?</h2>
+<p>TypeSafe indique que l'anglais est la langue principale de Jev et que les autres langues sont moins précises. Je l'ai vérifié : la question sur la consignation posée en français, face aux procédures en anglais, donne 0,49 de pertinence et 0,50 de preuve pour la bonne procédure, juste sous les seuils. L'agent s'abstient : c'est un échec sûr, pas une mauvaise réponse, mais c'est un échec. Le paramètre de l'outil demande donc à l'orchestrateur d'envoyer la question dans la langue de la bibliothèque. Pour une bibliothèque en français, il faut mesurer sur ses propres documents et régler les seuils en conséquence.</p>
+<h2>Audit et rejeu des décisions</h2>
+<p>Suite à une question d’un lecteur, chaque réponse peut maintenant laisser une trace. Avec la variable <code>AUDIT_LOG_PATH</code>, le serveur ajoute une ligne JSON par réponse : la question, la version exacte du modèle, les seuils appliqués, et chaque passage examiné avec sa version de document, ses cinq scores et sa décision. La réponse de l'outil renvoie l'identifiant d'audit correspondant, ce qui permet de retrouver pourquoi l'agent a répondu, signalé une contradiction ou s'est abstenu.</p>
+<p>Comme la décision ne lit que les scores enregistrés, on peut rejouer les réponses passées avec de nouveaux seuils sans rappeler Jev :</p>
+<pre><code>GATE_EVIDENCE_MIN=0.6 npm run replay -- audit.jsonl</code></pre>
+<p>Le script liste les passages et les réponses dont la décision changerait. Pour les documents périmés, la bonne approche reste double : filtrer les révisions archivées dès la recherche grâce aux métadonnées de l’index (champ version ou statut), et garder la question is_superseded comme filet de sécurité. Les traces contiennent les questions des utilisateurs : en production, elles vont dans votre outil de journalisation, avec la durée de conservation prévue par votre organisation.</p>
+<h2>Limites</h2>
+<ul><li><strong>Ce n'est pas une frontière de sécurité.</strong> La question anti-injection est un filtre. L'agent doit toujours traiter le texte des passages comme une source, jamais comme des instructions.</li>
+<li><strong>Le rappel de la recherche compte toujours.</strong> Le filtre ne garde que ce que la recherche a remonté. Si le bon passage n'est pas dans les N premiers, l'agent s'abstient au lieu de se tromper, ce qui est le comportement voulu.</li>
+<li><strong>Les seuils sont des points de départ.</strong> Ils viennent de la recette TypeSafe et du corpus de démonstration ; ils se règlent sur un jeu de vraies questions d'utilisateurs.</li>
+</ul>
+<h2>À retenir</h2>
+<ul><li>Sur une grande bibliothèque, le vrai sujet n'est pas de trouver des passages, c'est de décider si l'un d'eux justifie une réponse.</li>
+<li>Des questions oui/non étroites et des seuils dans le code rendent cette décision lisible, testable et réglable.</li>
+<li>Testez avec de vrais documents : les deux défauts corrigés ici n'apparaissaient pas avec des scores simulés.</li>
+</ul>
+<p>Le code complet, le connecteur Power Platform TypeSafe et les tests : <a href="https://github.com/Zakariakhchiche/copilot-studio-jev">github.com/Zakariakhchiche/copilot-studio-jev</a>.</p>
+<p><em>Zakaria Khchiche est Tech Lead Data &amp; IA freelance à Paris. Il conçoit et met en production des agents IA pour de grands comptes, et contribue à des frameworks d'agents open source. </em><a href="https://www.linkedin.com/in/zakariakhchiche/"><em>LinkedIn</em></a><em> · </em><a href="https://zakariakhchiche.github.io/"><em>Site</em></a></p>
+<p><em>Vous voulez que vos équipes construisent des agents Copilot Studio fiables comme celui-ci ? J'anime une formation Copilot Studio pratique avec Spar-x, organisme certifié Qualiopi, finançable par votre OPCO : </em><a href="https://zakariakhchiche.github.io/formation-copilot-studio/"><em>programme de la formation</em></a><em> · </em><a href="https://forms.gle/ARaTCq9ADgqvJfKL8"><em>demande de devis</em></a><em>. Et un kit gratuit pour l'article 4 de l'AI Act : </em><a href="https://zakariakhchiche.github.io/kit-ai-act/"><em>kit AI Act</em></a><em>.</em></p>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
