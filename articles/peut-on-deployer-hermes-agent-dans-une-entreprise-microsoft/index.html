@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Peut-on déployer Hermes Agent dans une entreprise Microsoft ? – Zakaria Khchiche</title>
+<meta name="description" content="Intune, Teams, Entra ID, Graph : ce qui fonctionne déjà, ce qui manque encore, et la checklist que j’applique avant un pilote">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/peut-on-deployer-hermes-agent-dans-une-entreprise-microsoft/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Peut-on déployer Hermes Agent dans une entreprise Microsoft ?">
+<meta property="og:description" content="Intune, Teams, Entra ID, Graph : ce qui fonctionne déjà, ce qui manque encore, et la checklist que j’applique avant un pilote">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/peut-on-deployer-hermes-agent-dans-une-entreprise-microsoft/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Peut-on déployer Hermes Agent dans une entreprise Microsoft ?","description":"Intune, Teams, Entra ID, Graph : ce qui fonctionne déjà, ce qui manque encore, et la checklist que j’applique avant un pilote","datePublished":"2026-10-16","inLanguage":"fr","url":"https://zakariakhchiche.github.io/articles/peut-on-deployer-hermes-agent-dans-une-entreprise-microsoft/","mainEntityOfPage":"https://zakariakhchiche.github.io/articles/peut-on-deployer-hermes-agent-dans-une-entreprise-microsoft/","image":"https://zakariakhchiche.github.io/og-image.png","author":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/"},"sameAs":["https://medium.com/@ZKHCHICHE/peut-on-d%C3%A9ployer-hermes-agent-dans-une-entreprise-microsoft-8c97c2faece8"]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>Peut-on déployer Hermes Agent dans une entreprise Microsoft ?</h1>
+  <p class="muted">Intune, Teams, Entra ID, Graph : ce qui fonctionne déjà, ce qui manque encore, et la checklist que j’applique avant un pilote</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-10-16">16 octobre 2026</time> · également publié sur <a href="https://medium.com/@ZKHCHICHE/peut-on-d%C3%A9ployer-hermes-agent-dans-une-entreprise-microsoft-8c97c2faece8">Medium</a></p>
+</header>
+<article>
+<p><strong>Réponse courte :</strong> oui pour un pilote encadré, pas encore pour un déploiement généralisé sans travail préalable. Depuis son arrivée sur le Microsoft Store, Hermes Agent (Nous Research, open source, licence MIT) peut être poussé par Intune comme n’importe quelle application du Store. Il parle déjà à Teams, à Microsoft Graph et à Microsoft Foundry via Entra ID. En revanche, la gouvernance (secrets, contrôle d’accès, journalisation) reste à construire par la DSI.</p>
+<p>Je suis Tech Lead Data &amp; IA et j’accompagne des grands comptes sur la mise en production d’agents (plus de 200 agents en production chez SUEZ). J’ai lu le code de Hermes Agent côté Microsoft, et j’y ai proposé deux correctifs, en revue chez les mainteneurs. Voici ce que j’en retiens pour une entreprise équipée Microsoft 365.</p>
+<h2>Ce qui change avec le Microsoft Store</h2>
+<p>Jusqu’ici, installer Hermes Agent sur Windows passait par un script PowerShell ou une commande dans un terminal. Aucune DSI ne valide ça pour 500 postes.</p>
+<p>Une application du Store se déploie avec Intune, via le type « Microsoft Store app (new) » (basé sur winget) :</p>
+<ul><li>ciblage par groupe Entra ID (un groupe pilote, pas toute l’entreprise) ;</li>
+<li>installation « disponible » dans le Portail d’entreprise ou « obligatoire » ;</li>
+<li>mises à jour suivies automatiquement.</li>
+</ul>
+<p>Deux précautions : vérifier l’éditeur du paquet avant de l’approuver, et tester le scénario Autopilot, encore partiellement pris en charge pour les applications du Store. La certification du Store contrôle l’absence de logiciel malveillant et le respect des règles de la boutique ; ce n’est ni un audit de sécurité ni une analyse RGPD.</p>
+<h2>Ce que Hermes Agent sait déjà faire avec Microsoft</h2>
+<ul><li><strong>Teams (conversation)</strong> : adaptateur natif Bot Framework : messages privés, conversations de groupe, canaux. <em>À prévoir :</em> inscription d’application Entra ID, point d’accès HTTPS public, liste d’utilisateurs autorisés.</li>
+<li><strong>Teams (validation)</strong> : les commandes sensibles arrivent sous forme de carte adaptative : approuver une fois, pour la session, toujours, ou refuser. <em>À prévoir :</em> refus par défaut si aucune liste d’utilisateurs n’est configurée : à garder.</li>
+<li><strong>Teams (réunions)</strong> : pipeline de réunions via Microsoft Graph : abonnements, transcriptions, résumé posté dans un canal ou une conversation. <em>À prévoir :</em> consentement administrateur, renouvellement régulier des abonnements Graph.</li>
+<li><strong>Microsoft Foundry</strong> : authentification sans clé via Entra ID (chaîne <code>DefaultAzureCredential</code> : principal de service, identité managée, Azure CLI…). <em>À prévoir :</em> choix du modèle et de la région d'hébergement.</li>
+<li><strong>Clouds souverains (GCC High, DoD, 21Vianet)</strong> : autorité d’authentification configurable. <em>À prévoir :</em> correctif proposé pour que les appels Graph suivent le bon cloud (voir plus bas).</li>
+</ul>
+<p>Le point que je trouve le plus mûr : la validation des commandes dans Teams. Quand l’agent veut exécuter une commande jugée dangereuse, il envoie une carte avec quatre boutons, et seuls les utilisateurs de la liste autorisée peuvent cliquer. Sans liste, le clic est refusé. C’est exactement le comportement qu’on attend d’un outil qui a accès à un terminal.</p>
+<h2>Ce qui manque pour un usage généralisé</h2>
+<ul><li><strong>Pas d’outillage d’administration documenté</strong> : la documentation ne décrit ni console d’administration centralisée, ni SSO, ni journal d’audit.</li>
+<li><strong>Des secrets dans un fichier</strong> : les identifiants Teams et Graph sont lus depuis un fichier <code>.env</code> sur la machine qui héberge la passerelle.</li>
+<li><strong>Un contrôle d’accès par identifiants</strong> : l’accès au bot Teams se règle par une liste d’identifiants d’objet Entra ID, pas par un groupe.</li>
+<li><strong>Une intégration Teams exigeante</strong> : inscription d’application, consentement administrateur, URL publique stable avec certificat valide, rotation des secrets. Comptez quelques heures avec de l’expérience Azure.</li>
+<li><strong>Un agent qui agit sur le poste</strong> : il peut lancer des commandes et des scripts. Sans règles Intune ni environnement isolé (Docker, par exemple), c’est un risque d’IA non maîtrisée.</li>
+</ul>
+<h2>Deux correctifs que j’ai proposés</h2>
+<p>En lisant le code Microsoft de Hermes Agent, j’ai trouvé deux défauts concrets et proposé un correctif pour chacun. Les deux sont <strong>en revue</strong> chez les mainteneurs, pas encore intégrés.</p>
+<p><strong>1. Microsoft Graph dans les clouds souverains</strong> (<a href="https://github.com/NousResearch/hermes-agent/pull/135618">PR #135618</a>). La documentation indique comment pointer l’authentification vers <code>login.microsoftonline.us</code> pour GCC High, mais le client Graph envoyait toujours ses requêtes vers <code>graph.microsoft.com</code>. Or un jeton émis pour un cloud souverain n'est pas accepté par le service mondial : toutes les requêtes étaient rejetées. Le correctif déduit l'adresse Graph du <em>scope</em> configuré, en se limitant aux quatre racines Graph publiées par Microsoft. Aucun nouveau paramètre, et le jeton n'est jamais envoyé ailleurs.</p>
+<p><strong>2. Résumés de réunion en français</strong> (<a href="https://github.com/NousResearch/hermes-agent/pull/135619">PR #135619</a>). En mode webhook, les sections vides d’un résumé (décisions, actions, risques) affichaient « None » en anglais, alors que le mode Graph affichait déjà « Aucun ». Le correctif utilise la même traduction dans les deux modes.</p>
+<p>Chaque correctif est accompagné d’un test qui échoue sans lui, et passe les contrôles du projet.</p>
+<h2>Ma checklist avant un pilote</h2>
+<ol><li><strong>Périmètre</strong> : un cas d’usage, un groupe pilote Entra ID, une installation « disponible » (pas « obligatoire ») dans Intune.</li>
+<li><strong>Modèle</strong> : Microsoft Foundry avec authentification Entra ID (pas de clé API à stocker), dans une région européenne.</li>
+<li><strong>Teams</strong> : une inscription d’application dédiée, une liste d’utilisateurs autorisés, jamais l’accès ouvert à tout le tenant, réponse uniquement sur mention dans les canaux.</li>
+<li><strong>Exécution</strong> : validation des commandes activée, exécution dans un environnement isolé plutôt que directement sur le poste.</li>
+<li><strong>Secrets</strong> : fichier <code>.env</code> aux droits restreints, rotation planifiée des secrets Entra ID.</li>
+<li><strong>Réunions</strong> : consentement administrateur documenté, tâche planifiée de renouvellement des abonnements Graph.</li>
+<li><strong>Formation</strong> : les utilisateurs du pilote formés aux usages et aux limites. L’article 4 de l’AI Act, réécrit par le règlement (UE) 2026/1744 en vigueur depuis le 27 juillet 2026, demande désormais de « favoriser » la maîtrise de l’IA par le personnel (ceci n’est pas un conseil juridique).</li>
+</ol>
+<h2>À retenir</h2>
+<ul><li>Le Microsoft Store rend Hermes Agent déployable par Intune : c’est la vraie nouveauté pour une DSI.</li>
+<li>L’intégration Teams, Graph et Foundry existe déjà et elle est sérieuse, notamment la validation des commandes par carte adaptative.</li>
+<li>La gouvernance (secrets, accès, audit) reste à la charge de l’entreprise : prévoir un pilote cadré avant toute généralisation.</li>
+</ul>
+<p><em>Zakaria Khchiche, Tech Lead Data &amp; IA (Paris), formateur IA chez Spar-x. Plus de 200 agents en production chez SUEZ ; missions pour TotalEnergies, Groupe SNCF, La Banque Postale, Volvo Group. Contributeur open source (Microsoft Agent Framework, Mistral, OGX).</em></p>
+<p><em>LinkedIn : </em><a href="https://www.linkedin.com/in/zakariakhchiche/"><em>https://www.linkedin.com/in/zakariakhchiche/</em></a><em> · Site : </em><a href="https://zakariakhchiche.github.io/"><em>https://zakariakhchiche.github.io/</em></a></p>
+<p><strong>Vous voulez cadrer un pilote d’agents IA dans votre environnement Microsoft ?</strong> J’anime avec Spar-x une formation pratique sur l’IA générative et les agents en production (organisme certifié Qualiopi, finançable par votre OPCO) : <a href="https://zakariakhchiche.github.io/formation-ia-generative/">https://zakariakhchiche.github.io/formation-ia-generative/</a> · Demande de devis : <a href="https://forms.gle/ARaTCq9ADgqvJfKL8">https://forms.gle/ARaTCq9ADgqvJfKL8</a> · Kit gratuit AI Act article 4 : <a href="https://zakariakhchiche.github.io/kit-ai-act/">https://zakariakhchiche.github.io/kit-ai-act/</a></p>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
