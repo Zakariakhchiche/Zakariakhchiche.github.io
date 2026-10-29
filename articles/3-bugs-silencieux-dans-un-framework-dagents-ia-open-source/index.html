@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>3 bugs silencieux dans un framework d’agents IA open source – Zakaria Khchiche</title>
+<meta name="description" content="Le contexte : OGX, l’ex-Llama Stack">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-un-framework-dagents-ia-open-source/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="3 bugs silencieux dans un framework d’agents IA open source">
+<meta property="og:description" content="Le contexte : OGX, l’ex-Llama Stack">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-un-framework-dagents-ia-open-source/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"3 bugs silencieux dans un framework d’agents IA open source","description":"Le contexte : OGX, l’ex-Llama Stack","datePublished":"2026-10-01","inLanguage":"fr","url":"https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-un-framework-dagents-ia-open-source/","mainEntityOfPage":"https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-un-framework-dagents-ia-open-source/","image":"https://zakariakhchiche.github.io/og-image.png","author":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/"},"sameAs":["https://medium.com/@ZKHCHICHE/3-bugs-silencieux-dans-un-framework-dagents-ia-open-source-10a86cd31dff"]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>3 bugs silencieux dans un framework d’agents IA open source</h1>
+  <p class="muted">Le contexte : OGX, l’ex-Llama Stack</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-10-01">1 octobre 2026</time> · également publié sur <a href="https://medium.com/@ZKHCHICHE/3-bugs-silencieux-dans-un-framework-dagents-ia-open-source-10a86cd31dff">Medium</a></p>
+</header>
+<article>
+<p></p>
+<p>Un bug qui plante, on le voit tout de suite. Un bug qui renvoie un résultat plausible mais faux peut tourner des mois en production sans que personne ne s’en aperçoive.</p>
+<p>En auditant le code d’OGX, un framework open source pour construire des agents IA, j’en ai trouvé trois de ce type. Aucun ne lève d’erreur. Chacun fausse discrètement un résultat : la pertinence d’une recherche, un filtre de documents ou une facture de tokens.</p>
+<h2>Le contexte : OGX, l’ex-Llama Stack</h2>
+<p><a href="https://github.com/ogx-ai/ogx">OGX</a> est la suite du projet Llama Stack lancé par Meta. Il fournit les briques standard d’une application agentique : inférence, API Responses compatible OpenAI, bases vectorielles pour le RAG (Elasticsearch, pgvector, Qdrant…).</p>
+<p>Quand une équipe bâtit ses agents sur ce genre de socle, elle fait confiance à ces briques sans les relire. C’est justement là qu’un audit est utile : chercher ce qui marche « presque ».</p>
+<h2>Bug 1 : une lettre en trop qui désactive un réglage de recherche</h2>
+<p>La recherche hybride d’Elasticsearch fusionne une recherche par mots-clés et une recherche vectorielle (RRF). Le paramètre <code>rank_window_size</code> définit combien de candidats sont pris en compte dans cette fusion.</p>
+<p>Dans le code, la liste des paramètres autorisés contenait <code>rank_windows_size</code>, avec un « s » en trop. Résultat : le bon paramètre était jugé inconnu et supprimé en silence.</p>
+<pre><code># avant
+allowed_rrf_params = {"rank_constant", "rank_windows_size", "filter"}
+# après
+allowed_rrf_params = {"rank_constant", "rank_window_size", "filter"}</code></pre>
+<p>Concrètement, on demande <code>rank_window_size = 50</code> et Elasticsearch reçoit 10 (la valeur par défaut). Après correction, il reçoit bien 50.</p>
+<p>Un seul caractère à corriger. Le correctif est proposé dans la <a href="https://github.com/ogx-ai/ogx/pull/6697">pull request #6697</a>, fusionnée par les mainteneurs.</p>
+<h2>Bug 2 : des filtres pgvector qui ne trouvent jamais les booléens</h2>
+<p>Sur pgvector, on peut filtrer les documents sur leurs métadonnées, par exemple « publié = vrai ». Pour les filtres « dans la liste » (IN) et « hors de la liste » (NOT IN), le code convertissait chaque valeur en texte Python : <code>True</code> devenait <code>"True"</code>.</p>
+<p>Or PostgreSQL extrait la métadonnée JSON sous la forme <code>"true"</code>. Les deux ne correspondent jamais. Même problème pour un nombre stocké <code>2023.0</code> filtré sur <code>2023</code>.</p>
+<p>Testé sur une vraie base PostgreSQL 16, avec deux documents :</p>
+<pre><code>Filtre                  | Avant            | Après correction
+publié dans [vrai]      | aucun résultat   | document 0
+publié hors de [vrai]   | documents 0 et 1 | document 1
+année dans [2023]       | aucun résultat   | document 1</code></pre>
+<p>Le pire cas est le filtre d’exclusion : il laisse passer des documents qu’on voulait écarter. Dans un RAG, cela veut dire des sources non publiées ou obsolètes injectées dans le contexte du modèle. Le correctif applique aux listes le même typage que les comparaisons simples.</p>
+<p>Le correctif est proposé dans la <a href="https://github.com/ogx-ai/ogx/pull/6698">pull request #6698</a>, fusionnée par les mainteneurs.</p>
+<h2>Bug 3 : un compteur de tokens qui oublie les appels précédents</h2>
+<p>Un agent fait souvent plusieurs appels au modèle pour une seule réponse, par exemple quand il utilise des outils. L’API Responses additionne bien les tokens d’entrée et de sortie de tous ces appels.</p>
+<p>Mais deux compteurs détaillés étaient écrasés au lieu d’être additionnés : les tokens servis depuis le cache et les tokens de raisonnement. Seul le dernier appel comptait.</p>
+<pre><code>Exemple sur 2 appels               | Avant | Après correction
+Tokens en cache (80 + 120)         | 120   | 200
+Tokens de raisonnement (10 + 15)   | 15    | 25</code></pre>
+<p>Ce sont précisément les deux chiffres qui servent à piloter les coûts. Le cache baisse la facture, le raisonnement l’augmente. Un tableau de bord basé sur ces valeurs sous-estimait les deux.</p>
+<p>Le bug est signalé dans l’<a href="https://github.com/ogx-ai/ogx/issues/6699">issue #6699</a>, résolue, avec le correctif proposé (<a href="https://github.com/Zakariakhchiche/ogx/commit/e8177d053f2a72a81909a5b9d9c21ede5ba895ee">commit e8177d0</a>).</p>
+<h2>Ce que ça change pour une équipe qui industrialise des agents</h2>
+<ol><li><strong>Testez ce qui est silencieux.</strong> Un paramètre ignoré ou un filtre qui ne filtre pas ne déclenche aucune alerte. Il faut un test qui vérifie la valeur réellement envoyée, pas seulement l’absence d’erreur.</li>
+<li><strong>Testez avec de vrais types.</strong> Les bugs 2 et 3 n’apparaissent qu’avec des booléens, des décimaux ou plusieurs appels enchaînés. Les jeux de test « chaînes de caractères et un seul appel » passent à côté.</li>
+<li><strong>Ne faites pas une confiance aveugle au socle.</strong> Un framework open source populaire reste du code écrit vite. Relire les briques critiques (filtrage, coûts) avant la mise en production coûte quelques heures.</li>
+<li><strong>Contribuez en retour.</strong> Chaque correctif fait ici fait quelques lignes. Le proposer en amont profite à tous ceux qui utilisent le même socle.</li>
+</ol>
+<p>Vous construisez des agents sur OGX ou un autre framework ? Je serais curieux de savoir quels bugs silencieux vous avez croisés.</p>
+<p>Pour en parler ou faire auditer vos propres agents : <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a> · Medium · <a href="https://zakariakhchiche.github.io/">https://zakariakhchiche.github.io/</a></p>
+<p>Vous formez vos équipes à l'IA générative ? J'anime avec Spar-x (organisme certifié Qualiopi, formations finançables par votre OPCO) une formation Copilot Studio : <a href="https://zakariakhchiche.github.io/formation-copilot-studio/">https://zakariakhchiche.github.io/formation-copilot-studio/</a> et j'ai publié un kit AI Act article 4 gratuit : <a href="https://zakariakhchiche.github.io/kit-ai-act/">https://zakariakhchiche.github.io/kit-ai-act/</a></p>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
