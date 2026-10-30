@@ -4,15 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mistral hors ligne : quand le tokenizer est sur le disque mais introuvable – Zakaria Khchiche</title>
-<meta name="description" content="Qui est concerné">
+<meta name="description" content="Sur un serveur isolé d'Internet, mistral-common ne trouvait pas un tokenizer pourtant téléchargé : la cause et le correctif fusionné par Mistral AI.">
 <link rel="canonical" href="https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Mistral hors ligne : quand le tokenizer est sur le disque mais introuvable">
-<meta property="og:description" content="Qui est concerné">
+<meta property="og:description" content="Sur un serveur isolé d'Internet, mistral-common ne trouvait pas un tokenizer pourtant téléchargé : la cause et le correctif fusionné par Mistral AI.">
 <meta property="og:url" content="https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/">
 <meta property="og:site_name" content="Zakaria Khchiche">
 <meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Mistral hors ligne : quand le tokenizer est sur le disque mais introuvable","description":"Qui est concerné","datePublished":"2026-10-05","inLanguage":"fr","url":"https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/","mainEntityOfPage":"https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/","image":"https://zakariakhchiche.github.io/og-image.png","author":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/"},"sameAs":["https://medium.com/@ZKHCHICHE/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable-b6d30b0bb78a"]}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BlogPosting","headline":"Mistral hors ligne : quand le tokenizer est sur le disque mais introuvable","description":"Sur un serveur isolé d'Internet, mistral-common ne trouvait pas un tokenizer pourtant téléchargé : la cause et le correctif fusionné par Mistral AI.","datePublished":"2026-10-05","inLanguage":"fr","url":"https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/","mainEntityOfPage":"https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/","image":"https://zakariakhchiche.github.io/og-image.png","author":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/"},"sameAs":["https://medium.com/@ZKHCHICHE/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable-b6d30b0bb78a"]}</script>
 <style>
 pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
 :root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
@@ -35,7 +35,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
 <header>
   <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
   <h1>Mistral hors ligne : quand le tokenizer est sur le disque mais introuvable</h1>
-  <p class="muted">Qui est concerné</p>
+  <p class="muted">Sur un serveur isolé d'Internet, mistral-common ne trouvait pas un tokenizer pourtant téléchargé : la cause et le correctif fusionné par Mistral AI.</p>
   <p class="muted">Zakaria Khchiche · <time datetime="2026-10-05">5 octobre 2026</time> · également publié sur <a href="https://medium.com/@ZKHCHICHE/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable-b6d30b0bb78a">Medium</a></p>
 </header>
 <article>
