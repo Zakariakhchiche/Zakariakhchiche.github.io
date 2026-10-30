@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mistral Large 4 en poids ouverts : peut-on le déployer sur ses propres serveurs ? – Zakaria Khchiche</title>
+<meta name="description" content="Mistral a publié les poids de Large 4 le 29 octobre 2026 : taille, matériel nécessaire, licence et ce qu&#x27;il faut prévoir pour un déploiement en entreprise.">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/mistral-large-4-poids-ouverts-deployer-sur-ses-serveurs/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Mistral Large 4 en poids ouverts : peut-on le déployer sur ses propres serveurs ?">
+<meta property="og:description" content="Mistral a publié les poids de Large 4 le 29 octobre 2026 : taille, matériel nécessaire, licence et ce qu&#x27;il faut prévoir pour un déploiement en entreprise.">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/mistral-large-4-poids-ouverts-deployer-sur-ses-serveurs/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Mistral Large 4 en poids ouverts : peut-on le déployer sur ses propres serveurs ?", "description": "Mistral a publié les poids de Large 4 le 29 octobre 2026 : taille, matériel nécessaire, licence et ce qu'il faut prévoir pour un déploiement en entreprise.", "datePublished": "2026-10-30", "dateModified": "2026-10-30", "inLanguage": "fr", "url": "https://zakariakhchiche.github.io/articles/mistral-large-4-poids-ouverts-deployer-sur-ses-serveurs/", "mainEntityOfPage": "https://zakariakhchiche.github.io/articles/mistral-large-4-poids-ouverts-deployer-sur-ses-serveurs/", "image": "https://zakariakhchiche.github.io/og-image.png", "author": {"@type": "Person", "@id": "https://zakariakhchiche.github.io/#person", "name": "Zakaria Khchiche", "url": "https://zakariakhchiche.github.io/"}, "about": ["Mistral Large 4", "IA souveraine", "LLM open weights", "Mise en production de LLM"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Mistral Large 4 est-il gratuit en usage commercial ?", "acceptedAnswer": {"@type": "Answer", "text": "Oui pour un usage interne et pour l'intégrer dans un produit : la Mistral Ecosystem Open-Weight License n'impose ni seuil de chiffre d'affaires ni plafond d'utilisateurs. Une licence commerciale séparée est exigée pour vendre l'accès au modèle comme un service (API ou inférence pour des tiers)."}}, {"@type": "Question", "name": "Quel matériel faut-il pour faire tourner Mistral Large 4 ?", "acceptedAnswer": {"@type": "Answer", "text": "En bf16, les poids pèsent environ 1,06 To et demandent plus de huit GPU de 141 Go une fois le cache réservé. La version NVFP4 (610 Go) tourne selon Mistral sur quatre GPU Nvidia B200 ou B300."}}]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>Mistral Large 4 en poids ouverts : peut-on le déployer sur ses propres serveurs ?</h1>
+  <p class="muted">Ce que la publication des poids change pour une entreprise qui veut garder ses données chez elle, et ce qu'il faut prévoir avant d'y croire.</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-10-30">30 octobre 2026</time></p>
+</header>
+<article>
+<p><strong>En bref</strong> : le 29 octobre 2026, Mistral AI a publié sur Hugging Face les poids de Mistral Large 4, son modèle phare. Une entreprise peut désormais l'héberger sur ses propres serveurs, sans envoyer ses données à une API. C'est possible, mais lourd : il faut quatre à huit GPU de dernière génération, et la licence demande un accord commercial dès qu'on vend l'accès au modèle à des tiers.</p>
+<h2>Ce qui a été publié</h2>
+<ul>
+<li><strong>Dépôt</strong> : <code>mistralai/Mistral-Large-4-1T-A52B</code>, plus une variante quantifiée <code>-NVFP4</code>, en accès libre (sans formulaire).</li>
+<li><strong>Taille</strong> : environ 1 050 milliards de paramètres, dont 52 milliards actifs par jeton (architecture à mélange d'experts : 128 experts, 4 actifs, plus un expert partagé).</li>
+<li><strong>Capacités</strong> : texte et images en entrée, texte en sortie, contexte annoncé à 1 million de jetons, effort de raisonnement réglable.</li>
+<li><strong>Position</strong> : selon Artificial Analysis, le meilleur modèle à poids ouverts développé hors de Chine.</li>
+</ul>
+<h2>Le matériel : le vrai sujet</h2>
+<p>Les poids pèsent environ 1,06 To en bf16 et 610 Go en NVFP4. La recette vLLM publiée utilise huit GPU en parallélisme tensoriel. La version NVFP4 tourne, selon Mistral, sur quatre GPU Nvidia B200 ou B300 (architecture Blackwell). Ce n'est donc pas un modèle de poste de travail ni de petit serveur : c'est un projet d'infrastructure, à comparer au coût de l'API.</p>
+<h2>La licence : libre, avec une exception</h2>
+<p>La <em>Mistral Ecosystem Open-Weight License</em> est une version modifiée de la licence MIT. L'usage interne, l'usage commercial et l'intégration dans un produit sont libres, sans seuil de chiffre d'affaires. En revanche, <strong>vendre l'accès au modèle comme un service</strong> (API ou inférence pour des tiers qui contrôlent les requêtes) exige une licence commerciale séparée avec Mistral, y compris pour une société affiliée. Ce résumé n'est pas un avis juridique : faites relire le texte par votre service juridique.</p>
+<h2>Avant de mettre Large 4 en production</h2>
+<ol>
+<li><strong>Comparer au besoin réel</strong> : beaucoup de cas d'usage d'agents tournent très bien sur des modèles plus légers (Mistral Small, Ministral). Le plus gros modèle n'est utile que là où il fait la différence.</li>
+<li><strong>Dimensionner et servir</strong> : nombre de GPU, mémoire réservée au cache, autoscaling, supervision. Voir <a href="https://medium.com/@ZKHCHICHE/putting-an-open-source-llm-in-production-with-vllm-the-four-questions-that-matter-d0ae5f01a24d">les quatre questions pour servir un LLM ouvert avec vLLM</a>.</li>
+<li><strong>Tout faire fonctionner hors ligne</strong> : sur un serveur isolé d'Internet, chaque composant doit trouver ses fichiers localement. J'ai corrigé dans mistral-common un bug qui empêchait de charger un tokenizer pourtant présent sur le disque (<a href="/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/">article et correctif fusionné</a>).</li>
+<li><strong>Évaluer sur vos cas</strong> : un jeu de vraies questions avec réponses attendues, rejoué contre Large 4, un modèle plus petit et l'API, avant de choisir.</li>
+<li><strong>Remettre des garde-fous</strong> : en auto-hébergement, les protections de l'API Mistral ne s'appliquent pas. Mistral signale lui-même un risque d'usage offensif.</li>
+</ol>
+<h2>À retenir</h2>
+<p>L'IA souveraine devient une option crédible pour les organisations qui ne peuvent pas envoyer leurs données à une API. Mais « télécharger les poids » n'est que le début : le coût du matériel, la licence et l'industrialisation décident si le projet passe en production.</p>
+<p><em>Zakaria Khchiche, Tech Lead Data &amp; IA freelance à Paris, plus de 200 agents IA en production, contributeur à Mistral AI (mistral-common) et à Microsoft Agent Framework. <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="/agents-ia-production/">Passer un agent IA du POC à la production</a> · <a href="/contact/">Contact</a></em></p>
+<h2>Sources</h2>
+<ul>
+<li><a href="https://huggingface.co/mistralai/Mistral-Large-4-1T-A52B">Fiche du modèle sur Hugging Face</a></li>
+<li><a href="https://www.orcarouter.ai/blog/mistral-large-4-open-weights-licence">OrcaRouter : poids, taille et licence de Mistral Large 4</a></li>
+<li><a href="https://dev.to/gabrielanhaia/mistral-large-4s-1t-weights-are-out-serve-it-as-an-api-to-others-and-you-need-a-license-1pkc">Lecture de la licence (DEV Community)</a></li>
+</ul>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
