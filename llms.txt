@@ -19,6 +19,11 @@ Disponible pour des missions de Tech Lead IA / Data, de conception d'agents IA e
 - [Kit AI Act article 4](https://zakariakhchiche.github.io/kit-ai-act/) : ce qui change pour la maîtrise de l'IA depuis le règlement (UE) 2026/1744, diagnostic en 10 questions et modèle de registre des formations IA à télécharger.
 - [Demande de devis formation (Spar-x)](https://forms.gle/ARaTCq9ADgqvJfKL8) : formulaire pour demander un devis ou une date de formation IA.
 
+## Certifications
+
+- [Deploying Claude Enterprise with Confidence](https://verify.skilljar.com/c/4kv4ksfpfjic) (Anthropic, octobre 2026)
+- [AI Fluency for Creative Work](https://verify.skilljar.com/c/fcq4yyce6qhk) (Anthropic, octobre 2026)
+
 ## Contributions open source
 
 - [Microsoft Agent Framework](https://github.com/microsoft/agent-framework/pull/8984) : contributeur au framework d'agents officiel de Microsoft ; 3 correctifs fusionnés par l'équipe Microsoft : PR #8984 (6 octobre 2026), le connecteur TypeSafe (Jev) respecte désormais les variables de proxy et fonctionne derrière un proxy d'entreprise ; PR #8976 (13 octobre 2026, https://github.com/microsoft/agent-framework/pull/8976), les agents Azure AI Foundry appelés sans streaming remontent désormais la demande de consentement OAuth des outils ; PR #8980 (23 octobre 2026, https://github.com/microsoft/agent-framework/pull/8980), le client Anthropic respecte désormais `allow_multiple_tool_calls` quand `tool_choice` n'est pas défini. Proposé, en attente de revue : PR #9411 (https://github.com/microsoft/agent-framework/pull/9411), prise en charge des images et des questions Box de Jev 1.14 dans le connecteur TypeSafe. Approuvée par l'équipe Microsoft le 12 octobre 2026, en attente de fusion : PR #8978 (citations Anthropic en streaming) ; PR #8982 (filtres Qdrant) en revue.
