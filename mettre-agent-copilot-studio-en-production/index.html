@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Comment mettre un agent Copilot Studio en production (guide pas à pas) – Zakaria Khchiche</title>
+<meta name="description" content="Mettre un agent Copilot Studio en production en 8 étapes : environnements gérés, solutions, Git, jeu de référence et évaluation, DLP, pipelines Power Platform, supervision, maintenance.">
+<link rel="canonical" href="https://zakariakhchiche.github.io/mettre-agent-copilot-studio-en-production/">
+<meta property="og:title" content="Comment mettre un agent Copilot Studio en production (guide pas à pas) – Zakaria Khchiche">
+<meta property="og:description" content="Mettre un agent Copilot Studio en production en 8 étapes : environnements gérés, solutions, Git, jeu de référence et évaluation, DLP, pipelines Power Platform, supervision, maintenance.">
+<meta property="og:url" content="https://zakariakhchiche.github.io/mettre-agent-copilot-studio-en-production/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "TechArticle", "headline": "Comment mettre un agent Copilot Studio en production", "description": "Mettre un agent Copilot Studio en production en 8 étapes : environnements gérés, solutions, Git, jeu de référence et évaluation, DLP, pipelines Power Platform, supervision, maintenance.", "url": "https://zakariakhchiche.github.io/mettre-agent-copilot-studio-en-production/", "mainEntityOfPage": "https://zakariakhchiche.github.io/mettre-agent-copilot-studio-en-production/", "inLanguage": "fr", "datePublished": "2026-11-02", "dateModified": "2026-11-02", "author": {"@type": "Person", "name": "Zakaria Khchiche", "jobTitle": "Tech Lead Data & IA", "url": "https://zakariakhchiche.github.io/", "sameAs": [ "https://www.linkedin.com/in/zakariakhchiche/", "https://www.malt.fr/profile/zakariakhchiche", "https://medium.com/@ZKHCHICHE", "https://github.com/Zakariakhchiche", "https://dev.to/zakaria_khchiche_490919ed"]}, "about": "Microsoft Copilot Studio", "isPartOf": {"@type": "Book", "name": "Agents Copilot en production", "url": "https://zakariakhchiche.github.io/livre/", "author": {"@type": "Person", "name": "Zakaria Khchiche"}}}
+</script>
+<script type="application/ld+json">
+{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "Combien d'environnements faut-il pour mettre un agent Copilot Studio en production ?", "acceptedAnswer": {"@type": "Answer", "text": "Trois : développement, test et production, avec le test et la production en environnements gérés. L'environnement par défaut est verrouillé pour éviter la prolifération des agents."}}, {"@type": "Question", "name": "Qu'est-ce qu'une solution gérée dans Copilot Studio ?", "acceptedAnswer": {"@type": "Answer", "text": "Une version scellée de la solution Power Platform qui contient l'agent. Elle ne se modifie pas dans l'environnement cible : toute correction repasse par le développement et le pipeline, ce qui garantit qu'aucune modification n'échappe au jeu de référence."}}, {"@type": "Question", "name": "Comment tester un agent Copilot Studio avant de le publier ?", "acceptedAnswer": {"@type": "Answer", "text": "Avec un jeu de questions de référence (questions fréquentes, difficiles et hors périmètre) rejoué dans l'évaluation d'agent intégrée à Copilot Studio, avec des seuils de réussite. Aucune publication sans seuil atteint."}}, {"@type": "Question", "name": "Peut-on corriger un agent directement en production ?", "acceptedAnswer": {"@type": "Answer", "text": "Non. Si c'est urgent, dépubliez le sujet concerné, puis corrigez en développement et redéployez par le pipeline. Les corrections directes créent des régressions invisibles et des environnements qui divergent."}}, {"@type": "Question", "name": "Comment suivre un agent Copilot Studio après sa mise en production ?", "acceptedAnswer": {"@type": "Answer", "text": "Avec l'analytique de Copilot Studio, Application Insights et les journaux de vos API, en suivant chaque mois six indicateurs : score sur le jeu de référence, taux de résolution, d'escalade et d'abandon, retours négatifs et crédits par session résolue."}}]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6;--c:#1f8a70;
+--f-display:"Sora",system-ui,sans-serif;--f-body:"IBM Plex Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff;--c:#4fc3a1}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.015em}
+h2{font-size:1.3rem}h3{font-size:1rem}
+p{margin:0;max-width:70ch}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.08rem}
+header,section{display:grid;gap:12px}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:500 .88rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 14px;text-decoration:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:10px;padding:16px;display:grid;gap:8px;align-content:start}
+.card p{font-size:.92rem;color:var(--muted)}
+ul{margin:0;padding-left:20px}li{margin:4px 0}
+nav.top{font-family:var(--f-mono);font-size:.82rem;display:flex;flex-wrap:wrap;gap:6px 14px}
+footer{color:var(--muted);font-size:.85rem}
+details{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px 16px}
+summary{font-weight:600;cursor:pointer}
+details p{margin-top:8px;color:var(--muted)}
+.meta{font-size:.88rem;color:var(--muted)}
+.note{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:12px 14px}
+.table{overflow-x:auto}
+table{border-collapse:collapse;width:100%;font-size:.92rem;background:var(--surface)}
+th,td{border:1px solid var(--line);padding:8px 10px;text-align:left;vertical-align:top}
+th{font-family:var(--f-display);font-weight:500}
+ul.check{list-style:none;padding-left:0}ul.check li::before{content:"\2610  ";color:var(--c)}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="top"><a href="/">← Zakaria Khchiche</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-ia-generative/">Formation IA générative</a><a href="/formation-copilot-studio/">Formation Copilot Studio</a><a href="/kit-ai-act/">Kit AI Act</a></nav>
+<header>
+  <span class="eyebrow">Copilot Studio · ALM · Évaluation · Gouvernance</span>
+  <h1>Comment mettre un agent Copilot Studio en production</h1>
+  <p class="lede">Un agent Copilot Studio en production se déploie comme un logiciel : construit en développement, validé en test, publié en production par un pipeline, et jamais modifié directement en production. Voici la méthode pas à pas que j'applique, tirée des chapitres 8, 9 et 11 de mon livre <a href="/livre/">Agents Copilot en production</a>.</p>
+  <p class="meta">Par <a href="/">Zakaria Khchiche</a>, Tech Lead Data &amp; IA, plus de 200 agents IA en production chez SUEZ · Mis à jour le <time datetime="2026-11-02">2 novembre 2026</time></p>
+</header>
+
+<section>
+  <h2>Les 8 étapes en résumé</h2>
+  <ol>
+    <li><a href="#environnements">Préparer trois environnements gérés</a> : développement, test, production.</li>
+    <li><a href="#solution">Ranger l'agent dans sa solution</a>, avec références de connexion et variables d'environnement.</li>
+    <li><a href="#git">Relier l'environnement de développement à Git</a>.</li>
+    <li><a href="#evaluation">Construire le jeu de référence</a> et l'évaluation intégrée de Copilot Studio.</li>
+    <li><a href="#dlp">Configurer les stratégies DLP et les droits d'accès</a>.</li>
+    <li><a href="#pipeline">Déployer par un pipeline Power Platform</a>, avec approbation.</li>
+    <li><a href="#observer">Observer l'agent en production</a> : analytique, Application Insights, journaux.</li>
+    <li><a href="#maintenance">Tenir le rituel de maintenance mensuel</a>, et savoir retirer un agent.</li>
+  </ol>
+</section>
+
+<section id="environnements">
+  <h2>1. Préparer trois environnements gérés</h2>
+  <p>Un environnement Power Platform est un espace isolé, avec ses agents, ses données Dataverse, ses connexions et ses règles. La stratégie d'environnements est la première décision de gouvernance.</p>
+  <div class="table"><table>
+    <thead><tr><th>Environnement</th><th>Qui y travaille</th><th>Ce qu'on y fait</th><th>Type de solution</th></tr></thead>
+    <tbody>
+      <tr><td>Développement</td><td>Makers, développeurs</td><td>Construire, itérer, tester à la main</td><td>Non gérée, reliée à Git</td></tr>
+      <tr><td>Test</td><td>Propriétaire métier, testeurs</td><td>Jeu de référence, recette, tests de charge</td><td>Gérée</td></tr>
+      <tr><td>Production</td><td>Utilisateurs</td><td>Service réel, suivi</td><td>Gérée</td></tr>
+    </tbody>
+  </table></div>
+  <ul>
+    <li><strong>Environnement par défaut verrouillé</strong>, avec une création d'agents limitée, pour éviter la prolifération.</li>
+    <li><strong>Environnements gérés</strong> (<em>managed environments</em>) pour le test et la production : les pipelines de déploiement les exigent comme cibles.</li>
+    <li><strong>Groupes d'environnements</strong> pour appliquer les mêmes règles à tous les environnements d'un même type. Ces règles ne peuvent pas être assouplies environnement par environnement.</li>
+  </ul>
+</section>
+
+<section id="solution">
+  <h2>2. Ranger l'agent dans sa solution</h2>
+  <p>Dans Copilot Studio, un agent est rangé dans une solution Power Platform, avec ses sujets, ses flux, ses connexions et ses variables. Définissez une <strong>solution préférée</strong> par projet, pour que tous les composants créés y aillent. Une solution gérée est une version scellée : elle ne se modifie pas dans l'environnement cible, et toute correction repasse par le développement et le pipeline.</p>
+  <ul>
+    <li><strong>Références de connexion et variables d'environnement</strong> pour tout ce qui change d'un environnement à l'autre : URL SharePoint, identifiants d'API, adresses de serveurs MCP. Jamais de valeur codée en dur.</li>
+    <li><strong>Une solution par agent ou par famille cohérente</strong>, pas une solution géante pour tout le service.</li>
+  </ul>
+</section>
+
+<section id="git">
+  <h2>3. Relier le développement à Git</h2>
+  <p>L'intégration Git de Power Platform relie un environnement de développement à un dépôt Azure DevOps ou GitHub. Chaque modification devient un commit lisible : instructions, sujets en YAML, flux. Vous savez qui a changé quoi et quand, et vous pouvez comparer deux versions quand le score du jeu de référence baisse. Microsoft recommande de l'utiliser en développement seulement : les autres environnements reçoivent des solutions gérées par pipeline.</p>
+</section>
+
+<section id="evaluation">
+  <h2>4. Construire le jeu de référence et l'évaluation</h2>
+  <p>Un agent en production a deux mesures : une <strong>évaluation hors ligne</strong>, sur un jeu de questions de référence rejoué à chaque changement, et un <strong>suivi en ligne</strong>, sur les conversations réelles. Le jeu de questions ne peut venir que de vous.</p>
+  <div class="table"><table>
+    <thead><tr><th>Catégorie</th><th>Départ</th><th>Cible à 3 mois</th><th>Pourquoi</th></tr></thead>
+    <tbody>
+      <tr><td>Questions fréquentes, telles que posées</td><td>35</td><td>80 à 100</td><td>Le cœur du service</td></tr>
+      <tr><td>Questions difficiles : ambiguës, multi-documents, avec exceptions</td><td>15</td><td>30 à 40</td><td>Là où les versions se distinguent</td></tr>
+      <tr><td>Questions hors périmètre ou sans réponse</td><td>10</td><td>20 à 30</td><td>Vérifier l'abstention</td></tr>
+    </tbody>
+  </table></div>
+  <p>Depuis mars 2026, Copilot Studio propose en version générale une <strong>évaluation d'agent</strong> intégrée : jeux de test (questions simples ou conversations complètes), méthode de notation par jeu (qualité générale, comparaison de sens, utilisation d'outils, mot-clé ou correspondance exacte, sécurité du contenu, critère personnalisé) et seuils de réussite configurables. C'est l'outil que je recommande en premier : il ne demande aucun code et tourne là où l'agent est construit.</p>
+  <p><strong>La porte de publication</strong> : aucune publication en production sans jeu de référence rejoué et seuil atteint. Cela vaut pour un changement d'instructions, de source, d'outil ou de modèle. Gardez un sous-ensemble de questions que l'équipe de construction ne voit pas, et renouvelez-le chaque trimestre avec des questions réelles.</p>
+</section>
+
+<section id="dlp">
+  <h2>5. Configurer les stratégies DLP et les droits d'accès</h2>
+  <p>Les stratégies de prévention de perte de données (DLP) s'appliquent à Copilot Studio sans possibilité de s'y soustraire. Elles classent les connecteurs en trois groupes (métier, non métier, bloqués) et peuvent bloquer des capacités propres aux agents : conversation sans authentification, certaines sources de connaissances, requêtes HTTP, certains canaux. Un agent qui viole une stratégie ne peut pas être publié.</p>
+  <p>Ma configuration de départ pour la production : <strong>authentification obligatoire, web public bloqué sauf liste validée, connecteurs HTTP bloqués sauf besoin justifié</strong>.</p>
+  <p>Le risque n°1 reste le partage excessif : un dossier SharePoint ouvert à trop de monde, que l'agent trouve en une question. Lancez les évaluations du partage excessif de Purview DSPM for AI avant de brancher SharePoint, corrigez les droits, et branchez des dossiers dédiés plutôt que des sites entiers.</p>
+</section>
+
+<section id="pipeline">
+  <h2>6. Déployer par un pipeline Power Platform</h2>
+  <p>Les pipelines Power Platform déploient une solution d'un environnement à l'autre, avec historique, sauvegarde automatique et retour arrière possible. Ils permettent des déploiements délégués avec approbation : le maker demande, un responsable valide. Les environnements cibles doivent être gérés, et Microsoft recommande d'héberger les pipelines dans un environnement de production. Depuis octobre 2026, un déploiement vers une cible non gérée déclenche une alerte à l'administrateur, qui dispose de 30 jours pour la passer en environnement géré, prolongeables une fois ; ensuite, les déploiements vers cette cible sont bloqués. Les équipes déjà outillées peuvent passer par les Power Platform Build Tools dans Azure DevOps ou GitHub Actions.</p>
+  <h3>La chaîne complète d'un changement</h3>
+  <ol>
+    <li>Le maker modifie l'agent en développement ; la modification est versionnée dans Git.</li>
+    <li>Il rejoue le jeu de référence en développement.</li>
+    <li>Il demande le déploiement en test via le pipeline.</li>
+    <li>Le propriétaire métier rejoue le jeu complet en test et vérifie les questions sensibles.</li>
+    <li>Si le seuil est atteint, le déploiement en production est approuvé.</li>
+    <li>Une note de version d'une ligne est publiée pour les utilisateurs si le comportement change.</li>
+  </ol>
+  <p>Pour un petit changement, cette chaîne prend moins d'une heure. Elle évite des jours de correction en urgence. L'agent est ensuite publié sur son canal, Teams ou Microsoft 365 Copilot, avec une mention indiquant aux utilisateurs qu'ils échangent avec une IA.</p>
+  <p class="note"><strong>Piège fréquent.</strong> Corriger « juste une phrase » directement dans l'agent publié parce que c'est urgent. C'est ainsi que commencent les régressions invisibles et les environnements qui divergent. Si c'est vraiment urgent, dépubliez le sujet concerné, puis corrigez par la chaîne normale.</p>
+</section>
+
+<section id="observer">
+  <h2>7. Observer l'agent en production</h2>
+  <ul>
+    <li><strong>L'analytique de Copilot Studio</strong> : sessions, utilisateurs actifs, satisfaction et résultat de chaque session (résolue, escaladée, abandonnée).</li>
+    <li><strong>Application Insights</strong> : télémétrie détaillée, erreurs d'outils, temps de réponse et alertes.</li>
+    <li><strong>Les journaux de vos API et serveurs MCP</strong> : les actions réellement exécutées. Propagez l'identifiant de conversation jusqu'à vos API pour tout corréler.</li>
+  </ul>
+  <div class="table"><table>
+    <thead><tr><th>Indicateur suivi chaque mois</th><th>Signal d'alerte</th></tr></thead>
+    <tbody>
+      <tr><td>Score sur le jeu de référence</td><td>Échec d'une question critique, ou baisse répétée</td></tr>
+      <tr><td>Taux de résolution</td><td>Stagnation après 3 mois</td></tr>
+      <tr><td>Taux d'escalade</td><td>Hausse soudaine</td></tr>
+      <tr><td>Taux d'abandon</td><td>Supérieur au taux de résolution</td></tr>
+      <tr><td>Retours négatifs</td><td>Concentrés sur un thème</td></tr>
+      <tr><td>Crédits par session résolue</td><td>Hausse sans gain de qualité</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<section id="maintenance">
+  <h2>8. Tenir le rituel de maintenance mensuel</h2>
+  <p>C'est la partie la plus négligée, et celle qui décide de la durée de vie de l'agent. Une heure par mois, avec le propriétaire métier et le maker : indicateurs, retours négatifs à ajouter au jeu de référence, questions sans réponse, documents changés ou expirés, modèles annoncés comme retirés, dérive du coût par conversation résolue.</p>
+  <p>Un agent qui reste sous ses seuils de valeur plusieurs mois de suite, malgré les corrections, doit être retiré : dépublier, archiver sa solution et son jeu de référence, prévenir les utilisateurs, réorienter les demandes.</p>
+</section>
+
+<section>
+  <h2>Checklist avant la mise en production</h2>
+  <ul class="check">
+    <li>Trois environnements existent, test et production en environnements gérés.</li>
+    <li>L'agent a sa solution préférée, avec références de connexion et variables d'environnement.</li>
+    <li>L'environnement de développement est relié à Git.</li>
+    <li>Le jeu de référence couvre questions fréquentes, difficiles et hors périmètre, avec des seuils dans l'évaluation de Copilot Studio.</li>
+    <li>Les stratégies DLP sont configurées pour la production et le partage excessif a été vérifié.</li>
+    <li>Un pipeline avec approbation déploie vers le test et la production.</li>
+    <li>Application Insights est branché, avec des alertes.</li>
+    <li>Le rituel mensuel est inscrit dans les agendas.</li>
+  </ul>
+</section>
+
+<section>
+  <h2>Aller plus loin</h2>
+  <div class="grid">
+    <article class="card"><h3><a href="/livre/">Le livre « Agents Copilot en production »</a></h3><p>100 pages gratuites : cadrage, conception, connaissances, évaluation, sécurité, coût, ALM, adoption et une étude de cas avec code open source.</p></article>
+    <article class="card"><h3><a href="/copilot-studio/">Mission Copilot Studio</a></h3><p>Faire concevoir ou débloquer votre agent par un Tech Lead freelance à Paris.</p></article>
+    <article class="card"><h3><a href="/formation-copilot-studio/">Formation Copilot Studio</a></h3><p>Former vos équipes avec Spar-x, organisme certifié Qualiopi, finançable par votre OPCO, 20 participants maximum.</p></article>
+    <article class="card"><h3><a href="/agents-ia-production/">Agents IA en production, toutes plateformes</a></h3><p>La checklist en 8 points pour Azure AI Foundry, Copilot Studio ou des modèles auto-hébergés.</p></article>
+  </div>
+  <p>En anglais : <a href="https://dev.to/zakaria_khchiche_490919ed/taking-a-copilot-studio-agent-to-production-the-6-steps-i-use-after-200-agents-26mn">Taking a Copilot Studio agent to production: the 6 steps I use after 200+ agents</a>.</p>
+</section>
+
+<section>
+  <h2>Questions fréquentes</h2>
+  <details><summary>Combien d'environnements faut-il pour mettre un agent Copilot Studio en production ?</summary><p>Trois : développement, test et production, avec le test et la production en environnements gérés. L'environnement par défaut est verrouillé pour éviter la prolifération des agents.</p></details>
+  <details><summary>Qu'est-ce qu'une solution gérée dans Copilot Studio ?</summary><p>Une version scellée de la solution Power Platform qui contient l'agent. Elle ne se modifie pas dans l'environnement cible : toute correction repasse par le développement et le pipeline, ce qui garantit qu'aucune modification n'échappe au jeu de référence.</p></details>
+  <details><summary>Comment tester un agent Copilot Studio avant de le publier ?</summary><p>Avec un jeu de questions de référence (questions fréquentes, difficiles et hors périmètre) rejoué dans l'évaluation d'agent intégrée à Copilot Studio, avec des seuils de réussite. Aucune publication sans seuil atteint.</p></details>
+  <details><summary>Peut-on corriger un agent directement en production ?</summary><p>Non. Si c'est urgent, dépubliez le sujet concerné, puis corrigez en développement et redéployez par le pipeline. Les corrections directes créent des régressions invisibles et des environnements qui divergent.</p></details>
+  <details><summary>Comment suivre un agent Copilot Studio après sa mise en production ?</summary><p>Avec l'analytique de Copilot Studio, Application Insights et les journaux de vos API, en suivant chaque mois six indicateurs : score sur le jeu de référence, taux de résolution, d'escalade et d'abandon, retours négatifs et crédits par session résolue.</p></details>
+</section>
+
+<section>
+  <h2>Votre agent Copilot Studio est prêt à passer en production ?</h2>
+  <p>Décrivez-moi l'agent, ses sources et ce qui bloque. Je vous réponds avec les points à traiter en priorité.</p>
+  <div class="links">
+    <a class="btn primary" href="https://www.malt.fr/profile/zakariakhchiche">Me confier une mission (Malt)</a>
+    <a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/">Échanger sur LinkedIn</a>
+  </div>
+</section>
+
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a> · <a href="https://medium.com/@ZKHCHICHE">Medium</a> · <a href="https://github.com/Zakariakhchiche">GitHub</a> · <a href="https://www.youtube.com/@zakariakhchiche">YouTube</a></footer>
+</div>
+</body>
+</html>
