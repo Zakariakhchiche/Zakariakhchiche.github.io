@@ -1,0 +1,151 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Réduire la facture Claude Code sans perdre en qualité : rightsize, la méthode mesurée d&#x27;Ayoub Hammoudi – Zakaria Khchiche</title>
+<meta name="description" content="Les mesures d&#x27;Ayoub Hammoudi sur 100 exécutions de Claude Code : au-delà de l&#x27;effort medium, la qualité n&#x27;augmente plus et le coût monte jusqu&#x27;à 9 fois. Ce que fait son plugin open source rightsize.">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/reduire-facture-claude-code-rightsize-ayoub-hammoudi/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Réduire la facture Claude Code sans perdre en qualité : rightsize, la méthode mesurée d&#x27;Ayoub Hammoudi">
+<meta property="og:description" content="Les mesures d&#x27;Ayoub Hammoudi sur 100 exécutions de Claude Code : au-delà de l&#x27;effort medium, la qualité n&#x27;augmente plus et le coût monte jusqu&#x27;à 9 fois. Ce que fait son plugin open source rightsize.">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/reduire-facture-claude-code-rightsize-ayoub-hammoudi/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Réduire la facture Claude Code sans perdre en qualité : rightsize, la méthode mesurée d'Ayoub Hammoudi", "description": "Les mesures d'Ayoub Hammoudi sur 100 exécutions de Claude Code : au-delà de l'effort medium, la qualité n'augmente plus et le coût monte jusqu'à 9 fois. Ce que fait son plugin open source rightsize.", "datePublished": "2026-11-03", "dateModified": "2026-11-03", "inLanguage": "fr", "url": "https://zakariakhchiche.github.io/articles/reduire-facture-claude-code-rightsize-ayoub-hammoudi/", "mainEntityOfPage": "https://zakariakhchiche.github.io/articles/reduire-facture-claude-code-rightsize-ayoub-hammoudi/", "image": "https://zakariakhchiche.github.io/og-image.png", "author": {"@type": "Person", "@id": "https://zakariakhchiche.github.io/#person", "name": "Zakaria Khchiche", "url": "https://zakariakhchiche.github.io/"}, "mentions": [{"@type": "Person", "name": "Ayoub Hammoudi", "url": "https://www.linkedin.com/in/ayoubhammoudi/", "sameAs": ["https://www.linkedin.com/in/ayoubhammoudi/", "https://github.com/Ayoubhm07"]}, {"@type": "SoftwareSourceCode", "name": "rightsize", "codeRepository": "https://github.com/Ayoubhm07/rightsize", "license": "https://opensource.org/licenses/MIT", "author": {"@type": "Person", "name": "Ayoub Hammoudi", "url": "https://www.linkedin.com/in/ayoubhammoudi/", "sameAs": ["https://www.linkedin.com/in/ayoubhammoudi/", "https://github.com/Ayoubhm07"]}}, {"@type": "SoftwareSourceCode", "name": "spar-x-skills", "codeRepository": "https://github.com/spar-x-fr/spar-x-skills"}], "about": ["Claude Code", "coût des agents IA", "niveau d'effort", "rightsize"]}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "L'effort maximal de Claude Code améliore-t-il la qualité ?", "acceptedAnswer": {"@type": "Answer", "text": "Sur les 100 exécutions mesurées par Ayoub Hammoudi en octobre 2026, sur des tâches vérifiées par des tests, toutes réussissent dès l'effort le plus bas et l'effort au-delà de medium n'apporte rien de mesurable, alors que max coûte 3,7 à 9,3 fois high sur Opus 5.5."}}, {"@type": "Question", "name": "Qu'est-ce que rightsize ?", "acceptedAnswer": {"@type": "Answer", "text": "Un plugin open source pour Claude Code, créé par Ayoub Hammoudi, qui choisit le modèle, l'effort et les vérifications de chaque étape selon une règle : la qualité d'abord, l'économie ensuite. Licence MIT, installation : /plugin install rightsize --marketplace Ayoubhm07/rightsize."}}]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+.wrap>*{min-width:0}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>Réduire la facture Claude Code sans perdre en qualité : rightsize, la méthode mesurée d&#x27;Ayoub Hammoudi</h1>
+  <p class="muted">100 exécutions mesurées montrent que l&#x27;effort maximal coûte jusqu&#x27;à 9 fois plus pour le même résultat. rightsize, le plugin open source d&#x27;Ayoub Hammoudi, route chaque étape vers le bon modèle et le bon effort.</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-11-03">3 novembre 2026</time> · Méthode et mesures : <a href="https://www.linkedin.com/in/ayoubhammoudi/">Ayoub Hammoudi</a> (<a href="https://github.com/Ayoubhm07/rightsize">rightsize sur GitHub</a>)</p>
+</header>
+<article>
+<p><strong>En bref.</strong> Depuis la mi-septembre 2026, les quotas hebdomadaires de Claude Code ont baissé et les plaintes de quotas vidés en un jour se multiplient. rightsize, un plugin Claude Code créé par <strong>Ayoub Hammoudi</strong> (<a href="https://github.com/Ayoubhm07/rightsize">GitHub</a>, <a href="https://www.linkedin.com/in/ayoubhammoudi/">LinkedIn</a>), applique une règle simple : la qualité d'abord, l'économie ensuite. Ses mesures, publiées et reproductibles, montrent qu'au-delà de l'effort « medium », la qualité n'augmente plus sur des tâches vérifiables, alors que le coût, lui, peut être multiplié par 9.</p>
+<h2>Le problème : on paie la qualité au mauvais endroit</h2>
+<p>Un agent de code mal piloté coûte cher de deux façons. Soit il rend un travail approximatif qu'il faudra reprendre. Soit il dépense des tokens là où ça ne change rien : le plus gros modèle pour lire un fichier, toute la suite de tests pour une ligne modifiée, la même analyse refaite plusieurs fois.</p>
+<p>La réaction habituelle, « tout mettre sur le modèle le plus puissant, effort maximal », ne règle que le premier problème, et aggrave le second.</p>
+<h2>Ce que les mesures d'Ayoub Hammoudi montrent</h2>
+<p>Ayoub Hammoudi a mesuré, en octobre 2026, <strong>100 exécutions sans intervention</strong> de Claude Code, 3 par configuration, sur quatre tâches notées par des tests cachés ou un oracle : un correctif de parseur, six bugs subtils dans un cache, un algorithme de routage sous contraintes, et un moteur d'expressions régulières comparé à celui de Python sur 3 000 motifs aléatoires.</p>
+<p>Résultats :</p>
+<ul>
+<li><strong>Toutes les exécutions valides réussissent dès l'effort le plus bas</strong>, sur Haiku, Sonnet et Opus 5.5.</li>
+<li>Haiku, à l'effort le plus bas, a construit un moteur de regex identique à celui de Python sur les 3 000 cas, trois fois sur trois, pour 0,02 $.</li>
+<li>Au-dessus de « medium », l'effort n'apporte rien de mesurable sur ces tâches. Il augmente seulement le coût et le temps :</li>
+</ul>
+<div style="overflow-x:auto"><table>
+<thead>
+<tr>
+<th>Coût par rapport à « high », même modèle</th>
+<th>low</th>
+<th>medium</th>
+<th>xhigh</th>
+<th>max</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Sonnet 5.5</td>
+<td>0,4 à 0,6×</td>
+<td>0,5 à 0,8×</td>
+<td>1,4 à 1,9×</td>
+<td>5,0 à 8,1×</td>
+</tr>
+<tr>
+<td>Opus 5.5</td>
+<td>0,6 à 1,1×</td>
+<td>0,9 à 1,0×</td>
+<td>1,5 à 2,2×</td>
+<td>3,7 à 9,3× (4 à 7 fois plus lent)</td>
+</tr>
+</tbody>
+</table></div>
+<p>Sur un second banc de 19 exécutions, comparé à « Opus en high pour tout » :</p>
+<div style="overflow-x:auto"><table>
+<thead>
+<tr>
+<th>Tâche</th>
+<th>Référence</th>
+<th>rightsize</th>
+<th>Coût</th>
+<th>Réussite</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Trouver une valeur dans un dépôt, avec leurres</td>
+<td>0,118 $</td>
+<td>haiku/low 0,002 $</td>
+<td>−98 %</td>
+<td>2/2 contre 2/2</td>
+</tr>
+<tr>
+<td>Renommer dans plusieurs fichiers, ajouter des types</td>
+<td>0,104 $</td>
+<td>haiku/low 0,004 $</td>
+<td>−96 %</td>
+<td>2/2 contre 2/2</td>
+</tr>
+<tr>
+<td>Corriger un parseur face à des tests cachés</td>
+<td>0,130 $</td>
+<td>sonnet/medium 0,035 $</td>
+<td>−73 %</td>
+<td>2/2 contre 2/2</td>
+</tr>
+</tbody>
+</table></div>
+<p>Et pour les tests : 11,4 s pour la suite complète contre 0,7 s pour les seuls tests touchés par une modification d'un module.</p>
+<p><strong>Les limites, écrites par l'auteur lui-même :</strong> ces tâches sont bien spécifiées et vérifiables, là où un effort bas est le plus sûr ; rien ne mesure ici le travail ouvert (conception, revue), et les échantillons sont petits. Tout est reproductible avec le dossier <code>bench/</code> du dépôt.</p>
+<h2>Comment rightsize s'en sert</h2>
+<p>La leçon centrale : <strong>quand un test prouve le résultat, c'est le test qui garantit la qualité, pas l'effort.</strong> rightsize en tire des règles concrètes :</p>
+<ol>
+<li><strong>Noter chaque tâche</strong> sur quatre axes de 0 à 3 : périmètre, risque, ambiguïté, profondeur.</li>
+<li><strong>Choisir le modèle et l'effort</strong> à partir de cette note : une lecture ou une recherche va sur Haiku en effort bas, du code standard sur Sonnet en effort moyen, un bug à la cause inconnue ou un changement risqué sur Opus.</li>
+<li><strong>Démarrer un cran plus bas quand un contrôle existe</strong> (tests, oracle, compilateur), et monter seulement sur preuve : un test qui échoue deux fois, une revue qui trouve un défaut grave. Jamais par habitude.</li>
+<li><strong>Garder un effort élevé là où aucun contrôle n'existe</strong> : conception, revue, cadrage.</li>
+<li><strong>Tester ce que le changement touche</strong> pendant le travail, et la suite complète à la fin du sprint, avec un registre des passages complets.</li>
+<li><strong>Protéger le cache</strong> : ne pas changer de modèle en pleine session, ce qui réécrit tout le cache, et passer plutôt par des sous-agents.</li>
+</ol>
+<p>Le plugin complet contient la stratégie (<code>SKILL.md</code>), des playbooks d'expert par type de travail (bug, fonctionnalité, refactorisation, revue, migration, performance…), quatre agents spécialisés (<code>rs-scout</code>, <code>rs-verifier</code>, <code>rs-builder</code>, <code>rs-sage</code>), un script de tests ciblés, un audit de consommation qui lit vos transcriptions locales, et des hooks qui injectent les règles dans chaque session (environ 200 tokens, une fois) et dans chaque brief de sous-agent.</p>
+<h2>Pourquoi ça compte pour un dirigeant</h2>
+<p>La question n'est pas « quel modèle acheter », mais « quel niveau d'effort pour quelle étape ». Une équipe qui pilote ses agents avec méthode peut garder une qualité d'expert et réserver le budget aux étapes où la réflexion change vraiment le résultat. C'est aussi un sujet de gouvernance : savoir où partent les tokens se mesure, et rightsize fournit l'outil pour le faire.</p>
+<h2>L'essayer</h2>
+<p>Le plugin d'Ayoub Hammoudi, en licence MIT, sans dépendance :</p>
+<pre><code>/plugin install rightsize --marketplace Ayoubhm07/rightsize
+</code></pre>
+<p>Spar-x en maintient aussi une sélection, avec la skill seule (sans les scripts ni les hooks), dans son dépôt <a href="https://github.com/spar-x-fr/spar-x-skills">spar-x-fr/spar-x-skills</a>, que je co-maintiens avec Ayoub.</p>
+<p><strong>À retenir</strong></p>
+<ul>
+<li>L'effort maximal coûte jusqu'à 9 fois plus que « high », pour le même résultat sur des tâches vérifiables.</li>
+<li>Un contrôle automatique (tests, oracle) permet de démarrer bas et de monter sur preuve.</li>
+<li>L'effort élevé se garde pour ce qu'aucun test ne peut juger.</li>
+</ul>
+<p>Sources : <a href="https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-is-cutting-claude-codes-current-weekly-limits-by-17-percent/">baisse des limites hebdomadaires de Claude Code (BleepingComputer)</a>, <a href="https://github.com/Ayoubhm07/rightsize">dépôt rightsize d'Ayoub Hammoudi</a>, documentation « Effort and models » et résultats du dossier <code>bench/results/</code>.</p>
+<p><em>Zakaria Khchiche, Tech Lead Data &amp; IA freelance à Paris, plus de 200 agents IA en production, contributeur à Mistral AI (mistral-common) et à Microsoft Agent Framework. <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a>. Former vos équipes à piloter l'IA : <a href="/formation-ia-generative/">formation IA générative</a> avec Spar-x, organisme certifié Qualiopi, finançable par votre OPCO. <a href="https://forms.gle/ARaTCq9ADgqvJfKL8">Demander un devis</a>.</em></p>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
