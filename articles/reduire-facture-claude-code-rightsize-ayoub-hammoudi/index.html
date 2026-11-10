@@ -21,7 +21,7 @@ pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow
 @media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
-.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}.wrap>*{min-width:0}:not(pre)>code{overflow-wrap:anywhere}
 h1,h2{margin:0;line-height:1.25}
 h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
 p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
@@ -151,6 +151,7 @@ figure{margin:0;display:grid;gap:6px}figure img{width:100%;height:auto;border:1p
 </ul>
 <p>Sources : <a href="https://www.bleepingcomputer.com/news/artificial-intelligence/anthropic-is-cutting-claude-codes-current-weekly-limits-by-17-percent/">baisse des limites hebdomadaires de Claude Code (BleepingComputer)</a>, mesures publiées par <a href="https://www.linkedin.com/in/ayoubhammoudi/">Ayoub Hammoudi</a> avec rightsize (octobre 2026), <a href="https://github.com/spar-x-fr/spar-x-skills">skill rightsize sur GitHub</a>.</p>
 <p><em>Zakaria Khchiche, Tech Lead Data &amp; IA freelance à Paris, plus de 200 agents IA en production, contributeur à Mistral AI (mistral-common) et à Microsoft Agent Framework. <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a>. Former vos équipes à piloter l'IA : <a href="/formation-ia-generative/">formation IA générative</a> avec Spar-x, organisme certifié Qualiopi, finançable par votre OPCO. <a href="https://forms.gle/ARaTCq9ADgqvJfKL8">Demander un devis</a>.</em></p>
+<p><strong>Sur le même sujet :</strong> <a href="/articles/mistral-large-4-poids-ouverts-deployer-sur-ses-serveurs/">Mistral Large 4 en poids ouverts : peut-on le déployer sur ses propres serveurs ?</a> · <a href="/agents-ia-production/">Passer un agent IA du POC à la production</a></p>
 </article>
 <footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
 </div>
