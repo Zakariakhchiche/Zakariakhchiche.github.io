@@ -19,7 +19,7 @@ pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow
 @media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
-.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}.wrap>*{min-width:0}:not(pre)>code{overflow-wrap:anywhere}
 h1,h2{margin:0;line-height:1.25}
 h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
 p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
@@ -71,6 +71,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
 </ul>
 <p>Demander un devis ou une date de formation : <a href="https://forms.gle/ARaTCq9ADgqvJfKL8">formulaire Spar-x</a></p>
 <p><em>Zakaria Khchiche, Tech Lead Data &amp; IA freelance à Paris. Plus de 200 agents IA mis en production chez SUEZ. </em><a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a><em> · </em><a href="https://zakariakhchiche.github.io/">Site</a></p>
+<p><strong>Sur le même sujet :</strong> <a href="/articles/3-bugs-silencieux-dans-un-framework-dagents-ia-open-source/">3 bugs silencieux dans un framework d’agents IA open source</a> · <a href="/articles/copilot-studio-sur-des-milliers-de-documents-faire-repondre-lagent-seulement-quand-une-source-le/">Copilot Studio sur des milliers de documents : faire répondre l’agent seulement quand une source le justifie</a> · <a href="/agents-ia-production/">Passer un agent IA du POC à la production</a></p>
 </article>
 <footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
 </div>
