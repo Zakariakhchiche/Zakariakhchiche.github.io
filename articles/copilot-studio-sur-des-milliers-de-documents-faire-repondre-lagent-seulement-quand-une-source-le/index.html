@@ -19,7 +19,7 @@ pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow
 @media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
 *{box-sizing:border-box}
 body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
-.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}.wrap>*{min-width:0}:not(pre)>code{overflow-wrap:anywhere}
 h1,h2{margin:0;line-height:1.25}
 h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
 p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
@@ -120,6 +120,7 @@ devtunnel host -p 3000 --allow-anonymous</code></pre>
 <p>Le code complet, le connecteur Power Platform TypeSafe et les tests : <a href="https://github.com/Zakariakhchiche/copilot-studio-jev">github.com/Zakariakhchiche/copilot-studio-jev</a>.</p>
 <p><em>Zakaria Khchiche est Tech Lead Data &amp; IA freelance à Paris. Il conçoit et met en production des agents IA pour de grands comptes, et contribue à des frameworks d'agents open source. </em><a href="https://www.linkedin.com/in/zakariakhchiche/"><em>LinkedIn</em></a><em> · </em><a href="https://zakariakhchiche.github.io/"><em>Site</em></a></p>
 <p><em>Vous voulez que vos équipes construisent des agents Copilot Studio fiables comme celui-ci ? J'anime une formation Copilot Studio pratique avec Spar-x, organisme certifié Qualiopi, finançable par votre OPCO : </em><a href="https://zakariakhchiche.github.io/formation-copilot-studio/"><em>programme de la formation</em></a><em> · </em><a href="https://forms.gle/ARaTCq9ADgqvJfKL8"><em>demande de devis</em></a><em>. Et un kit gratuit pour l'article 4 de l'AI Act : </em><a href="https://zakariakhchiche.github.io/kit-ai-act/"><em>kit AI Act</em></a><em>.</em></p>
+<p><strong>Sur le même sujet :</strong> <a href="/mettre-agent-copilot-studio-en-production/">Comment mettre un agent Copilot Studio en production (guide pas à pas)</a> · <a href="/copilot-studio/">Copilot Studio : conseil et mise en production</a> · <a href="/livre/">Le livre gratuit « Agents Copilot en production »</a></p>
 </article>
 <footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
 </div>
