@@ -1,26 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://zakariakhchiche.github.io/</loc><lastmod>2026-11-02</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://zakariakhchiche.github.io/copilot-studio/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://zakariakhchiche.github.io/azure-ai-foundry/</loc><lastmod>2026-10-23</lastmod></url>
   <url><loc>https://zakariakhchiche.github.io/agents-ia-production/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://zakariakhchiche.github.io/formation-ia-generative/</loc><lastmod>2026-10-02</lastmod></url>
-<url><loc>https://zakariakhchiche.github.io/formation-copilot-studio/</loc><lastmod>2026-10-01</lastmod></url>
+<url><loc>https://zakariakhchiche.github.io/formation-copilot-studio/</loc><lastmod>2026-11-10</lastmod></url>
 <url><loc>https://zakariakhchiche.github.io/kit-ai-act/</loc><lastmod>2026-10-01</lastmod></url>
 <url><loc>https://zakariakhchiche.github.io/livre/</loc><lastmod>2026-11-02</lastmod></url>
-<url><loc>https://zakariakhchiche.github.io/articles/</loc><lastmod>2026-11-03</lastmod></url>
+<url><loc>https://zakariakhchiche.github.io/articles/</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://zakariakhchiche.github.io/contact/</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-les-bibliotheques-python-de-mistral-ai/</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-un-framework-dagents-ia-open-source/</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://zakariakhchiche.github.io/articles/5-bugs-silencieux-dans-microsoft-agent-framework-et-comment-savoir-si-vos-agents-sont-touches/</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://zakariakhchiche.github.io/articles/copilot-studio-sur-des-milliers-de-documents-faire-repondre-lagent-seulement-quand-une-source-le/</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://zakariakhchiche.github.io/articles/microsoft-agent-framework-derriere-un-proxy-dentreprise-le-transport-http-qui-ignorait/</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://zakariakhchiche.github.io/articles/peut-on-deployer-hermes-agent-dans-une-entreprise-microsoft/</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://zakariakhchiche.github.io/articles/un-outil-openai-que-mistral-refusait-le-strict-null-du-sdk/</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://zakariakhchiche.github.io/articles/weaviate-quand-reindexer-un-document-cree-des-doublons-dans-votre-rag/</loc><lastmod>2026-10-29</lastmod></url>
-  <url><loc>https://zakariakhchiche.github.io/articles/mistral-large-4-poids-ouverts-deployer-sur-ses-serveurs/</loc><lastmod>2026-10-30</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-les-bibliotheques-python-de-mistral-ai/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/articles/3-bugs-silencieux-dans-un-framework-dagents-ia-open-source/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/articles/5-bugs-silencieux-dans-microsoft-agent-framework-et-comment-savoir-si-vos-agents-sont-touches/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/articles/copilot-studio-sur-des-milliers-de-documents-faire-repondre-lagent-seulement-quand-une-source-le/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/articles/microsoft-agent-framework-derriere-un-proxy-dentreprise-le-transport-http-qui-ignorait/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/articles/peut-on-deployer-hermes-agent-dans-une-entreprise-microsoft/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/articles/un-outil-openai-que-mistral-refusait-le-strict-null-du-sdk/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/articles/weaviate-quand-reindexer-un-document-cree-des-doublons-dans-votre-rag/</loc><lastmod>2026-11-10</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/articles/mistral-large-4-poids-ouverts-deployer-sur-ses-serveurs/</loc><lastmod>2026-11-10</lastmod></url>
   <url><loc>https://zakariakhchiche.github.io/certifications/</loc><lastmod>2026-11-02</lastmod></url>
   <url><loc>https://zakariakhchiche.github.io/mettre-agent-copilot-studio-en-production/</loc><lastmod>2026-11-02</lastmod></url>
-  <url><loc>https://zakariakhchiche.github.io/articles/reduire-facture-claude-code-rightsize-ayoub-hammoudi/</loc><lastmod>2026-11-03</lastmod></url>
+  <url><loc>https://zakariakhchiche.github.io/articles/reduire-facture-claude-code-rightsize-ayoub-hammoudi/</loc><lastmod>2026-11-10</lastmod></url>
 </urlset>
