@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Déployer Mistral en entreprise : API, Azure ou vos serveurs – Zakaria Khchiche</title>
+<meta name="description" content="Déployer les modèles Mistral AI en entreprise : API, Azure AI Foundry ou auto-hébergement. Matériel, licence, hors ligne, évaluation. Consultant à Paris.">
+<link rel="canonical" href="https://zakariakhchiche.github.io/mistral-entreprise/">
+<meta property="og:title" content="Déployer Mistral en entreprise : API, Azure ou vos propres serveurs">
+<meta property="og:description" content="Choisir entre l'API Mistral, Azure AI Foundry et l'auto-hébergement, puis passer en production : matériel, licence, hors ligne, évaluation et garde-fous.">
+<meta property="og:url" content="https://zakariakhchiche.github.io/mistral-entreprise/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"ProfessionalService","name":"Déploiement des modèles Mistral AI en entreprise","url":"https://zakariakhchiche.github.io/mistral-entreprise/","areaServed":{"@type":"Country","name":"France"},"serviceType":"Conseil et mise en production de modèles Mistral AI","provider":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","jobTitle":"Tech Lead Data & IA","url":"https://zakariakhchiche.github.io/","sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://github.com/Zakariakhchiche"]},"knowsAbout":["Mistral AI","Mistral Large 4","modèles à poids ouverts","vLLM","mistral-common","IA souveraine","auto-hébergement de LLM"]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Peut-on héberger un modèle Mistral sur ses propres serveurs ?","acceptedAnswer":{"@type":"Answer","text":"Oui pour les modèles publiés en poids ouverts, comme Mistral Large 4 depuis le 29 octobre 2026. C'est un projet d'infrastructure : la recette vLLM publiée utilise huit GPU et la version NVFP4 tourne, selon Mistral, sur quatre GPU Nvidia B200 ou B300."}},
+{"@type":"Question","name":"La licence de Mistral Large 4 autorise-t-elle l'usage commercial ?","acceptedAnswer":{"@type":"Answer","text":"L'usage interne, l'usage commercial et l'intégration dans un produit sont libres. Vendre l'accès au modèle comme un service à des tiers exige une licence commerciale séparée avec Mistral. Ce résumé n'est pas un avis juridique."}},
+{"@type":"Question","name":"Faut-il toujours le plus gros modèle Mistral ?","acceptedAnswer":{"@type":"Answer","text":"Non. Beaucoup de cas d'usage d'agents fonctionnent très bien avec des modèles plus légers comme Mistral Small ou Ministral. Le plus gros modèle n'est utile que là où il fait la différence, ce qu'une évaluation sur vos cas permet de vérifier."}},
+{"@type":"Question","name":"Mistral fonctionne-t-il sur un serveur sans accès à Internet ?","acceptedAnswer":{"@type":"Answer","text":"Oui, à condition que chaque composant trouve ses fichiers localement. Un bug de mistral-common empêchait de charger un tokenizer présent sur le disque dans un dossier personnalisé ; le correctif de Zakaria Khchiche a été intégré par Mistral AI (PR #349)."}}
+]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6;--c:#c2541f;
+--f-display:"Sora",system-ui,sans-serif;--f-body:"IBM Plex Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff;--c:#f0955f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.015em}
+h2{font-size:1.3rem}h3{font-size:1rem}
+p{margin:0;max-width:70ch}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.08rem}
+header,section{display:grid;gap:12px}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:500 .88rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 14px;text-decoration:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:10px;padding:16px;display:grid;gap:8px;align-content:start}
+.card p{font-size:.92rem;color:var(--muted)}
+.n{font-family:var(--f-mono);font-size:.78rem;color:var(--c)}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.fact b{display:block;font-family:var(--f-display)}
+.fact span{font-size:.88rem;color:var(--muted)}
+ul{margin:0;padding-left:20px}li{margin:4px 0}
+nav.top{font-family:var(--f-mono);font-size:.82rem;display:flex;flex-wrap:wrap;gap:6px 14px}
+footer{color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="top"><a href="/">← Zakaria Khchiche</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-ia-generative/">Formation IA générative</a><a href="/formation-copilot-studio/">Formation Copilot Studio</a><a href="/articles/">Articles</a></nav>
+<header>
+  <span class="eyebrow">Conseil · Mistral AI · IA souveraine</span>
+  <h1>Déployer Mistral en entreprise : API, Azure ou vos propres serveurs</h1>
+  <p class="lede">Les modèles de Mistral AI permettent de garder la main sur ses données, jusqu'à les héberger chez soi. Encore faut-il choisir le bon mode de déploiement et le faire tenir en production. J'accompagne ce choix et sa mise en œuvre, avec l'expérience de plus de 200 agents IA en production et de correctifs intégrés par Mistral AI.</p>
+  <div class="links">
+    <a class="btn primary" href="https://www.malt.fr/profile/zakariakhchiche">Me confier une mission (Malt)</a>
+    <a class="btn" href="https://www.linkedin.com/in/zakariakhchiche/">Échanger sur LinkedIn</a>
+  </div>
+</header>
+
+<section>
+  <div><span class="eyebrow">Le choix</span><h2>Trois façons d'utiliser Mistral</h2></div>
+  <div class="grid">
+    <article class="card"><span class="n">1 · API Mistral</span><h3>Le plus rapide à démarrer</h3><p>Aucun matériel à gérer. Les données transitent par l'API : à valider avec votre DSI selon leur sensibilité.</p></article>
+    <article class="card"><span class="n">2 · Azure AI Foundry</span><h3>Dans votre environnement Azure</h3><p>Pour les entreprises déjà sur Microsoft : mêmes règles d'accès, de traçabilité et de suivi des coûts que vos autres modèles, derrière une même passerelle.</p></article>
+    <article class="card"><span class="n">3 · Auto-hébergement</span><h3>Vos données restent chez vous</h3><p>Avec les modèles en poids ouverts, sur vos serveurs. La souveraineté la plus forte, mais un vrai projet d'infrastructure.</p></article>
+  </div>
+</section>
+
+<section>
+  <div><span class="eyebrow">Auto-hébergement</span><h2>Ce qu'il faut prévoir avant d'y croire</h2></div>
+  <ul>
+    <li><strong>Le matériel</strong> : Mistral Large 4, publié en poids ouverts le 29 octobre 2026, pèse environ 1,06 To en bf16. La recette vLLM publiée utilise huit GPU ; la version NVFP4 tourne, selon Mistral, sur quatre GPU Nvidia B200 ou B300. À comparer au coût de l'API.</li>
+    <li><strong>La bonne taille</strong> : beaucoup d'agents fonctionnent très bien avec Mistral Small ou Ministral. Le plus gros modèle n'est utile que là où il fait la différence.</li>
+    <li><strong>La licence</strong> : usage interne et commercial libres ; vendre l'accès au modèle comme un service à des tiers demande une licence commerciale séparée. Faites relire le texte par votre service juridique.</li>
+    <li><strong>Le hors ligne</strong> : sur un serveur isolé d'Internet, chaque composant doit trouver ses fichiers localement. J'ai corrigé dans mistral-common un bug qui empêchait de charger un tokenizer présent sur le disque (<a href="/articles/mistral-hors-ligne-quand-le-tokenizer-est-sur-le-disque-mais-introuvable/">article</a>, correctif intégré par Mistral AI, PR #349).</li>
+    <li><strong>Les garde-fous</strong> : en auto-hébergement, les protections de l'API ne s'appliquent pas. Il faut remettre filtrage, journalisation et contrôle d'accès.</li>
+  </ul>
+  <p>Le détail, chiffres et sources : <a href="/articles/mistral-large-4-poids-ouverts-deployer-sur-ses-serveurs/">Mistral Large 4 en poids ouverts : peut-on le déployer sur ses propres serveurs ?</a></p>
+</section>
+
+<section>
+  <div><span class="eyebrow">Ma méthode</span><h2>De la question au déploiement</h2></div>
+  <div class="grid">
+    <article class="card"><span class="n">1 · Cadrage</span><h3>Données, usages, contraintes</h3><p>Sensibilité des données, volumes, exigences de la DSI : ce qui décide du mode de déploiement.</p></article>
+    <article class="card"><span class="n">2 · Évaluation</span><h3>Comparer sur vos cas</h3><p>Un jeu de vraies questions avec réponses attendues, rejoué contre plusieurs modèles Mistral et l'API, avant de choisir.</p></article>
+    <article class="card"><span class="n">3 · Mise en œuvre</span><h3>Servir et intégrer</h3><p>vLLM ou Azure AI Foundry, passerelle, accès, supervision et intégration à vos agents et à votre RAG.</p></article>
+    <article class="card"><span class="n">4 · Exploitation</span><h3>Tenir dans la durée</h3><p>Tests avant chaque mise à jour, suivi des coûts et de la qualité, passage de relais à vos équipes.</p></article>
+  </div>
+</section>
+
+<section>
+  <div><span class="eyebrow">Preuves</span><h2>Contributions à Mistral AI</h2></div>
+  <p>Correctifs intégrés par les mainteneurs de mistral-common : tokenizer utilisable hors ligne dans un dossier personnalisé (PR #349) et définition d'outil OpenAI acceptée par Mistral (PR #396). Les articles : <a href="/articles/3-bugs-silencieux-dans-les-bibliotheques-python-de-mistral-ai/">3 bugs silencieux dans les bibliothèques Python de Mistral AI</a> et <a href="/articles/un-outil-openai-que-mistral-refusait-le-strict-null-du-sdk/">Un outil OpenAI que Mistral refusait</a>.</p>
+</section>
+
+<section>
+  <h2>Questions fréquentes</h2>
+  <div><h3>Peut-on héberger Mistral sur ses propres serveurs ?</h3><p>Oui pour les modèles en poids ouverts, comme Mistral Large 4. C'est un projet d'infrastructure à comparer au coût de l'API.</p></div>
+  <div><h3>Faut-il toujours le plus gros modèle ?</h3><p>Non. Une évaluation sur vos cas montre souvent qu'un modèle plus léger suffit, pour un coût bien inférieur.</p></div>
+  <div><h3>Mistral fonctionne-t-il sans accès à Internet ?</h3><p>Oui, si chaque composant trouve ses fichiers localement. C'est précisément le cas que mon correctif de mistral-common a réglé.</p></div>
+</section>
+
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA · Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a> · <a href="/confidentialite/">Confidentialité</a></footer>
+</div>
+</body>
+</html>
