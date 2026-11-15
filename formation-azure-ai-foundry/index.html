@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Formation Azure AI Foundry (Spar-x, OPCO) – Zakaria Khchiche</title>
+<meta name="description" content="Formation Azure AI Foundry et Azure OpenAI pour équipes techniques : modèles, sécurité, RAG, coûts et mise en production. Spar-x, Qualiopi, finançable OPCO.">
+<link rel="canonical" href="https://zakariakhchiche.github.io/formation-azure-ai-foundry/">
+<meta property="og:title" content="Formation Azure AI Foundry : construire un socle IA qui passe en production">
+<meta property="og:description" content="Formation pratique Azure AI Foundry et Azure OpenAI, 20 participants maximum. Spar-x, organisme certifié Qualiopi, finançable OPCO.">
+<meta property="og:url" content="https://zakariakhchiche.github.io/formation-azure-ai-foundry/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<meta name="twitter:card" content="summary_large_image">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Course","name":"Formation Azure AI Foundry et Azure OpenAI : un socle IA d'entreprise en production","description":"Formation pratique pour équipes techniques : choix des modèles, AI Gateway et routage multi-modèles, sécurité et accès, RAG avec Azure AI Search, évaluation, observabilité, quotas et coûts, mise en production.","url":"https://zakariakhchiche.github.io/formation-azure-ai-foundry/","inLanguage":"fr","teaches":["Azure AI Foundry","Azure OpenAI","AI Gateway","RAG","Azure AI Search","évaluation de LLM","maîtrise des coûts","mise en production d'agents IA"],"provider":{"@type":"Organization","name":"Spar-x"},"instructor":{"@type":"Person","@id":"https://zakariakhchiche.github.io/#person","name":"Zakaria Khchiche","url":"https://zakariakhchiche.github.io/","sameAs":["https://www.linkedin.com/in/zakariakhchiche/","https://www.malt.fr/profile/zakariakhchiche","https://www.youtube.com/@zakariakhchiche"]},"hasCourseInstance":[{"@type":"CourseInstance","courseMode":"onsite","location":"Paris ou dans vos locaux"},{"@type":"CourseInstance","courseMode":"online"}]}
+</script>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"La formation Azure AI Foundry est-elle finançable par un OPCO ?","acceptedAnswer":{"@type":"Answer","text":"Oui. Spar-x est un organisme certifié Qualiopi au titre des actions de formation, ce qui permet de demander une prise en charge à votre OPCO. Nous fournissons les documents nécessaires au dossier."}},
+{"@type":"Question","name":"À qui s'adresse la formation Azure AI Foundry ?","acceptedAnswer":{"@type":"Answer","text":"Aux équipes techniques : développeurs, data engineers, architectes et équipes IT qui conçoivent ou exploitent des applications et des agents d'IA générative sur Azure."}},
+{"@type":"Question","name":"Quelle différence avec la formation Copilot Studio ?","acceptedAnswer":{"@type":"Answer","text":"Copilot Studio permet de créer des agents sans code avec les équipes métier. Azure AI Foundry s'adresse aux équipes techniques qui maîtrisent les modèles, l'architecture et le code. Les deux formations sont complémentaires."}},
+{"@type":"Question","name":"Combien de participants par session ?","acceptedAnswer":{"@type":"Answer","text":"20 participants maximum, pour que chacun travaille sur son propre cas."}}
+]}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6;--c:#c2541f;
+--f-display:"Sora",system-ui,sans-serif;--f-body:"IBM Plex Sans",system-ui,sans-serif;--f-mono:"IBM Plex Mono",ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff;--c:#f0955f}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6}
+.wrap{max-width:900px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:36px}
+h1,h2,h3{font-family:var(--f-display);margin:0;text-wrap:balance}
+h1{font-size:clamp(1.7rem,4vw,2.4rem);letter-spacing:-.015em}
+h2{font-size:1.3rem}h3{font-size:1rem}
+p{margin:0;max-width:70ch}
+a{color:var(--accent)}
+.eyebrow{font-family:var(--f-mono);font-size:.74rem;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+.lede{color:var(--muted);font-size:1.08rem}
+header,section{display:grid;gap:12px}
+.links{display:flex;flex-wrap:wrap;gap:8px}
+.btn{font:500 .88rem var(--f-body);border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:8px;padding:8px 14px;text-decoration:none}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:#fff}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.card{background:var(--surface);border:1px solid var(--line);border-top:3px solid var(--c);border-radius:10px;padding:16px;display:grid;gap:8px;align-content:start}
+.card p{font-size:.92rem;color:var(--muted)}
+.n{font-family:var(--f-mono);font-size:.78rem;color:var(--c)}
+.facts{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px}
+.fact{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:12px}
+.fact b{display:block;font-family:var(--f-display)}
+.fact span{font-size:.88rem;color:var(--muted)}
+ul{margin:0;padding-left:20px}li{margin:4px 0}
+nav.top{font-family:var(--f-mono);font-size:.82rem;display:flex;flex-wrap:wrap;gap:6px 14px}
+footer{color:var(--muted);font-size:.85rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="top"><a href="/">← Zakaria Khchiche</a><a href="/copilot-studio/">Copilot Studio</a><a href="/azure-ai-foundry/">Azure AI Foundry</a><a href="/agents-ia-production/">Agents IA en production</a><a href="/formation-ia-generative/">Formation IA générative</a><a href="/formation-copilot-studio/">Formation Copilot Studio</a><a href="/articles/">Articles</a></nav>
+<header>
+  <span class="eyebrow">Formation · Spar-x · Organisme certifié Qualiopi</span>
+  <h1>Formation Azure AI Foundry : construire un socle IA qui passe en production</h1>
+  <p class="lede">Lancer un premier appel à Azure OpenAI prend dix minutes. Faire tourner des dizaines d'agents en sécurité, avec des coûts maîtrisés, est un autre métier. Cette formation l'enseigne sur vos propres cas, avec un formateur dont le socle porte plus de 200 agents IA en production.</p>
+  <div class="links">
+    <a class="btn primary" href="https://forms.gle/ARaTCq9ADgqvJfKL8">Demander un devis ou une date</a>
+    <a class="btn" href="/azure-ai-foundry/">Mission de conseil Azure AI Foundry</a>
+  </div>
+</header>
+
+<section class="facts" aria-label="Format">
+  <div class="fact"><b>20 max</b><span>participants par session</span></div>
+  <div class="fact"><b>Intra ou inter</b><span>dans vos locaux, à Paris ou à distance</span></div>
+  <div class="fact"><b>Finançable OPCO</b><span>Spar-x est certifié Qualiopi</span></div>
+  <div class="fact"><b>Équipes techniques</b><span>développeurs, data, architectes, IT</span></div>
+</section>
+
+<section>
+  <div><span class="eyebrow">Programme</span><h2>Six modules, du premier appel à la production</h2></div>
+  <div class="grid">
+    <article class="card"><span class="n">1 · Modèles</span><h3>Choisir les bons modèles</h3><p>Le catalogue d'Azure AI Foundry, Azure OpenAI et les modèles ouverts : quel modèle pour quel usage, et pourquoi le plus gros n'est pas toujours le bon.</p></article>
+    <article class="card"><span class="n">2 · Socle</span><h3>AI Gateway et routage multi-modèles</h3><p>Envoyer chaque requête vers le modèle autorisé, suffisant et le moins cher, selon la sensibilité des données, la qualité attendue et la latence.</p></article>
+    <article class="card"><span class="n">3 · Sécurité</span><h3>Accès, données et conformité</h3><p>Identités, réseau, traçabilité et travail avec la DSI et la cybersécurité : ce qui débloque les projets.</p></article>
+    <article class="card"><span class="n">4 · RAG</span><h3>Connecter l'IA à vos documents</h3><p>Azure AI Search, préparation des sources, découpage et filtres : la plupart des mauvaises réponses viennent des documents, pas du modèle.</p></article>
+    <article class="card"><span class="n">5 · Qualité</span><h3>Évaluer et superviser</h3><p>Jeux de questions de référence, tests avant chaque changement, suivi de la qualité et de l'usage de chaque agent.</p></article>
+    <article class="card"><span class="n">6 · Production</span><h3>Quotas, coûts et mise en production</h3><p>Suivre qui consomme quoi, fixer des quotas, préparer l'exploitation et la maintenance dans la durée.</p></article>
+  </div>
+  <p>Chaque participant travaille sur un cas de son équipe. Pour aller plus loin : la page <a href="/agents-ia-production/">Agents IA en production</a> et le livre gratuit <a href="/livre/">Agents Copilot en production</a>.</p>
+</section>
+
+<section>
+  <div><span class="eyebrow">Pour qui</span><h2>Public et prérequis</h2></div>
+  <ul>
+    <li>Développeurs, data engineers, architectes et équipes IT qui conçoivent ou exploitent des applications d'IA générative sur Azure.</li>
+    <li>Bases en développement et accès à un abonnement Azure, ou environnement fourni pour la session.</li>
+    <li>Évaluation des acquis en fin de formation et attestation remise à chaque participant.</li>
+  </ul>
+  <p>Vos équipes métier veulent plutôt créer des agents sans code ? Voir la <a href="/formation-copilot-studio/">formation Copilot Studio</a>.</p>
+</section>
+
+<section>
+  <div><span class="eyebrow">Formateur</span><h2>Zakaria Khchiche</h2></div>
+  <p>Tech Lead Data &amp; IA. Chez SUEZ, il a conçu 20 cas d'usage d'IA générative et mis plus de 200 agents IA en production sur Copilot Studio, Azure AI Foundry et Azure OpenAI. Ses correctifs ont été intégrés par les mainteneurs de Microsoft Agent Framework et de mistral-common (Mistral AI). <a href="/">Son parcours</a>.</p>
+</section>
+
+<section>
+  <div><span class="eyebrow">Financement et AI Act</span><h2>Financement et conformité</h2></div>
+  <ul>
+    <li><strong>OPCO</strong> : Spar-x est certifié Qualiopi, ce qui permet de demander une prise en charge par votre OPCO. Nous fournissons les documents du dossier.</li>
+    <li><strong>AI Act, article 4</strong> : l'entreprise doit prendre des mesures pour favoriser la maîtrise de l'IA de ses équipes. Une formation documentée, avec attestation, entre dans votre registre. Voir le <a href="/kit-ai-act/">Kit AI Act</a>.</li>
+  </ul>
+  <p style="font-size:.85rem;color:var(--muted)">La certification qualité a été délivrée au titre de la catégorie d'action suivante : actions de formation.</p>
+</section>
+
+<section>
+  <h2>Questions fréquentes</h2>
+  <div><h3>Quelle différence avec la formation Copilot Studio ?</h3><p>Copilot Studio permet de créer des agents sans code avec les métiers. Azure AI Foundry s'adresse aux équipes techniques qui maîtrisent modèles, architecture et code. Les deux sont complémentaires.</p></div>
+  <div><h3>Peut-on travailler sur nos propres cas ?</h3><p>Oui, c'est recommandé en intra : chaque participant avance sur un cas réel de son équipe.</p></div>
+  <div><h3>Comment obtenir un devis ?</h3><p>Remplissez le <a href="https://forms.gle/ARaTCq9ADgqvJfKL8">formulaire de demande de devis Spar-x</a> en indiquant le nombre de participants, le format souhaité et votre OPCO.</p></div>
+</section>
+
+<footer>Formation proposée par Spar-x, animée par Zakaria Khchiche · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://www.malt.fr/profile/zakariakhchiche">Malt</a> · <a href="/confidentialite/">Confidentialité</a></footer>
+</div>
+</body>
+</html>
