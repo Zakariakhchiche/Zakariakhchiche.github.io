@@ -1,0 +1,48 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Agents IA en entreprise : le modèle ne fait pas la fiabilité, le harnais si – Zakaria Khchiche</title>
+<meta name="description" content="Le « harness engineering » s&#x27;impose dans les débats sur les agents IA : un agent fiable en production tient moins au modèle qu&#x27;à tout ce qu&#x27;on construit autour.">
+<link rel="canonical" href="https://zakariakhchiche.github.io/articles/agents-ia-entreprise-le-modele-ne-fait-pas-la-fiabilite-le-harnais-si/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Agents IA en entreprise : le modèle ne fait pas la fiabilité, le harnais si">
+<meta property="og:description" content="Le « harness engineering » s&#x27;impose dans les débats sur les agents IA : un agent fiable en production tient moins au modèle qu&#x27;à tout ce qu&#x27;on construit autour.">
+<meta property="og:url" content="https://zakariakhchiche.github.io/articles/agents-ia-entreprise-le-modele-ne-fait-pas-la-fiabilite-le-harnais-si/">
+<meta property="og:site_name" content="Zakaria Khchiche">
+<meta property="og:image" content="https://zakariakhchiche.github.io/og-image.png">
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "BlogPosting", "headline": "Agents IA en entreprise : le modèle ne fait pas la fiabilité, le harnais si", "description": "Le « harness engineering » s'impose dans les débats sur les agents IA : un agent fiable en production tient moins au modèle qu'à tout ce qu'on construit autour.", "datePublished": "2026-11-23", "inLanguage": "fr", "url": "https://zakariakhchiche.github.io/articles/agents-ia-entreprise-le-modele-ne-fait-pas-la-fiabilite-le-harnais-si/", "mainEntityOfPage": "https://zakariakhchiche.github.io/articles/agents-ia-entreprise-le-modele-ne-fait-pas-la-fiabilite-le-harnais-si/", "image": "https://zakariakhchiche.github.io/og-image.png", "author": {"@type": "Person", "@id": "https://zakariakhchiche.github.io/#person", "name": "Zakaria Khchiche", "url": "https://zakariakhchiche.github.io/"}, "sameAs": ["https://dev.to/zakaria_khchiche_490919ed/ai-agents-in-production-the-model-does-not-make-them-reliable-the-harness-does-44fi"]}</script>
+<style>
+pre{background:var(--surface);border:1px solid var(--line);padding:12px;overflow-x:auto;font-size:.88rem}code{font-family:ui-monospace,Consolas,monospace;font-size:.92em}blockquote{border-left:3px solid var(--accent);margin:0;padding-left:14px}
+:root{--bg:#f5f6f8;--surface:#fff;--ink:#15202b;--muted:#5b6673;--line:#dde2e8;--accent:#2457d6}
+@media (prefers-color-scheme:dark){:root{--bg:#0f141a;--surface:#161d25;--ink:#e6ebf1;--muted:#9aa6b3;--line:#27313c;--accent:#7ea3ff}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:16px;line-height:1.6}
+.wrap{max-width:820px;margin:0 auto;padding:32px 20px 64px;display:grid;gap:28px;grid-template-columns:minmax(0,1fr)}.wrap>*{min-width:0}:not(pre)>code{overflow-wrap:anywhere}
+h1,h2{margin:0;line-height:1.25}
+h1{font-size:clamp(1.6rem,4vw,2.2rem)}h2{font-size:1.2rem}
+p,ul{margin:0;max-width:70ch}ul{padding-left:1.2em}
+section{display:grid;gap:10px}
+a{color:var(--accent);overflow-wrap:anywhere}
+.muted{color:var(--muted)}
+table{border-collapse:collapse;width:100%}td,th{border:1px solid var(--line);padding:8px;text-align:left;vertical-align:top}th{background:var(--surface)}
+footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font-size:.9rem}
+</style>
+</head>
+<body>
+<div class="wrap">
+<header>
+  <p class="muted"><a href="/">← Zakaria Khchiche</a> · <a href="/articles/">Tous les articles</a></p>
+  <h1>Agents IA en entreprise : le modèle ne fait pas la fiabilité, le harnais si</h1>
+  <p class="muted">Le « harness engineering » s&#x27;impose dans les débats sur les agents IA : un agent fiable en production tient moins au modèle qu&#x27;à tout ce qu&#x27;on construit autour.</p>
+  <p class="muted">Zakaria Khchiche · <time datetime="2026-11-23">23 novembre 2026</time> · version anglaise sur <a href="https://dev.to/zakaria_khchiche_490919ed/ai-agents-in-production-the-model-does-not-make-them-reliable-the-harness-does-44fi">dev.to</a></p>
+</header>
+<article>
+<p>Depuis quelques jours, un terme revient dans les discussions des ingénieurs IA : le <em>harness engineering</em>. Le « harnais » d'un agent, c'est tout ce qui entoure le modèle : la boucle d'exécution, les outils qu'on lui donne, la gestion de son contexte et les garde-fous. Anthropic, l'éditeur de Claude, le définit comme l'échafaudage logiciel qui transforme l'intelligence brute d'un modèle en agent qui fonctionne.</p><p>Le sujet n'est pas académique. Les chiffres publiés par les éditeurs eux-mêmes montrent que, à modèle égal, le harnais change le résultat du tout au tout. Sur BrowseComp, un test de recherche sur le web, permettre au modèle de filtrer lui-même les sorties de ses outils a fait passer la précision de 45,3 % à 61,6 %. Sur une tâche de recherche interne, un système où un agent principal coordonne des sous-agents a fait 90,2 % mieux qu'un agent seul utilisant pourtant le modèle le plus puissant.</p><p>Pour les directions métier et les DSI qui déploient des agents, c'est une bonne nouvelle : la fiabilité se construit, elle ne s'achète pas avec le dernier modèle.</p><h2>Ce que le terrain confirme</h2><p>J'accompagne des grands groupes dans la mise en production d'agents IA, sur Copilot Studio et Azure AI Foundry notamment, avec plus de 200 agents en production. Les incidents que je rencontre viennent rarement du modèle. Ils viennent du harnais :</p><ul><li><strong>Des outils mal décrits.</strong> Un agent choisit ses outils d'après leur description. Une description floue, et l'agent appelle le mauvais connecteur ou passe de mauvais paramètres.</li><li><strong>Un contexte qui déborde.</strong> Renvoyer à l'agent des réponses d'outils entières, souvent des centaines de lignes inutiles, dégrade la qualité et fait exploser les coûts.</li><li><strong>L'absence de vérification.</strong> Un agent qui juge son propre travail a tendance à se trouver très bon. Il faut un contrôle indépendant : un second agent, des tests, une règle métier.</li><li><strong>Une plomberie fragile.</strong> Une variable de proxy ignorée, un consentement OAuth perdu en route, un filtre mal appliqué : des bugs silencieux dans les frameworks d'agents que j'ai documentés et corrigés en open source. Ils ne se voient pas en démonstration, seulement en production.</li></ul><h2>Quatre règles pour un harnais d'entreprise</h2><ol><li><strong>Peu d'outils, bien décrits.</strong> Chaque outil a une description précise et un périmètre clair. On charge les outils à la demande plutôt que tous d'emblée.</li><li><strong>Répondre seulement sur preuve.</strong> Sur un corpus documentaire, l'agent répond quand un passage le justifie et s'abstient sinon. Une abstention vaut mieux qu'une hallucination devant un client.</li><li><strong>Séparer le faire et le vérifier.</strong> L'agent qui produit n'est pas celui qui valide. Les tâches larges se découpent entre un coordinateur et des sous-agents.</li><li><strong>Tester le harnais comme un logiciel.</strong> Jeux de questions de référence, mesures avant et après chaque changement, journalisation des appels d'outils.</li></ol><h2>Un enjeu de compétences, pas seulement de technologie</h2><p>Le harnais se conçoit, se teste et se maintient : c'est un travail d'équipe, qui demande des compétences. C'est aussi ce que la réglementation européenne demande désormais de favoriser : l'article 4 de l'AI Act, réécrit en 2026, invite les entreprises à développer la maîtrise de l'IA de leurs équipes.</p><p>Les entreprises qui réussiront avec les agents ne seront pas celles qui auront le meilleur modèle, mais celles qui sauront construire, autour, un harnais solide.</p><p>Sources : <a href="https://claude.com/resources/articles/harnessing-claudes-intelligence">Anthropic, Agent Harness Design</a> · <a href="https://www.anthropic.com/engineering/multi-agent-research-system">Anthropic, système de recherche multi-agents</a> · <a href="https://www.anthropic.com/engineering/harness-design-long-running-apps">Anthropic, harnais pour les applications longues</a></p><p><em>Zakaria Khchiche, Tech Lead Data &amp; IA freelance à Paris, plus de 200 agents IA en production, contributeur open source (Mistral AI). <a href="https://www.linkedin.com/in/zakariakhchiche/">LinkedIn</a> · <a href="https://zakariakhchiche.github.io/">Site</a></em></p><p>Vous formez vos équipes à l'IA générative ? J'anime avec Spar-x (organisme certifié Qualiopi, formations finançables par votre OPCO) une formation Copilot Studio : <a href="https://zakariakhchiche.github.io/formation-copilot-studio/">https://zakariakhchiche.github.io/formation-copilot-studio/</a> et j'ai publié un kit AI Act article 4 gratuit : <a href="https://zakariakhchiche.github.io/kit-ai-act/">https://zakariakhchiche.github.io/kit-ai-act/</a></p>
+<p><strong>Sur le même sujet :</strong> <a href="/agents-ia-production/">Agents IA en production</a> · <a href="/copilot-studio/">Copilot Studio</a> · <a href="/articles/">Tous les articles</a></p>
+</article>
+<footer>Zakaria Khchiche · Tech Lead Data &amp; IA à Paris · <a href="/">Accueil</a> · <a href="/contact/">Contact</a> · <a href="/articles/">Articles</a></footer>
+</div>
+</body>
+</html>
