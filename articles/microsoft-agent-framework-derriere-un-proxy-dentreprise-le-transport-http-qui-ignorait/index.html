@@ -41,7 +41,7 @@ footer{border-top:1px solid var(--line);padding-top:16px;color:var(--muted);font
 <article>
 <p><em>Mon premier correctif fusionné dans le framework d’agents de Microsoft, et le test à ajouter à vos propres intégrations.</em></p>
 <p>Un agent qui marche sur le poste du développeur, puis qui ne joint plus son API une fois déployé chez le client. Pas d’exception claire, pas de trace utile : simplement un appel qui n’aboutit pas. Dans une grande entreprise, le premier suspect est souvent le même : le proxy.</p>
-<p>C’est ce qui m’est arrivé avec le connecteur TypeSafe (Jev) de Microsoft Agent Framework. Le correctif a été fusionné par l’équipe Microsoft le 6 octobre 2026 : <a href="https://github.com/microsoft/agent-framework/pull/8984">microsoft/agent-framework#8984</a>.</p>
+<p>C’est ce qui m’est arrivé avec le connecteur TypeSafe (Jev) de Microsoft Agent Framework. Le correctif a été fusionné par l’équipe Microsoft le 6 octobre 2026 : microsoft/agent-framework#8984.</p>
 <h2>Le contexte</h2>
 <p>J’utilise Jev, le modèle de TypeSafe, pour décider si un passage retrouvé dans une grande base documentaire justifie vraiment une réponse. Microsoft Agent Framework fournit un connecteur Python vers TypeSafe. Dans un environnement d’entreprise, les serveurs sortent sur Internet par un proxy, configuré avec les variables <code>HTTPS_PROXY</code>, <code>HTTP_PROXY</code>, <code>ALL_PROXY</code> et <code>NO_PROXY</code>.</p>
 <p>Le constat : le SDK TypeSafe utilisé seul joignait l’API dans cet environnement. Le même appel passé par le connecteur d’Agent Framework, non.</p>
